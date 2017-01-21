@@ -6,24 +6,23 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRoomsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('number', 5);
+            // TODO:
+            // $table->addColumn('tinyInteger', 'floor', ['lenght' => 3]);
+            $table->smallInteger('floor');
+            // TODO:
+            // $table->addColumn('tinyInteger', 'capacity', ['lenght' => 3]);
+            $table->smallInteger('capacity');
+            $table->double('price', 15, 2);
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('rooms');
