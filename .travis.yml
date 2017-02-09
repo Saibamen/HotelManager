@@ -2,7 +2,7 @@ language: php
 
 addons:
     code_climate:
-        repo_token: 3c9e7e59385a1fd4f170bcf74f9d8e06b37d5ce7868265aaf57a059786b99386
+        repo_token: $CODE_CLIMATE_TOKEN
 
 php:
   - 5.6
@@ -24,3 +24,6 @@ script:
   - php artisan db:seed --env=testing --no-interaction -vvv
   - vendor/bin/phpunit
   - php artisan migrate:rollback --env=testing --no-interaction -vvv
+
+after_success:
+  - vendor/bin/test-reporter
