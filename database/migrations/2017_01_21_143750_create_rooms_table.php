@@ -11,12 +11,9 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number', 5);
-            // TODO:
-            // $table->addColumn('tinyInteger', 'floor', ['lenght' => 3]);
+            // TODO: floor i capacity: skrócić długość -> $table->addColumn('smallInteger', 'floor', ['lenght' => 3]);
             $table->smallInteger('floor');
-            // TODO:
-            // $table->addColumn('tinyInteger', 'capacity', ['lenght' => 3]);
-            $table->smallInteger('capacity');
+            $table->smallInteger('capacity')->unsigned();
             $table->double('price', 15, 2);
             $table->text('comments')->nullable();
             $table->timestamps();
