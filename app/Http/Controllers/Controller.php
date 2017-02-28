@@ -19,7 +19,7 @@ class Controller extends BaseController
     protected function returnBack($data)
     {
         // Zapobiegaj infinite loop
-        if(back()->getTargetUrl() === url()->current()) {
+        if (back()->getTargetUrl() === url()->current()) {
             return redirect(route('room.index'))->with($data);
         }
 
