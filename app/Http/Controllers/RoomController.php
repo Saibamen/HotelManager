@@ -6,17 +6,32 @@ use App\Models\Room;
 
 class RoomController extends Controller
 {
+    private function getRouteName()
+    {
+        return 'room';
+    }
+
+    public function delete($id)
+    {
+        Room::destroy($id);
+
+        $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
+
+        return response()->json($data);
+    }
+
     public function index()
     {
         $title = trans('general.rooms');
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price')
-            ->paginate(10);
+            ->paginate($this->getItemsPerPage());
 
         $view_data = [
-            'dataset' => $dataset,
-            'columns' => $this->getColumns(),
-            'title'   => $title,
+            'columns'    => $this->getColumns(),
+            'dataset'    => $dataset,
+            'route_name' => $this->getRouteName(),
+            'title'      => $title,
         ];
 
         return view('list', $view_data);

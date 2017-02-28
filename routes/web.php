@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('home', 'HomeController@index');
 
-Route::get('rooms', ['as' => 'room.index', 'uses' => 'RoomController@index']);
+Route::get('room', ['as' => 'room.index', 'uses' => 'RoomController@index']);
+Route::delete('room/delete/{id}', ['as' => 'room.delete', 'uses' => 'RoomController@delete'])->where(['id' => '[0-9]+']);
 
 Route::get('lang/{language}', ['as' => 'lang.set', 'uses' => 'Controller@changeLanguage']);
+

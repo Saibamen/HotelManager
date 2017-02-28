@@ -61,7 +61,7 @@
     </div>
 
     @if($dataset->total() > 0)
-        {{-- @include("deletemodal") --}}
+        @include("deletemodal")
     @endif
 
 @endsection
