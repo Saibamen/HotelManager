@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Reservation
+ * App\Models\Reservation.
  *
  * @property int $id
  * @property int $room_id
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $people
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Reservation whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Reservation whereDateEnd($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Reservation whereDateStart($value)

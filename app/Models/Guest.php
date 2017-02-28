@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Guest
+ * App\Models\Guest.
  *
  * @property int $id
  * @property string $first_name
@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $contact
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Guest whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Guest whereContact($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Guest whereCreatedAt($value)

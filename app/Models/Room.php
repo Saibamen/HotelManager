@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Room
+ * App\Models\Room.
  *
  * @property int $id
  * @property string $number
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $comments
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereCapacity($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereComments($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereCreatedAt($value)
