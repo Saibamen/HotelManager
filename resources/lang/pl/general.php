@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'actions' => 'Akcje',
+    'add' => 'Dodaj',
+    'added_date' => 'Data dodania',
+    'all_rights_reserved' => 'Wszelkie prawa zastrzeżone.',
+    'comment' => 'Komentarz',
+    'date' => 'Data',
+    'delete' => 'Usuń',
+    'deleted' => 'Usunięto pomyślnie',
+    'edit' => 'Edytuj',
+    'language' => 'Język',
+    'mail_action_trouble_1' => 'Jeśli masz problem z kliknięciem na przycisk',
+    'mail_action_trouble_2' => ', skopiuj i wklej poniższy adres URL do przeglądarki:',
+    'mail_greeting' => 'Witaj!',
+    'mail_regards' => 'Pozdrowienia',
+    'name' => 'Nazwa',
+    'no' => 'Nie',
+    'object_not_found' => 'Nie znaleziono obiektu',
+    'really_delete' => 'Czy na pewno chcesz usunąć',
+    'saved' => 'Zapisano pomyślnie',
+    'select' => 'Wybierz',
+    'send' => 'Wyślij',
+    'title' => 'Tytuł',
+    'value' => 'Wartość',
+    'yes' => 'Tak',
+];

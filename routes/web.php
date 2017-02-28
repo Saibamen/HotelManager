@@ -19,4 +19,6 @@ Auth::routes();
 
 Route::get('home', 'HomeController@index');
 
-Route::get('rooms', 'RoomController@index');
+Route::get('rooms', ['as' => 'room.index', 'uses' => 'RoomController@index']);
+
+Route::get('lang/{language}', ['as' => 'lang.set', 'uses' => 'Controller@changeLanguage']);

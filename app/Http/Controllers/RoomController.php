@@ -27,25 +27,25 @@ class RoomController extends Controller
         $dataset = [
             [
                 'title' => trans('general.number'),
-                'value' => function($data) {
+                'value' => function ($data) {
                     return $data->number;
                 },
             ],
             [
                 'title' => trans('general.floor'),
-                'value' => function($data) {
+                'value' => function ($data) {
                     return $data->floor;
                 },
             ],
             [
                 'title' => trans('general.capacity'),
-                'value' => function($data) {
+                'value' => function ($data) {
                     return $data->capacity;
                 },
             ],
             [
                 'title' => trans('general.price'),
-                'value' => function($data) {
+                'value' => function ($data) {
                     return $data->price;
                 },
             ],
