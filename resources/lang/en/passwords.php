@@ -19,4 +19,11 @@ return [
     'token'    => 'This password reset token is invalid.',
     'user'     => "We can't find a user with that e-mail address.",
 
+    'send'           => 'Send Password Reset Link',
+    'reset_password' => 'Reset Password',
+
+    'mail_subject' => 'Reset Your Password',
+    'mail_line_1'  => 'You are receiving this email because we received a password reset request for your account.',
+    'mail_line_2'  => 'If you did not request a password reset, no further action is required.',
+
 ];
