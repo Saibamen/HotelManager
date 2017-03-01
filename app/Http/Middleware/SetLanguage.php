@@ -31,5 +31,4 @@ class SetLanguage
 
         return $next($request);
     }
-
 }

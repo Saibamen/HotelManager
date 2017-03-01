@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RoomController extends Controller
 {
@@ -35,6 +36,99 @@ class RoomController extends Controller
         ];
 
         return view('list', $view_data);
+    }
+
+    public function showAddEditForm($id = NULL)
+    {
+        if ($id === NULL) {
+            $dataset = new Room;
+            $title = trans('general.add');
+            $submit_route = route($this->getRouteName() . '.postadd');
+        } else {
+            try {
+                $dataset = Room::findOrFail($id);
+            } catch(ModelNotFoundException $e) {
+                return Controller::returnBack([
+                    'message' => trans('general.object_not_found'),
+                    'alert-class' => 'alert-danger'
+                ]);
+            }
+
+            $title = trans('general.edit');
+            $submit_route = route($this->getRouteName() . '.postedit', $id);
+        }
+
+        $title .= ' ' . mb_strtolower(trans('general.room'));
+
+        $view_data = [
+            'dataset' => $dataset,
+            'fields' => $this->getFields(),
+            'title' => $title,
+            'submit_route' => $submit_route,
+            'route_name' => $this->getRouteName()
+        ];
+
+        return view('addedit', $view_data);
+    }
+
+    private function getFields()
+    {
+        return [
+            [
+                'id'    => 'number',
+                'title' => trans('general.number'),
+                'value' => function(Room $data) {
+                    return $data->number;
+                },
+                'type'  => 'number',
+                'optional' => [
+                    'required' => 'required'
+                ]
+            ],
+            [
+                'id'    => 'floor',
+                'title' => trans('general.floor'),
+                'value' => function(Room $data) {
+                    return $data->floor;
+                },
+                'type'  => 'number',
+                'optional' => [
+                    'required' => 'required'
+                ]
+            ],
+            [
+                'id'    => 'capacity',
+                'title' => trans('general.capacity'),
+                'value' => function(Room $data) {
+                    return $data->capacity;
+                },
+                'type'  => 'number',
+                'optional' => [
+                    'required' => 'required'
+                ]
+            ],
+            [
+                'id'    => 'price',
+                'title' => trans('general.price'),
+                'value' => function(Room $data) {
+                    return $data->price;
+                },
+                'type'  => 'number',
+                'optional' => [
+                    'step' => '0.01',
+                    'placeholder' => '0.00',
+                    'required' => 'required'
+                ]
+            ],
+            [
+                'id'    => 'comments',
+                'title' => trans('general.comment'),
+                'value' => function(Room $data) {
+                    return $data->comments;
+                },
+                'type' => 'textarea'
+            ],
+        ];
     }
 
     private function getColumns()

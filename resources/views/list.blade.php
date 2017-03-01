@@ -1,17 +1,17 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
-@section("content")
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">@if(isset($title)) {{ $title }} @endif</div>
+                    <div class="panel-heading">@if (isset($title)) {{ $title }} @endif</div>
 
                     <div class="panel-body">
-                        @include("layouts.messages")
+                        @include('layouts.messages')
 
-                        @if(!is_null($dataset))
-                            @if(isset($title))
+                        @if (!is_null($dataset))
+                            @if (isset($title))
                                 <h2>{{ $title }}</h2>
                             @endif
 
@@ -19,25 +19,25 @@
                                 <table class="table table-striped table-hover table-responsive">
                                     <thead>
                                         <tr class="active">
-                                            @foreach($columns as $column)
-                                                <th>{{ $column["title"] }}</th>
+                                            @foreach ($columns as $column)
+                                                <th>{{ $column['title'] }}</th>
                                             @endforeach
 
-                                            <th style="width:130px;">@lang("general.actions")</th>
+                                            <th style="width:130px;">@lang('general.action')</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($dataset as $data)
+                                    @foreach ($dataset as $data)
                                         <tr>
-                                            @foreach($columns as $column)
-                                                <td>{!! $column["value"]($data) !!}</td>
+                                            @foreach ($columns as $column)
+                                                <td>{!! $column['value']($data) !!}</td>
                                             @endforeach
 
                                             {{-- Akcje --}}
                                             <td>
-                                                {{-- Html::link(route($route_name . ".editform", $data->id), trans("general.edit"), ["class" => "btn btn-sm btn-primary"]) --}}
-                                                {{ Form::button(trans("general.delete"), ["class" => "btn btn-sm btn-danger", "data-toggle" => "modal", "data-target" => "#delete-modal", "data-id" => $data->id, "data-name" => $data->name]) }}
+                                                {{-- Html::link(route($route_name . '.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) --}}
+                                                {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-name' => $data->name]) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -46,12 +46,12 @@
                             @endif
 
                             <div class="text-center">
-                                @if($dataset->total() > $dataset->perPage())
+                                @if ($dataset->total() > $dataset->perPage())
                                     {{ $dataset->links() }}
                                     <br>
                                 @endif
 
-                                <a href="{{-- route($route_name . ".addform") --}}" class="btn btn-success" role="button"><i class="fa fa-plus"></i> @lang("general.add")</a>
+                                <a href="{{ route($route_name . '.addform') }}" class="btn btn-success" role="button"><i class="fa fa-plus"></i> @lang('general.add')</a>
                             </div>
                         @endif
                     </div>
@@ -60,8 +60,8 @@
         </div>
     </div>
 
-    @if($dataset->total() > 0)
-        @include("deletemodal")
+    @if ($dataset->total() > 0)
+        @include('deletemodal')
     @endif
 
 @endsection
