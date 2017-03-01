@@ -38,34 +38,34 @@ class RoomController extends Controller
         return view('list', $view_data);
     }
 
-    public function showAddEditForm($id = NULL)
+    public function showAddEditForm($id = null)
     {
-        if ($id === NULL) {
-            $dataset = new Room;
+        if ($id === null) {
+            $dataset = new Room();
             $title = trans('general.add');
-            $submit_route = route($this->getRouteName() . '.postadd');
+            $submit_route = route($this->getRouteName().'.postadd');
         } else {
             try {
                 $dataset = Room::findOrFail($id);
-            } catch(ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 return Controller::returnBack([
-                    'message' => trans('general.object_not_found'),
+                    'message'     => trans('general.object_not_found'),
                     'alert-class' => 'alert-danger'
                 ]);
             }
 
             $title = trans('general.edit');
-            $submit_route = route($this->getRouteName() . '.postedit', $id);
+            $submit_route = route($this->getRouteName().'.postedit', $id);
         }
 
-        $title .= ' ' . mb_strtolower(trans('general.room'));
+        $title .= ' '.mb_strtolower(trans('general.room'));
 
         $view_data = [
-            'dataset' => $dataset,
-            'fields' => $this->getFields(),
-            'title' => $title,
+            'dataset'      => $dataset,
+            'fields'       => $this->getFields(),
+            'title'        => $title,
             'submit_route' => $submit_route,
-            'route_name' => $this->getRouteName()
+            'route_name'   => $this->getRouteName()
         ];
 
         return view('addedit', $view_data);
@@ -77,56 +77,56 @@ class RoomController extends Controller
             [
                 'id'    => 'number',
                 'title' => trans('general.number'),
-                'value' => function(Room $data) {
+                'value' => function (Room $data) {
                     return $data->number;
                 },
-                'type'  => 'number',
+                'type'     => 'number',
                 'optional' => [
-                    'required' => 'required'
+                    'required' => 'required',
                 ]
             ],
             [
                 'id'    => 'floor',
                 'title' => trans('general.floor'),
-                'value' => function(Room $data) {
+                'value' => function (Room $data) {
                     return $data->floor;
                 },
-                'type'  => 'number',
+                'type'     => 'number',
                 'optional' => [
-                    'required' => 'required'
+                    'required' => 'required',
                 ]
             ],
             [
                 'id'    => 'capacity',
                 'title' => trans('general.capacity'),
-                'value' => function(Room $data) {
+                'value' => function (Room $data) {
                     return $data->capacity;
                 },
-                'type'  => 'number',
+                'type'     => 'number',
                 'optional' => [
-                    'required' => 'required'
+                    'required' => 'required',
                 ]
             ],
             [
                 'id'    => 'price',
                 'title' => trans('general.price'),
-                'value' => function(Room $data) {
+                'value' => function (Room $data) {
                     return $data->price;
                 },
-                'type'  => 'number',
+                'type'     => 'number',
                 'optional' => [
-                    'step' => '0.01',
+                    'step'        => '0.01',
                     'placeholder' => '0.00',
-                    'required' => 'required'
+                    'required'    => 'required',
                 ]
             ],
             [
                 'id'    => 'comments',
                 'title' => trans('general.comment'),
-                'value' => function(Room $data) {
+                'value' => function (Room $data) {
                     return $data->comments;
                 },
-                'type' => 'textarea'
+                'type' => 'textarea',
             ],
         ];
     }
