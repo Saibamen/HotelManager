@@ -50,7 +50,7 @@ class RoomController extends Controller
             } catch (ModelNotFoundException $e) {
                 return Controller::returnBack([
                     'message'     => trans('general.object_not_found'),
-                    'alert-class' => 'alert-danger'
+                    'alert-class' => 'alert-danger',
                 ]);
             }
 
@@ -65,7 +65,7 @@ class RoomController extends Controller
             'fields'       => $this->getFields(),
             'title'        => $title,
             'submit_route' => $submit_route,
-            'route_name'   => $this->getRouteName()
+            'route_name'   => $this->getRouteName(),
         ];
 
         return view('addedit', $view_data);
@@ -83,7 +83,7 @@ class RoomController extends Controller
                 'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
-                ]
+                ],
             ],
             [
                 'id'    => 'floor',
@@ -94,7 +94,7 @@ class RoomController extends Controller
                 'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
-                ]
+                ],
             ],
             [
                 'id'    => 'capacity',
@@ -105,7 +105,7 @@ class RoomController extends Controller
                 'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
-                ]
+                ],
             ],
             [
                 'id'    => 'price',
@@ -118,7 +118,7 @@ class RoomController extends Controller
                     'step'        => '0.01',
                     'placeholder' => '0.00',
                     'required'    => 'required',
-                ]
+                ],
             ],
             [
                 'id'    => 'comments',
