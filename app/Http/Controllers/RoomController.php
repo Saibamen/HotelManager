@@ -32,7 +32,7 @@ class RoomController extends Controller
 
     public function store(/*RoomRequest $request*/ Request $request, $id = null)
     {
-        if($id === null) {
+        if ($id === null) {
             $object = new Room();
         } else {
             try {
@@ -40,7 +40,7 @@ class RoomController extends Controller
             } catch (ModelNotFoundException $e) {
                 return Controller::returnBack([
                     'message'     => trans('general.object_not_found'),
-                    'alert-class' => 'alert-danger'
+                    'alert-class' => 'alert-danger',
                 ]);
             }
         }
@@ -48,10 +48,10 @@ class RoomController extends Controller
         $object->fill($request->all());
         $object->save();
 
-        return redirect()->route($this->getRouteName() . '.index')
+        return redirect()->route($this->getRouteName().'.index')
             ->with([
                 'message'     => trans('general.saved'),
-                'alert-class' => 'alert-success'
+                'alert-class' => 'alert-success',
             ]);
     }
 
