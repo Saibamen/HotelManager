@@ -2,12 +2,14 @@
 
 class RegisterTest extends TestCase
 {
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         Session::start();
     }
 
-    public function testEmptyRegister() {
+    public function testEmptyRegister()
+    {
         $this->visit('register')
             ->see('Zarejestruj')
             ->type('', 'name')
@@ -21,7 +23,8 @@ class RegisterTest extends TestCase
             ->see('Pole hasło jest wymagane.');
     }
 
-    public function testSimpleFailRegister() {
+    public function testSimpleFailRegister()
+    {
         $this->visit('register')
             ->see('Zarejestruj')
             ->type('name', 'name')
@@ -35,7 +38,8 @@ class RegisterTest extends TestCase
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
     }
 
-    public function testSimpleFailRegisterBadPassConfirm() {
+    public function testSimpleFailRegisterBadPassConfirm()
+    {
         $this->visit('register')
             ->see('Zarejestruj')
             ->type('name', 'name')
