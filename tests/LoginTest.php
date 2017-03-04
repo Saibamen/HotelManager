@@ -1,8 +1,7 @@
 <?php
 
-class UserTest extends TestCase
+class LoginTest extends TestCase
 {
-
     public function testEmptyLogin() {
         $this->visit('/login')
             ->see('Zaloguj')
