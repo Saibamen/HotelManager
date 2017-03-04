@@ -2,7 +2,8 @@
 
 class LoginTest extends TestCase
 {
-    public function testEmptyLogin() {
+    public function testEmptyLogin()
+    {
         $this->visit('/login')
             ->see('Zaloguj')
             ->type('', 'email')
@@ -14,7 +15,8 @@ class LoginTest extends TestCase
             ->see('Pole hasło jest wymagane.');
     }
 
-    public function testSimpleFailLogin() {
+    public function testSimpleFailLogin()
+    {
         $this->visit('/login')
             ->see('Zaloguj')
             ->type('badEmail', 'email')
