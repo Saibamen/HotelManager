@@ -103,8 +103,7 @@ class RoomController extends Controller
             [
                 'id'    => 'number',
                 'title' => trans('general.number'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->number;
                 },
                 'type'     => 'number',
@@ -115,8 +114,7 @@ class RoomController extends Controller
             [
                 'id'    => 'floor',
                 'title' => trans('general.floor'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->floor;
                 },
                 'type'     => 'number',
@@ -127,8 +125,7 @@ class RoomController extends Controller
             [
                 'id'    => 'capacity',
                 'title' => trans('general.capacity'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->capacity;
                 },
                 'type'     => 'number',
@@ -139,8 +136,7 @@ class RoomController extends Controller
             [
                 'id'    => 'price',
                 'title' => trans('general.price'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->price;
                 },
                 'type'     => 'number',
@@ -153,8 +149,7 @@ class RoomController extends Controller
             [
                 'id'    => 'comments',
                 'title' => trans('general.comments'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->comments;
                 },
                 'type' => 'textarea',
@@ -167,29 +162,25 @@ class RoomController extends Controller
         $dataset = [
             [
                 'title' => trans('general.number'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->number;
                 },
             ],
             [
                 'title' => trans('general.floor'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->floor;
                 },
             ],
             [
                 'title' => trans('general.capacity'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->capacity;
                 },
             ],
             [
                 'title' => trans('general.price'),
-                'value' => function (Room $data)
-                {
+                'value' => function (Room $data) {
                     return $data->price;
                 },
             ],
