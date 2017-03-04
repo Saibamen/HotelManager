@@ -4,21 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
     private function getRouteName()
     {
         return 'room';
-    }
-
-    public function delete($id)
-    {
-        Room::destroy($id);
-
-        $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
-
-        return response()->json($data);
     }
 
     public function index()
@@ -36,6 +28,40 @@ class RoomController extends Controller
         ];
 
         return view('list', $view_data);
+    }
+
+    public function store(/*RoomRequest $request*/ Request $request, $id = null)
+    {
+        if($id === null) {
+            $object = new Room();
+        } else {
+            try {
+                $object = Room::findOrFail($id);
+            } catch (ModelNotFoundException $e) {
+                return Controller::returnBack([
+                    'message'     => trans('general.object_not_found'),
+                    'alert-class' => 'alert-danger'
+                ]);
+            }
+        }
+
+        $object->fill($request->all());
+        $object->save();
+
+        return redirect()->route($this->getRouteName() . '.index')
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success'
+            ]);
+    }
+
+    public function delete($id)
+    {
+        Room::destroy($id);
+
+        $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
+
+        return response()->json($data);
     }
 
     public function showAddEditForm($id = null)
@@ -122,7 +148,7 @@ class RoomController extends Controller
             ],
             [
                 'id'    => 'comments',
-                'title' => trans('general.comment'),
+                'title' => trans('general.comments'),
                 'value' => function (Room $data) {
                     return $data->comments;
                 },
