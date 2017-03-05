@@ -7,6 +7,11 @@ engines:
       languages:
       - php
       - javascript
+    exclude_fingerprints:
+    - afa9b137c4f7bd575eba5b5e6fd11cdf
+    - 90499addfcdcfaf453e14c05777d1a8e
+    - 8cf604e26389e8acdfe2574db0f65682
+    - c4babfbebd23bd530d9b5cfdf6f210f4
   eslint:
     enabled: true
   fixme:
