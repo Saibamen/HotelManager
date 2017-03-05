@@ -6,6 +6,8 @@ class LoginTest extends TestCase
 {
     use DatabaseTransactions;
 
+    private $fakeUser;
+
     public function setUp()
     {
         parent::setUp();
@@ -76,5 +78,29 @@ class LoginTest extends TestCase
         $this->assertRedirectedTo('/');
 
         $this->visit('login')->seePageIs('login')->dontSee($this->fakeUser->name);
+    }
+
+    public function testFactoryLoggedFakeUserCannotLoginAgain()
+    {
+        $this->be($this->fakeUser)
+            ->visit('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!')
+            ->visit('login')
+            ->seePageIs('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!');
+    }
+
+    public function testFactoryLoggedFakeUserCannotRegister()
+    {
+        $this->be($this->fakeUser)
+            ->visit('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!')
+            ->visit('register')
+            ->seePageIs('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!');
     }
 }

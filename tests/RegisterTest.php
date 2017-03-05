@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
+
 class RegisterTest extends TestCase
 {
     public function setUp()
@@ -51,6 +53,6 @@ class RegisterTest extends TestCase
             ->dontSee('Cześć')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Potwierdzenie hasło nie zgadza się.')
-            ->assertNull(\Illuminate\Support\Facades\Input::get('password'));
+            ->assertNull(Input::get('password'));
     }
 }
