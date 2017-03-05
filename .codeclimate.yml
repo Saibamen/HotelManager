@@ -1,4 +1,3 @@
----
 engines:
   csslint:
     enabled: true
