@@ -16,6 +16,12 @@ engines:
     checks:
       CleanCode/StaticAccess:
         enabled: false
+      Naming/ShortMethodName:
+        enabled: false
+      Naming/ShortVariable:
+        enabled: false
+      CleanCode/ElseExpression:
+        enabled: false
 ratings:
   paths:
   - "**.css"

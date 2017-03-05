@@ -16,9 +16,9 @@
                             @endif
 
                             @if ($dataset->id)
-                                {!! Form::model($dataset, ['url' => $submit_route, 'class' => 'form-horizontal']) !!}
+                                {!! Form::model($dataset, ['url' => $submitRoute, 'class' => 'form-horizontal']) !!}
                             @else
-                                {!! Form::open(['url' => $submit_route, 'class' => 'form-horizontal']) !!}
+                                {!! Form::open(['url' => $submitRoute, 'class' => 'form-horizontal']) !!}
                             @endif
 
                             @php($fields_class = ['class' => 'form-control'])

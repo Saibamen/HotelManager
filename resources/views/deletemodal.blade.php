@@ -1,4 +1,4 @@
-<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-url="{{ url('/') }}/{{ $route_name }}/delete/">
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-url="{{ url('/') }}/{{ $routeName }}/delete/">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

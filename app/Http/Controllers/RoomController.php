@@ -20,14 +20,14 @@ class RoomController extends Controller
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price')
             ->paginate($this->getItemsPerPage());
 
-        $view_data = [
+        $viewData = [
             'columns'    => $this->getColumns(),
             'dataset'    => $dataset,
-            'route_name' => $this->getRouteName(),
+            'routeName' => $this->getRouteName(),
             'title'      => $title,
         ];
 
-        return view('list', $view_data);
+        return view('list', $viewData);
     }
 
     public function store(/*RoomRequest $request*/ Request $request, $id = null)
@@ -69,7 +69,7 @@ class RoomController extends Controller
         if ($id === null) {
             $dataset = new Room();
             $title = trans('general.add');
-            $submit_route = route($this->getRouteName().'.postadd');
+            $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
                 $dataset = Room::findOrFail($id);
@@ -81,20 +81,20 @@ class RoomController extends Controller
             }
 
             $title = trans('general.edit');
-            $submit_route = route($this->getRouteName().'.postedit', $id);
+            $submitRoute = route($this->getRouteName().'.postedit', $id);
         }
 
         $title .= ' '.mb_strtolower(trans('general.room'));
 
-        $view_data = [
+        $viewData = [
             'dataset'      => $dataset,
             'fields'       => $this->getFields(),
             'title'        => $title,
-            'submit_route' => $submit_route,
-            'route_name'   => $this->getRouteName(),
+            'submitRoute' => $submitRoute,
+            'routeName'   => $this->getRouteName(),
         ];
 
-        return view('addedit', $view_data);
+        return view('addedit', $viewData);
     }
 
     private function getFields()
