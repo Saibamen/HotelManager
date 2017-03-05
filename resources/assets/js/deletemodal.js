@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#delete-modal").on("show.bs.modal", function(modal) {
-        window.delete_id = $(modal.relatedTarget).data("id");
+        window.deleteId = $(modal.relatedTarget).data("id");
         var name = $(modal.relatedTarget).data("name");
 
         $(".modal-body strong:last").text(name);
@@ -11,7 +11,7 @@ $(document).ready(function() {
         $("#ajax-loading").show();
 
         $.ajax({
-            url: $("#delete-modal").data("url") + window.delete_id,
+            url: $("#delete-modal").data("url") + window.deleteId,
             type: "POST",
             data: {_method: "delete", _token: window.Laravel.csrfToken},
             success: function(data) {
