@@ -23,7 +23,7 @@ class RoomController extends Controller
         $viewData = [
             'columns'    => $this->getColumns(),
             'dataset'    => $dataset,
-            'routeName' => $this->getRouteName(),
+            'routeName'  => $this->getRouteName(),
             'title'      => $title,
         ];
 
@@ -90,8 +90,8 @@ class RoomController extends Controller
             'dataset'      => $dataset,
             'fields'       => $this->getFields(),
             'title'        => $title,
-            'submitRoute' => $submitRoute,
-            'routeName'   => $this->getRouteName(),
+            'submitRoute'  => $submitRoute,
+            'routeName'    => $this->getRouteName(),
         ];
 
         return view('addedit', $viewData);
