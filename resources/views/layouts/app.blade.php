@@ -95,7 +95,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="/js/app.min.js"></script>
     @yield('js')
 </body>
 </html>
