@@ -2,17 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines contain the default error messages used by
-    | the validator class. Some of these rules have multiple versions such
-    | such as the size rules. Feel free to tweak each of these messages.
-    |
-    */
-
     'accepted'             => ':Attribute musi zostać zaakceptowany.',
     'active_url'           => ':Attribute jest nieprawidłowym adresem URL.',
     'after'                => ':Attribute musi być datą późniejszą od :date.',
