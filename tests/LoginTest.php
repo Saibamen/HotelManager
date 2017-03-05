@@ -6,16 +6,18 @@ class LoginTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         Session::start();
 
         $this->fakeUser = factory(App\Models\User::class)->create([
-            'password' => bcrypt('testpass123')
+            'password' => bcrypt('testpass123'),
         ]);
     }
 
-    public function testEmptyLogin() {
+    public function testEmptyLogin()
+    {
         $this->visit('login')
             ->see('Zaloguj')
             ->type('', 'email')
@@ -27,7 +29,8 @@ class LoginTest extends TestCase
             ->see('Pole hasło jest wymagane.');
     }
 
-    public function testSimpleFailLogin() {
+    public function testSimpleFailLogin()
+    {
         $this->visit('login')
             ->see('Zaloguj')
             ->type('badEmail', 'email')
@@ -38,7 +41,8 @@ class LoginTest extends TestCase
             ->see('Błędny login lub hasło.');
     }
 
-    public function testFactoryLogin() {
+    public function testFactoryLogin()
+    {
         $this->visit('login')
             ->see('Zaloguj')
             ->type($this->fakeUser->email, 'email')
@@ -50,13 +54,14 @@ class LoginTest extends TestCase
             ->dontSee('Błędny login lub hasło.');
     }
 
-    public function testFactoryLoginLogout() {
+    public function testFactoryLoginLogout()
+    {
         $email = $this->fakeUser->email;
         $password = 'testpass123';
 
         $response = $this->call('POST', 'login', [
-            '_token' => csrf_token(),
-            'email' => $email,
+            '_token'   => csrf_token(),
+            'email'    => $email,
             'password' => $password,
         ]);
 
