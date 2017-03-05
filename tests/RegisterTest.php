@@ -45,11 +45,8 @@ class RegisterTest extends TestCase
             ->press('Zarejestruj')
             ->seePageIs('register')
             ->dontSee('Cześć')
-            //->assertSessionHasErrors()
-            //->assertHasOldInput()
-            //->assertNull(\Illuminate\Support\Facades\Input::get('password'))
-            //->assertNull(\Illuminate\Support\Facades\Input::get('password_confirmation'))
             ->see('Format adres e-mail jest nieprawidłowy.')
-            ->see('Potwierdzenie hasło nie zgadza się.');
+            ->see('Potwierdzenie hasło nie zgadza się.')
+            ->assertNull(\Illuminate\Support\Facades\Input::get('password'));
     }
 }

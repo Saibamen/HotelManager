@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index');
+Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('room', ['as' => 'room.index', 'uses' => 'RoomController@index']);
 Route::get('room/add', ['as' => 'room.addform', 'uses' => 'RoomController@showAddEditForm']);
