@@ -15,7 +15,7 @@
                                 <h2>{{ $title }}</h2>
                             @endif
 
-                            @if($dataset->total() > 0)
+                            @if ($dataset->total() > 0)
                                 <table class="table table-striped table-hover table-responsive">
                                     <thead>
                                         <tr class="active">
@@ -23,7 +23,7 @@
                                                 <th>{{ $column['title'] }}</th>
                                             @endforeach
 
-                                            <th style="width:130px;">@lang('general.action')</th>
+                                            <th style="width:130px;">@lang('general.actions')</th>
                                         </tr>
                                     </thead>
 
@@ -36,7 +36,7 @@
 
                                             {{-- Akcje --}}
                                             <td>
-                                                {{-- Html::link(route($routeName . '.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) --}}
+                                                {{ Html::link(route($routeName.'.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) }}
                                                 {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-name' => $data->name]) }}
                                             </td>
                                         </tr>
@@ -51,7 +51,7 @@
                                     <br>
                                 @endif
 
-                                <a href="{{ route($routeName . '.addform') }}" class="btn btn-success" role="button"><i class="fa fa-plus"></i> @lang('general.add')</a>
+                                <a href="{{ route($routeName.'.addform') }}" class="btn btn-success" role="button"><i class="fa fa-plus"></i> @lang('general.add')</a>
                             </div>
                         @endif
                     </div>

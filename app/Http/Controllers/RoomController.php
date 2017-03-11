@@ -147,10 +147,10 @@ class RoomController extends Controller
                 ],
             ],
             [
-                'id'    => 'comments',
-                'title' => trans('general.comments'),
+                'id'    => 'comment',
+                'title' => trans('general.comment'),
                 'value' => function (Room $data) {
-                    return $data->comments;
+                    return $data->comment;
                 },
                 'type' => 'textarea',
             ],

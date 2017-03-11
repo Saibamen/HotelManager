@@ -16,8 +16,10 @@ return [
     'mail_greeting'         => 'Witaj!',
     'mail_regards'          => 'Pozdrowienia',
     'name'                  => 'Nazwa',
+    'number'                => 'Numer',
     'no'                    => 'Nie',
     'object_not_found'      => 'Nie znaleziono obiektu',
+    'price'                 => 'Cena',
     'really_delete'         => 'Czy na pewno chcesz usunąć',
     'saved'                 => 'Zapisano pomyślnie',
     'select'                => 'Wybierz',
@@ -25,4 +27,9 @@ return [
     'title'                 => 'Tytuł',
     'value'                 => 'Wartość',
     'yes'                   => 'Tak',
+
+    'room'     => 'Pokój',
+    'rooms'    => 'Pokoje',
+    'floor'    => 'Piętro',
+    'capacity' => 'Pojemność',
 ];

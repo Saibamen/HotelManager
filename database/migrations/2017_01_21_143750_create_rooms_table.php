@@ -15,7 +15,7 @@ class CreateRoomsTable extends Migration
             $table->smallInteger('floor');
             $table->smallInteger('capacity')->unsigned();
             $table->double('price', 15, 2);
-            $table->text('comments')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
