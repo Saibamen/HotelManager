@@ -63,12 +63,17 @@ class RegisterTest extends TestCase
     {
         $this->visit('register')
             ->see('Zarejestruj')
-            ->type('name', 'name')
+            ->type('Valid Name', 'name')
             ->type('valid-email@test.com', 'email')
             ->type('correctpassword', 'password')
             ->type('correctpassword', 'password_confirmation')
             ->press('Zarejestruj')
             ->seePageIs('home')
             ->see('Wyloguj');
+
+        $this->seeInDatabase('users', [
+            'name'  => 'Valid Name',
+            'email' => 'valid-email@test.com',
+        ]);
     }
 }
