@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
@@ -30,7 +30,7 @@ class RoomController extends Controller
         return view('list', $viewData);
     }
 
-    public function store(/*RoomRequest $request*/ Request $request, $id = null)
+    public function store(RoomRequest $request, $id = null)
     {
         if ($id === null) {
             $object = new Room();
@@ -72,7 +72,7 @@ class RoomController extends Controller
             $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
-                $dataset = Room::findOrFail($id);
+                $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')->findOrFail($id);
             } catch (ModelNotFoundException $e) {
                 return Controller::returnBack([
                     'message'     => trans('general.object_not_found'),
