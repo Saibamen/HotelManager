@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
-
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
+
     Route::get('room', ['as' => 'room.index', 'uses' => 'RoomController@index']);
     Route::get('room/add', ['as' => 'room.addform', 'uses' => 'RoomController@showAddEditForm']);
     Route::post('room/add', ['as' => 'room.postadd', 'uses' => 'RoomController@store']);
