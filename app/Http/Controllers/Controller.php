@@ -28,6 +28,7 @@ class Controller extends BaseController
 
     public function changeLanguage($language)
     {
-        return back()->withCookie(cookie()->forever('lang', $language));
+        // 90 dni w minutach
+        return back()->cookie('lang', $language, 129600);
     }
 }
