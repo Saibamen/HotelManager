@@ -80,7 +80,7 @@ class LoginTest extends TestCase
         $this->visit('login')->seePageIs('login')->dontSee($this->fakeUser->name);
     }
 
-    public function testFactoryLoggedFakeUserCannotLoginAgain()
+    public function testFactoryLoggedUserCannotLoginAgain()
     {
         $this->be($this->fakeUser)
             ->visit('home')
@@ -92,7 +92,7 @@ class LoginTest extends TestCase
             ->see('You are logged in!');
     }
 
-    public function testFactoryLoggedFakeUserCannotRegister()
+    public function testFactoryLoggedUserCannotRegister()
     {
         $this->be($this->fakeUser)
             ->visit('home')
@@ -102,5 +102,12 @@ class LoginTest extends TestCase
             ->seePageIs('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!');
+    }
+
+    public function testFactoryNotLoggedUserCannotSeeRooms()
+    {
+        $this->visit('room')
+            ->seePageIs('login')
+            ->see('Zaloguj');
     }
 }

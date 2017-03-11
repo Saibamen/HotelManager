@@ -14,11 +14,11 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'number'    => 'required',
-            'floor'     => 'required|numeric',
-            'capacity'  => 'required|digits_between:1,2',
-            'price'     => '',
-            'comment'   => 'nullable',
+            'number'   => 'required',
+            'floor'    => 'required|numeric',
+            'capacity' => 'required|digits_between:1,2',
+            'price'    => '',
+            'comment'  => 'nullable',
         ];
     }
 }
