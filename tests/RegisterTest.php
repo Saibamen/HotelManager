@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Input;
 
 class RegisterTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function setUp()
     {
         parent::setUp();
@@ -20,7 +23,7 @@ class RegisterTest extends TestCase
             ->type('', 'password_confirmation')
             ->press('Zarejestruj')
             ->seePageIs('register')
-            ->dontSee('Cześć')
+            ->dontSee('Wyloguj')
             ->see('Pole adres e-mail jest wymagane.')
             ->see('Pole hasło jest wymagane.');
     }
@@ -35,7 +38,7 @@ class RegisterTest extends TestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Zarejestruj')
             ->seePageIs('register')
-            ->dontSee('Cześć')
+            ->dontSee('Wyloguj')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
     }
@@ -50,9 +53,22 @@ class RegisterTest extends TestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Zarejestruj')
             ->seePageIs('register')
-            ->dontSee('Cześć')
+            ->dontSee('Wyloguj')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Potwierdzenie hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
+    }
+
+    public function testSimpleCorrectRegister()
+    {
+        $this->visit('register')
+            ->see('Zarejestruj')
+            ->type('name', 'name')
+            ->type('valid-email@test.com', 'email')
+            ->type('correctpassword', 'password')
+            ->type('correctpassword', 'password_confirmation')
+            ->press('Zarejestruj')
+            ->seePageIs('home')
+            ->see('Wyloguj');
     }
 }
