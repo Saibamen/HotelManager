@@ -58,7 +58,6 @@ class RoomController extends Controller
     public function delete($id)
     {
         Room::destroy($id);
-
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         return response()->json($data);
