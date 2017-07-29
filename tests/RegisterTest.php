@@ -17,6 +17,7 @@ class RegisterTest extends TestCase
     {
         $this->visit('register')
             ->see('Zarejestruj')
+            ->dontSee('Pokoje')
             ->type('', 'name')
             ->type('', 'email')
             ->type('', 'password')
@@ -24,6 +25,7 @@ class RegisterTest extends TestCase
             ->press('Zarejestruj')
             ->seePageIs('register')
             ->dontSee('Wyloguj')
+            ->dontSee('Pokoje')
             ->see('Pole adres e-mail jest wymagane.')
             ->see('Pole hasło jest wymagane.');
     }
@@ -32,6 +34,7 @@ class RegisterTest extends TestCase
     {
         $this->visit('register')
             ->see('Zarejestruj')
+            ->dontSee('Pokoje')
             ->type('name', 'name')
             ->type('badEmail', 'email')
             ->type('bad', 'password')
@@ -39,6 +42,7 @@ class RegisterTest extends TestCase
             ->press('Zarejestruj')
             ->seePageIs('register')
             ->dontSee('Wyloguj')
+            ->dontSee('Pokoje')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
     }
@@ -47,6 +51,7 @@ class RegisterTest extends TestCase
     {
         $this->visit('register')
             ->see('Zarejestruj')
+            ->dontSee('Pokoje')
             ->type('name', 'name')
             ->type('badEmail', 'email')
             ->type('badPass4', 'password')
@@ -54,6 +59,7 @@ class RegisterTest extends TestCase
             ->press('Zarejestruj')
             ->seePageIs('register')
             ->dontSee('Wyloguj')
+            ->dontSee('Pokoje')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Potwierdzenie hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
@@ -63,13 +69,15 @@ class RegisterTest extends TestCase
     {
         $this->visit('register')
             ->see('Zarejestruj')
+            ->dontSee('Pokoje')
             ->type('Valid Name', 'name')
             ->type('valid-email@test.com', 'email')
             ->type('correctpassword', 'password')
             ->type('correctpassword', 'password_confirmation')
             ->press('Zarejestruj')
             ->seePageIs('home')
-            ->see('Wyloguj');
+            ->see('Wyloguj')
+            ->see('Pokoje');
 
         $this->seeInDatabase('users', [
             'name'  => 'Valid Name',

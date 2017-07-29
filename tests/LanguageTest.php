@@ -14,7 +14,9 @@ class LanguageTest extends TestCase
             ->see('Zaloguj')
             ->see('Adres e-mail')
             ->see('Hasło')
-            ->dontSee('E-Mail Address');
+            ->dontSee('E-Mail Address')
+            ->dontSee('Pokoje')
+            ->dontSee('Rooms');
     }
 
     /*public function testLangSwitcherToEnglish()

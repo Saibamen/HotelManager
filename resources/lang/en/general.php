@@ -32,4 +32,10 @@ return [
     'rooms'    => 'Rooms',
     'floor'    => 'Floor',
     'capacity' => 'Capacity',
+
+    'guests' => 'Guests',
+
+    'reservations' => 'Reservations',
+
+    'users' => 'Users',
 ];

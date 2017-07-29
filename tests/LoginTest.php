@@ -27,6 +27,7 @@ class LoginTest extends TestCase
             ->press('Zaloguj')
             ->seePageIs('login')
             ->dontSee('Cześć')
+            ->dontSee('Pokoje')
             ->see('Pole adres e-mail jest wymagane.')
             ->see('Pole hasło jest wymagane.');
     }
@@ -40,6 +41,7 @@ class LoginTest extends TestCase
             ->press('Zaloguj')
             ->seePageIs('login')
             ->dontSee('Cześć')
+            ->dontSee('Pokoje')
             ->see('Błędny login lub hasło.');
     }
 
@@ -53,6 +55,7 @@ class LoginTest extends TestCase
             ->seePageIs('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!')
+            ->see('Pokoje')
             ->dontSee('Błędny login lub hasło.');
     }
 
@@ -70,7 +73,7 @@ class LoginTest extends TestCase
         $this->assertEquals(302, $response->status());
         $this->assertRedirectedToRoute('home');
 
-        $this->visit('/')->dontSee('Zaloguj')->see($this->fakeUser->name);
+        $this->visit('/')->dontSee('Zaloguj')->see($this->fakeUser->name)->dontSee('Pokoje');
 
         $response = $this->call('POST', 'logout', ['_token' => csrf_token()]);
 
@@ -86,10 +89,12 @@ class LoginTest extends TestCase
             ->visit('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!')
+            ->see('Pokoje')
             ->visit('login')
             ->seePageIs('home')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!');
+            ->see('You are logged in!')
+            ->see('Pokoje');
     }
 
     public function testFactoryLoggedUserCannotRegister()
@@ -98,16 +103,19 @@ class LoginTest extends TestCase
             ->visit('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!')
+            ->see('Pokoje')
             ->visit('register')
             ->seePageIs('home')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!');
+            ->see('You are logged in!')
+            ->see('Pokoje');
     }
 
-    public function testFactoryNotLoggedUserCannotSeeRooms()
+    public function testNotLoggedUserCannotSeeRooms()
     {
         $this->visit('room')
             ->seePageIs('login')
-            ->see('Zaloguj');
+            ->see('Zaloguj')
+            ->dontSee('Pokoje');
     }
 }

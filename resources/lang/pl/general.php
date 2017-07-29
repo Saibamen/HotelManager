@@ -32,4 +32,10 @@ return [
     'rooms'    => 'Pokoje',
     'floor'    => 'Piętro',
     'capacity' => 'Pojemność',
+
+    'guests' => 'Goście',
+
+    'reservations' => 'Rezerwacje',
+
+    'users' => 'Użytkownicy',
 ];
