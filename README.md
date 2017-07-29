@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Saibamen/HotelManager.svg?branch=master)](https://travis-ci.org/Saibamen/HotelManager)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/?branch=master)
 [![StyleCI](https://styleci.io/repos/77186372/shield?branch=master)](https://styleci.io/repos/77186372)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d/mini.png)](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d)
 
 # Hotel Manager
 
