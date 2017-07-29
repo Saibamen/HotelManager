@@ -17,10 +17,10 @@ class LanguageTest extends TestCase
             ->dontSee('E-Mail Address');
     }
 
-    public function testLangSwitcherToEnglish()
+    /*public function testLangSwitcherToEnglish()
     {
         $this->call('GET', '/lang/en');
         $this->assertRedirectedTo('login');
         $this->seeCookie('lang', 'en');
-    }
+    }*/
 }
