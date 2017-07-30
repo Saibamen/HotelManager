@@ -17,7 +17,7 @@ class RoomController extends Controller
     {
         $title = trans('general.rooms');
 
-        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price')
+        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
             ->paginate($this->getItemsPerPage());
 
         $viewData = [
@@ -181,6 +181,12 @@ class RoomController extends Controller
                 'title' => trans('general.price'),
                 'value' => function (Room $data) {
                     return $data->price;
+                },
+            ],
+            [
+                'title' => trans('general.comment'),
+                'value' => function (Room $data) {
+                    return $data->comment;
                 },
             ],
         ];
