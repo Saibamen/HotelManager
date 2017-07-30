@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use App\Models\Room;
 
 class RoomTest extends TestCase
 {
