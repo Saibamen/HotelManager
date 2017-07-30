@@ -22,3 +22,13 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\Room::class, function (Faker\Generator $faker) {
+    return [
+        'number'    => $faker->numerify(),
+        'floor'     => $faker->numerify(),
+        'capacity'  => $faker->numerify(),
+        'price'     => $faker->numerify(),
+        'comment'   => 'test comment'
+    ];
+});

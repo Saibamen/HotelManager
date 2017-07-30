@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use App\Models\Room;
 
 class RoomTest extends TestCase
 {
@@ -17,8 +18,24 @@ class RoomTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function testIndex()
+    public function testEmptyIndex()
     {
+        $this->visit('room')
+            ->dontSee('Zaloguj')
+            ->see('Pokoje')
+            ->dontSee('Numer')
+            ->dontSee('Piętro')
+            ->dontSee('Cena')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Dodaj');
+    }
+
+    public function testFilledIndex()
+    {
+        factory(Room::class, 3)->create();
+
         $this->visit('room')
             ->dontSee('Zaloguj')
             ->see('Pokoje')
@@ -26,8 +43,9 @@ class RoomTest extends TestCase
             ->see('Piętro')
             ->see('Cena')
             ->see('Akcje')
-            ->see('Dodaj')
             ->see('Edytuj')
-            ->see('Usuń');
+            ->see('Usuń')
+            ->see('test comment')
+            ->see('Dodaj');
     }
 }
