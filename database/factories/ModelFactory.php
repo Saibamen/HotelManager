@@ -29,6 +29,6 @@ $factory->define(App\Models\Room::class, function (Faker\Generator $faker) {
         'floor'     => $faker->numerify(),
         'capacity'  => $faker->numerify(),
         'price'     => $faker->numerify(),
-        'comment'   => 'test comment'
+        'comment'   => 'test comment',
     ];
 });
