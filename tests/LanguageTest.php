@@ -19,10 +19,19 @@ class LanguageTest extends TestCase
             ->dontSee('Rooms');
     }
 
-    /*public function testLangSwitcherToEnglish()
+    public function testLangSwitcherSetEnglishCookie()
     {
+        $this->visit('login');
         $this->call('GET', '/lang/en');
         $this->assertRedirectedTo('login');
         $this->seeCookie('lang', 'en');
-    }*/
+    }
+
+    public function testLangSwitcherSetPolishCookie()
+    {
+        $this->visit('login');
+        $this->call('GET', '/lang/pl');
+        $this->assertRedirectedTo('login');
+        $this->seeCookie('lang', 'pl');
+    }
 }

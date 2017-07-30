@@ -50,4 +50,15 @@ class RoomTest extends TestCase
             ->see('test comment')
             ->see('Dodaj');
     }
+
+    public function testTryEditInvalidId()
+    {
+        $this->visit('room')
+            ->see('Pokoje')
+            ->visit('room/edit/10000');
+
+        $this->followRedirects();
+
+        $this->see('Nie znaleziono obiektu');
+    }
 }
