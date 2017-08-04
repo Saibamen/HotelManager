@@ -130,6 +130,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.min.js"></script>
-    @yield('js')
+    @yield('js') 
 </body>
 </html>
