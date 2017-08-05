@@ -24,7 +24,7 @@
                             @php($fields_class = ['class' => 'form-control'])
 
                             @foreach ($fields as $field)
-                                <div class="form-group{{ $errors->has($field['id']) ? ' has-error' : '' }}">
+                                <div class="form-group{{ isset($errors) && $errors->has($field['id']) ? ' has-error' : '' }}">
                                     {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
 
                                     @php(isset($field['optional']) ? $fields_attributes = $fields_class + $field['optional'] : $fields_attributes = $fields_class)
@@ -45,7 +45,7 @@
                                             {{ Form::$type($field['id'], $field['value']($dataset), $fields_attributes) }}
                                         @endif
 
-                                        @if ($errors->has($field['id']))
+                                        @if (isset($errors) && $errors->has($field['id']))
                                             <span class="help-block">
                                             <strong>{{ $errors->first($field['id']) }}</strong>
                                         </span>

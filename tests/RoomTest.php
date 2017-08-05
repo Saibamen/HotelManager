@@ -64,8 +64,6 @@ class RoomTest extends TestCase
 
     public function testEditValidId()
     {
-
-
         $room = factory(Room::class)->create();
 
         $this->visit('room')
@@ -84,11 +82,7 @@ class RoomTest extends TestCase
         $this->type('Edycja komentarza', 'comment')
             ->press('Wyślij');
 
-        $this->followRedirects();
-
-        $this->see('Edycja komentarza');
-
-        $this->visit('room')
+        $this->seePageIs('room')
             ->see('Edycja komentarza');
     }
 }

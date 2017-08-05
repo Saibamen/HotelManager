@@ -105,7 +105,6 @@ class RoomController extends Controller
                 'value' => function (Room $data) {
                     return $data->number;
                 },
-                'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
                 ],
@@ -142,7 +141,6 @@ class RoomController extends Controller
                 'optional' => [
                     'step'        => '0.01',
                     'placeholder' => '0.00',
-                    'required'    => 'required',
                 ],
             ],
             [
