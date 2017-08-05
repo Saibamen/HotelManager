@@ -83,6 +83,26 @@ class RoomTest extends TestCase
             ->press('Wyślij');
 
         $this->seePageIs('room')
+            ->see('Zapisano pomyślnie')
             ->see('Edycja komentarza');
+    }
+
+    public function testDelete()
+    {
+        $room = factory(Room::class)->create();
+
+        $this->seeInDatabase('rooms', [
+            'ID'  => $room->id,
+        ]);
+
+        $response = $this->call('DELETE', 'room/delete/'.$room->id, [
+            '_token'   => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->notSeeInDatabase('rooms', [
+            'ID'  => $room->id,
+        ]);
     }
 }
