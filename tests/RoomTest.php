@@ -68,7 +68,7 @@ class RoomTest extends TestCase
 
         $this->visit('room')
             ->see('Pokoje')
-            ->visit('room/edit/'. $room->id);
+            ->visit('room/edit/'.$room->id);
 
         $this->see('Edytuj pokój')
             ->see('Numer')
