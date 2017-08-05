@@ -61,4 +61,34 @@ class RoomTest extends TestCase
 
         $this->see('Nie znaleziono obiektu');
     }
+
+    public function testEditValidId()
+    {
+
+
+        $room = factory(Room::class)->create();
+
+        $this->visit('room')
+            ->see('Pokoje')
+            ->visit('room/edit/'. $room->id);
+
+        $this->see('Edytuj pokój')
+            ->see('Numer')
+            ->see('Piętro')
+            ->see('Pojemność')
+            ->see('Cena')
+            ->see('Komentarz')
+            ->see('test comment')
+            ->see('Wyślij');
+
+        $this->type('Edycja komentarza', 'comment')
+            ->press('Wyślij');
+
+        $this->followRedirects();
+
+        $this->see('Edycja komentarza');
+
+        $this->visit('room')
+            ->see('Edycja komentarza');
+    }
 }
