@@ -105,4 +105,19 @@ class RoomTest extends TestCase
             'ID'  => $room->id,
         ]);
     }
+
+    public function testTryStoreInvalidId()
+    {
+        $this->markTestSkipped('Investigate redirects...');
+
+        $this->visit('room');
+
+        $this->call('POST', 'room/edit/1000', [
+            '_token'   => csrf_token(),
+        ]);
+
+        $this->assertRedirectedTo('/');
+
+        $this->seeInSession('message', 'Nie znaleziono obiektu');
+    }
 }
