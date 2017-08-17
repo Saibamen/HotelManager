@@ -4,6 +4,9 @@ env:
   global:
   - secure: $COVERITY_SCAN_TOKEN
 
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
 addons:
     code_climate:
         repo_token: $CODE_CLIMATE_TOKEN
