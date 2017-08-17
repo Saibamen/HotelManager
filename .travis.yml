@@ -12,8 +12,8 @@ addons:
         name: "Saibamen/HotelManager"
         description: "Build submitted via Travis CI"
       notification_email: saibamenppl@gmail.com
-      build_command_prepend: ""
-      build_command:   ""
+      build_command_prepend: "cp .env.travis .env"
+      build_command:   "vendor/bin/phpunit"
       branch_pattern: master
 
 php:
