@@ -15,6 +15,7 @@ addons:
         name: "Saibamen/HotelManager"
         description: "Build submitted via Travis CI"
       notification_email: saibamenppl@gmail.com
+      build_command:   "chmod -R 777 bootstrap/cache"
       branch_pattern: master
 
 php:
