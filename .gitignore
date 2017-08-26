@@ -1,18 +1,14 @@
-/vendor
 /node_modules
+/public/hot
 /public/storage
-Homestead.yaml
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
 Homestead.json
-storage/**/
-!storage/app/.gitkeep
-!storage/framework/sessions/.gitkeep
-!storage/framework/cache/.gitkeep
-!storage/framework/views/.gitkeep
-
-/_ide_helper.php
-bootstrap/cache/*
-!bootstrap/cache/.gitkeep
-.env.php
+Homestead.yaml
+npm-debug.log
+yarn-error.log
 .env
 
 # Created by https://www.gitignore.io/api/sublimetext,notepadpp,windows
@@ -33,11 +29,9 @@ bootstrap/cache/*
 # sftp configuration file
 sftp-config.json
 
-
 ### NotepadPP ###
 # Notepad++ backups #
 *.bak
-
 
 ### Windows ###
 
@@ -145,4 +139,13 @@ composer.phar
 *.jpg
 sh.exe.stackdump
 
-scheduler.bat
+### Own rules ###
+storage/**/
+!storage/app/.gitkeep
+!storage/framework/sessions/.gitkeep
+!storage/framework/cache/.gitkeep
+!storage/framework/views/.gitkeep
+
+/_ide_helper.php
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep

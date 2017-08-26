@@ -6,6 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang('auth.login')</div>
+
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -42,7 +43,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> @lang('auth.remember')
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> @lang('auth.remember')
                                     </label>
                                 </div>
                             </div>
@@ -54,7 +55,7 @@
                                     <i class="fa fa-btn fa-sign-in"></i> @lang('auth.login')
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                     @lang('auth.forgot')
                                 </a>
                                 {{--<br><br>
