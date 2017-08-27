@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Input;
 
-class RegisterTest extends TestCase
+class RegisterTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

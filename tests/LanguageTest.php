@@ -1,6 +1,6 @@
 <?php
 
-class LanguageTest extends TestCase
+class LanguageTest extends BrowserKitTestCase
 {
     public function setUp()
     {

@@ -4,7 +4,7 @@ use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class RoomTest extends TestCase
+class RoomTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
     use WithoutMiddleware;

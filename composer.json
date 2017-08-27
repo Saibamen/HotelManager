@@ -13,10 +13,11 @@
         "laravelcollective/html": "^5.4.0"
     },
     "require-dev": {
+        "codeclimate/php-test-reporter": "dev-master",
         "fzaninotto/faker": "~1.4",
+        "laravel/browser-kit-testing": "1.*",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7",
-        "codeclimate/php-test-reporter": "dev-master"
+        "phpunit/phpunit": "~5.7"
     },
     "autoload": {
         "classmap": [
@@ -28,6 +29,9 @@
         }
     },
     "autoload-dev": {
+        "classmap": [
+            "tests/BrowserKitTestCase.php"
+        ],
         "psr-4": {
             "Tests\\": "tests/"
         }
