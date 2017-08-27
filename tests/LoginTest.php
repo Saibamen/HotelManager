@@ -85,9 +85,8 @@ class LoginTest extends BrowserKitTestCase
 
     public function testFactoryLoggedUserCannotLoginAgain()
     {
-        if ($this->be($this->fakeUser) == null)
-        {
-            $this->markTestSkipped("FakeUser not working...");
+        if ($this->be($this->fakeUser) == null) {
+            $this->markTestSkipped('FakeUser not working...');
         }
 
         $this->be($this->fakeUser)
@@ -104,9 +103,8 @@ class LoginTest extends BrowserKitTestCase
 
     public function testFactoryLoggedUserCannotRegister()
     {
-        if ($this->be($this->fakeUser) == null)
-        {
-            $this->markTestSkipped("FakeUser not working...");
+        if ($this->be($this->fakeUser) == null) {
+            $this->markTestSkipped('FakeUser not working...');
         }
 
         $this->be($this->fakeUser)
