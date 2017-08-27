@@ -18,14 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('home', 'HomeController@index')->name('home');
 
-    Route::get('room', ['as' => 'room.index', 'uses' => 'RoomController@index']);
-    Route::get('room/add', ['as' => 'room.addform', 'uses' => 'RoomController@showAddEditForm']);
-    Route::post('room/add', ['as' => 'room.postadd', 'uses' => 'RoomController@store']);
-    Route::get('room/edit/{id}', ['as' => 'room.editform', 'uses' => 'RoomController@showAddEditForm'])->where(['id' => '[0-9]+']);
-    Route::post('room/edit/{id}', ['as' => 'room.postedit', 'uses' => 'RoomController@store'])->where(['id' => '[0-9]+']);
-    Route::delete('room/delete/{id}', ['as' => 'room.delete', 'uses' => 'RoomController@delete'])->where(['id' => '[0-9]+']);
+    Route::get('room', 'RoomController@index')->name('room.index');
+    Route::get('room/add', 'RoomController@showAddEditForm')->name('room.addform');
+    Route::post('room/add', 'RoomController@store')->name('room.postadd');
+    Route::get('room/edit/{id}', 'RoomController@showAddEditForm')->name('room.editform')->where(['id' => '[0-9]+']);
+    Route::post('room/edit/{id}', 'RoomController@store')->name('room.postedit')->where(['id' => '[0-9]+']);
+    Route::delete('room/delete/{id}', 'RoomController@delete')->name('room.delete')->where(['id' => '[0-9]+']);
 });
 
-Route::get('lang/{language}', ['as' => 'lang.set', 'uses' => 'Controller@changeLanguage']);
+Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');
