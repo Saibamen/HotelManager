@@ -13,6 +13,7 @@
         "laravelcollective/html": "^5.4.0"
     },
     "require-dev": {
+        "codacy/coverage": "dev-master",
         "codeclimate/php-test-reporter": "dev-master",
         "fzaninotto/faker": "~1.4",
         "laravel/browser-kit-testing": "1.*",

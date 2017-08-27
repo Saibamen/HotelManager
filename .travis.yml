@@ -1,22 +1,11 @@
 language: php
 
-env:
-  global:
-  - secure: $COVERITY_SCAN_TOKEN
-
 before_install:
       - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 addons:
     code_climate:
         repo_token: $CODE_CLIMATE_TOKEN
-    coverity_scan:
-      project:
-        name: "Saibamen/HotelManager"
-        description: "Build submitted via Travis CI"
-      notification_email: saibamenppl@gmail.com
-      build_command:   "chmod -R 777 bootstrap/cache"
-      branch_pattern: master
 
 php:
   - 5.6
@@ -42,3 +31,6 @@ script:
 
 after_success:
   - vendor/bin/test-reporter
+
+after_script:
+  - php vendor/bin/codacycoverage clover
