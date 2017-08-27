@@ -129,7 +129,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.min.js"></script>
-    @yield('js') 
+    {!! Html::script('/js/app.min.js') !!}
+    @yield('js')
 </body>
 </html>

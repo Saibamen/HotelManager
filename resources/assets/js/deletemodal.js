@@ -13,7 +13,7 @@ $(document).ready(function() {
         $.ajax({
             url: $("#delete-modal").data("url") + window.deleteId,
             type: "POST",
-            data: {_method: "delete", _token: window.Laravel.csrfToken},
+            data: {_method: "delete", _token: $("meta[name='csrf-token']").attr("content")},
             success: function(data) {
                 $("#alert-box").addClass(data.class);
                 $("#alert-message").text(data.message);
