@@ -16,13 +16,6 @@
     <!-- Styles -->
     {!! Html::style('css/app.min.css') !!}
     @yield('css')
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
 </head>
 <body>
     <div id="app">
