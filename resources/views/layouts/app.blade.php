@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@if(isset($title)){{ $title }} | @endif{{ config('app.name', 'Laravel') }}</title>
+    <title>@if(isset($title)){{ $title }} | @endif{{ config('app.name', 'Hotel Manager') }}</title>
 
     <!-- Fonts -->
     {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') !!}
@@ -33,13 +33,13 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Hotel Manager') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    @if (Auth::user())
+                    @auth
                         <ul class="nav navbar-nav">
                             <!-- Rooms -->
                             <li class="dropdown">
@@ -75,7 +75,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    @endif
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
