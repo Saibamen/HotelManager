@@ -7,7 +7,7 @@
 
 # Hotel Manager
 
-Laravel 5.3
+Laravel 5.4
 
 ## O autorze
 
