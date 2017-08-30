@@ -84,4 +84,22 @@ class RegisterTest extends BrowserKitTestCase
             'email' => 'valid-email@test.com',
         ]);
     }
+
+    public function testFactoryLoggedUserCannotRegister()
+    {
+        if ($this->actingAs($this->fakeUser) == null) {
+            $this->markTestSkipped('FakeUser not working...');
+        }
+
+        $this->actingAs($this->fakeUser)
+            ->visit('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!')
+            ->see('Pokoje')
+            ->visit('register')
+            ->seePageIs('home')
+            ->see($this->fakeUser->name)
+            ->see('You are logged in!')
+            ->see('Pokoje');
+    }
 }

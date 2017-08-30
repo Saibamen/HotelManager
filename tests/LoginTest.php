@@ -85,34 +85,16 @@ class LoginTest extends BrowserKitTestCase
 
     public function testFactoryLoggedUserCannotLoginAgain()
     {
-        if ($this->be($this->fakeUser) == null) {
+        if ($this->actingAs($this->fakeUser) == null) {
             $this->markTestSkipped('FakeUser not working...');
         }
 
-        $this->be($this->fakeUser)
+        $this->actingAs($this->fakeUser)
             ->visit('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!')
             ->see('Pokoje')
             ->visit('login')
-            ->seePageIs('home')
-            ->see($this->fakeUser->name)
-            ->see('You are logged in!')
-            ->see('Pokoje');
-    }
-
-    public function testFactoryLoggedUserCannotRegister()
-    {
-        if ($this->be($this->fakeUser) == null) {
-            $this->markTestSkipped('FakeUser not working...');
-        }
-
-        $this->be($this->fakeUser)
-            ->visit('home')
-            ->see($this->fakeUser->name)
-            ->see('You are logged in!')
-            ->see('Pokoje')
-            ->visit('register')
             ->seePageIs('home')
             ->see($this->fakeUser->name)
             ->see('You are logged in!')
