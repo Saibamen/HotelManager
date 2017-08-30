@@ -1,5 +1,8 @@
 $(document).ready(function() {
+    var row;
+
     $("#delete-modal").on("show.bs.modal", function(modal) {
+        row = $(modal.relatedTarget).closest("tr");
         window.deleteId = $(modal.relatedTarget).data("id");
         var name = $(modal.relatedTarget).data("name");
 
@@ -18,13 +21,11 @@ $(document).ready(function() {
                 $("#alert-box").addClass(data.class);
                 $("#alert-message").text(data.message);
                 $("#alert-box").show();
+
+                row.hide("slow", function() {
+                    $(this).remove();
+                });
             }
         });
-
-        setTimeout(function() {
-            window.location.reload();
-        }, 3000);
-
     });
-
 });
