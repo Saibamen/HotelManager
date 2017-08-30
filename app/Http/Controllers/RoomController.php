@@ -25,7 +25,7 @@ class RoomController extends Controller
             'dataset'       => $dataset,
             'routeName'     => $this->getRouteName(),
             'title'         => $title,
-            'deleteMessage' => mb_strtolower(trans('general.room')) . ' ' . mb_strtolower(trans('general.number'))
+            'deleteMessage' => mb_strtolower(trans('general.room')).' '.mb_strtolower(trans('general.number')),
         ];
 
         return view('list', $viewData);
