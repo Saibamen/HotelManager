@@ -21,10 +21,11 @@ class RoomController extends Controller
             ->paginate($this->getItemsPerPage());
 
         $viewData = [
-            'columns'    => $this->getColumns(),
-            'dataset'    => $dataset,
-            'routeName'  => $this->getRouteName(),
-            'title'      => $title,
+            'columns'       => $this->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->getRouteName(),
+            'title'         => $title,
+            'deleteMessage' => mb_strtolower(trans('general.room')) . ' ' . mb_strtolower(trans('general.number'))
         ];
 
         return view('list', $viewData);
