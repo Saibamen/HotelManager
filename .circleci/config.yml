@@ -33,7 +33,7 @@ jobs:
       - run: php composer.phar self-update
       - run: sudo mv composer.phar /usr/local/bin/composer
 
-      - run: composer install -n --prefer-dist
+      - run: composer update -n --prefer-dist
 
       - save_cache:
           paths:
@@ -41,4 +41,4 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       # run tests!
-      - run: phpunit
+      - run: vendor/bin/phpunit
