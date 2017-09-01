@@ -33,7 +33,8 @@ jobs:
       - run: php composer.phar self-update
       - run: sudo mv composer.phar /usr/local/bin/composer
 
-      - run: composer update -n --prefer-dist
+      - run: composer update --no-interaction
+      - run: php artisan key:generate
 
       - save_cache:
           paths:
