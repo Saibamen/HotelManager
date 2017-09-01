@@ -12,12 +12,9 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/mysql:9.4
+      - image: circleci/mysql:latest
 
     working_directory: ~/repo
-
-    services:
-      - mysql
 
     steps:
       - checkout
