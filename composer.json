@@ -15,7 +15,7 @@
         "barryvdh/laravel-ide-helper": "^2.4",
         "codacy/coverage": "dev-master",
         "codeclimate/php-test-reporter": "dev-master",
-        "doctrine/dbal": "^2.5",
+        "doctrine/dbal": "~2.3",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "laravel/browser-kit-testing": "2.*",
