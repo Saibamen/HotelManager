@@ -89,7 +89,7 @@
                         </li>
 
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
+                        @guest
                             <li><a href="{{ route('login') }}">@lang('auth.login')</a></li>
                             <li><a href="{{ route('register') }}">@lang('auth.register')</a></li>
                         @else
@@ -112,7 +112,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endif
+                        @endguest
                     </ul>
                 </div>
             </div>
