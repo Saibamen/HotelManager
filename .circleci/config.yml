@@ -33,6 +33,7 @@ jobs:
       - run: php composer.phar self-update
       - run: sudo mv composer.phar /usr/local/bin/composer
 
+      - run: cp .env.travis .env
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
