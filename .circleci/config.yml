@@ -27,7 +27,9 @@ jobs:
           - v1-dependencies-
 
       # MySQL
+      - run: sudo apt-get update
       - run: sudo apt-get install mysql-server
+      - run: sudo apt-get install php-mysql
       - run: sudo service mysql start
       # Composer
       - run: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
