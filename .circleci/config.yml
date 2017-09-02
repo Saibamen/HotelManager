@@ -35,7 +35,7 @@ jobs:
       - run: sudo mv composer.phar /usr/local/bin/composer
 
       - run: cp .env.travis .env
-      - run: mysql -e 'create database homestead_test;'
+      - run: mysql -u ubuntu -e 'create database homestead_test;'
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
