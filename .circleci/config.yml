@@ -21,10 +21,7 @@ jobs:
 
       # MySQL
       - run: sudo apt-get update
-      - run: sudo apt-get install -y mysql-server
       - run: sudo apt install -y libsqlite3-dev
-      - run: sudo docker-php-ext-install pdo_mysql
-      - run: sudo service mysql start
 
       - run: composer self-update
 
@@ -43,7 +40,6 @@ jobs:
       - run: sudo chmod -R 775 storage
       - run: sudo chmod -R 775 bootstrap/cache
       - run: cp .env.travis .env
-      - run: mysql -u root -e 'create database homestead_test;'
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
@@ -52,11 +48,11 @@ jobs:
           paths:
             - vendor
 
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=testing --force
-      - run: php artisan db:seed --env=testing --database=testing --no-interaction -vvv
+      - run: touch storage/database.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite --force
+      - run: php artisan db:seed --env=testing --database=sqlite --no-interaction -vvv
 
       # run tests!
       - run: vendor/bin/phpunit
 
-      - run: php artisan migrate:rollback --env=testing --database=testing --no-interaction -vvv
+      - run: php artisan migrate:rollback --env=testing --database=sqlite --no-interaction -vvv
