@@ -7,12 +7,16 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/php:7.1.8-apache-browsers
+      - image: notnoopci/php:7.1-apache-node
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
 
     working_directory: ~/repo
 
