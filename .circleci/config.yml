@@ -29,7 +29,7 @@ jobs:
       # MySQL
       - run: sudo apt-get update
       - run: sudo apt-get install mysql-server
-      - run: sudo apt-get install php-mysql
+      - run: sudo docker-php-ext-install pdo_mysql
       - run: sudo service mysql start
       # Composer
       - run: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -40,6 +40,12 @@ jobs:
       - run: sudo mv composer.phar /usr/local/bin/composer
 
       - run: dpkg --get-selections | grep mysql
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            mysql -V
+            composer --version
 
       - run: cp .env.travis .env
       - run: mysql -u root -e 'create database homestead_test;'
