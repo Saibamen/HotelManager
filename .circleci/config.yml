@@ -57,13 +57,13 @@ jobs:
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
-      - run: php artisan migrate --env=testing --no-interaction -vvv
-      - run: php artisan db:seed --env=testing --no-interaction -vvv
-
       - save_cache:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run: php artisan migrate --env=testing --no-interaction -vvv
+      - run: php artisan db:seed --env=testing --no-interaction -vvv
 
       # run tests!
       - run: vendor/bin/phpunit
