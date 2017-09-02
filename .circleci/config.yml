@@ -17,6 +17,7 @@ jobs:
           - MYSQL_USER=root
           - MYSQL_PASSWORD=
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_DATABASE=homestead_test
 
     working_directory: ~/repo
 
@@ -47,13 +48,12 @@ jobs:
           name: Display versions
           command: |
             php -v
-            mysql -V
             composer --version
 
       - run: sudo chmod -R 775 storage
       - run: sudo chmod -R 775 bootstrap/cache
       - run: cp .env.travis .env
-      - run: mysql -u root -e 'create database homestead_test;'
+      #- run: mysql -u root -e 'create database homestead_test;'
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
