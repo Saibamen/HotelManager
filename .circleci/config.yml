@@ -47,12 +47,13 @@ jobs:
             mysql -V
             composer --version
 
+      - run: sudo chmod -R 775 storage
+      - run: sudo chmod -R 775 bootstrap/cache
       - run: cp .env.travis .env
       - run: mysql -u root -e 'create database homestead_test;'
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
-      #- run: php artisan migrate:install --env=testing --no-interaction -vvv
       - run: php artisan migrate --env=testing --no-interaction -vvv
       - run: php artisan db:seed --env=testing --no-interaction -vvv
 
