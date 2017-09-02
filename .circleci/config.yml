@@ -39,7 +39,7 @@ jobs:
 
       - run: sudo chmod -R 775 storage
       - run: sudo chmod -R 775 bootstrap/cache
-      - run: cp .env.travis .env
+      - run: cp .env.circleci .env
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
