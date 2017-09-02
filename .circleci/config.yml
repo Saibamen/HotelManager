@@ -39,7 +39,6 @@ jobs:
       - run: php composer.phar self-update
       - run: sudo mv composer.phar /usr/local/bin/composer
 
-      - run: dpkg --get-selections | grep mysql
       - run:
           name: Display versions
           command: |
