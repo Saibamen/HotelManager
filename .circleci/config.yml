@@ -23,12 +23,15 @@ jobs:
 
     steps:
       - checkout
+
       # MySQL
-      #- run: sudo apt-get update
-      #- run: sudo apt-get install mysql-server
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y mysql-server
+      - run: sudo apt install -y libsqlite3-dev
       - run: sudo docker-php-ext-install pdo_mysql
+      - run: sudo service mysql start
+
       - run: composer self-update
-      #- run: sudo service mysql start
 
       # Download and cache dependencies
       - restore_cache:
@@ -45,7 +48,7 @@ jobs:
       - run: sudo chmod -R 775 storage
       - run: sudo chmod -R 775 bootstrap/cache
       - run: cp .env.travis .env
-      #- run: mysql -u root -e 'create database homestead_test;'
+      - run: mysql -u root -e 'create database homestead_test;'
       - run: composer update --no-interaction
       - run: php artisan key:generate
 
@@ -61,4 +64,4 @@ jobs:
       # run tests!
       - run: vendor/bin/phpunit
 
-      - run: php artisan migrate:rollback --env=testing --no-interaction -vvv
+      - run: php artisan migrate:rollback --env=testing --database=testing --no-interaction -vvv
