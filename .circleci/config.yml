@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: notnoopci/php:7.1-apache-node
+      - image: circleci/php:7.1.8-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -19,13 +19,14 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_DATABASE=homestead_test
 
-    working_directory: ~/repo
+    working_directory: ~/laravel
 
     steps:
       # MySQL
       #- run: sudo apt-get update
       #- run: sudo apt-get install mysql-server
       - run: sudo docker-php-ext-install pdo_mysql
+      - run: composer self-update
       #- run: sudo service mysql start
       # Composer
       - run: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -61,6 +62,7 @@ jobs:
           paths:
             - vendor
 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=testing --force
       - run: php artisan db:seed --env=testing --database=testing --no-interaction -vvv
 
