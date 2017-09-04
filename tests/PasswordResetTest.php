@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Input;
 
 class PasswordResetTest extends BrowserKitTestCase
 {
