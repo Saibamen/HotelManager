@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Notification;
 
 class PasswordResetTest extends BrowserKitTestCase
 {
@@ -57,6 +58,7 @@ class PasswordResetTest extends BrowserKitTestCase
 
     public function testUserInDatabaseCorrectPasswordReset()
     {
+        Notification::fake();
         $user = factory(\App\Models\User::class)->create();
 
         $this->seeInDatabase('users', [
