@@ -53,6 +53,6 @@ jobs:
       - run: php artisan db:seed --env=testing --database=sqlite --no-interaction -vvv
 
       # run tests!
-      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpunit -v
 
       - run: php artisan migrate:rollback --env=testing --database=sqlite --no-interaction -vvv

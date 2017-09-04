@@ -30,7 +30,7 @@ before_script:
   - php artisan db:seed --env=testing --no-interaction -vvv
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit -v --coverage-clover build/logs/clover.xml
 
 after_script:
   - php artisan migrate:rollback --env=testing --no-interaction -vvv

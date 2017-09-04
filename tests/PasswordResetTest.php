@@ -38,7 +38,7 @@ class PasswordResetTest extends BrowserKitTestCase
             ->see('Format adres e-mail jest nieprawidłowy.');
     }
 
-    public function testUserNotInDatabasePasswordReset()
+    public function testUserNotInDatabaseFailPasswordReset()
     {
         $this->visit('password/reset')
             ->see('Zresetuj hasło')
@@ -55,11 +55,28 @@ class PasswordResetTest extends BrowserKitTestCase
         ]);
     }
 
+    public function testUserInDatabaseCorrectPasswordReset()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->seeInDatabase('users', [
+            'email' => $user->email,
+        ]);
+
+        $this->visit('password/reset')
+            ->see('Zresetuj hasło')
+            ->dontSee('Pokoje')
+            ->type($user->email, 'email')
+            ->press('Wyślij link na email')
+            ->seePageIs('password/reset')
+            ->see('Przypomnienie hasła zostało wysłane!')
+            ->dontSee('Wyloguj')
+            ->dontSee('Pokoje');
+    }
+
     public function testFactoryLoggedUserCannotResetPassword()
     {
-        $this->fakeUser = factory(App\Models\User::class)->create([
-            'password' => bcrypt('testpass123'),
-        ]);
+        $this->fakeUser = factory(\App\Models\User::class)->create();
 
         if ($this->actingAs($this->fakeUser) == null) {
             $this->markTestSkipped('FakeUser not working...');

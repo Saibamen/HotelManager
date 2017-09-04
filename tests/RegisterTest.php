@@ -87,9 +87,7 @@ class RegisterTest extends BrowserKitTestCase
 
     public function testFactoryLoggedUserCannotRegister()
     {
-        $this->fakeUser = factory(App\Models\User::class)->create([
-            'password' => bcrypt('testpass123'),
-        ]);
+        $this->fakeUser = factory(\App\Models\User::class)->create();
 
         if ($this->actingAs($this->fakeUser) == null) {
             $this->markTestSkipped('FakeUser not working...');
