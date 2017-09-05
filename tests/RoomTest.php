@@ -42,6 +42,7 @@ class RoomTest extends BrowserKitTestCase
             ->see('Pokoje')
             ->see('Numer')
             ->see('Piętro')
+            ->see('Pojemność')
             ->see('Cena')
             ->see('Komentarz')
             ->see('Akcje')
@@ -49,6 +50,23 @@ class RoomTest extends BrowserKitTestCase
             ->see('Usuń')
             ->see('test comment')
             ->see('Dodaj');
+    }
+
+    public function testAddEmptyForm()
+    {
+        $this->visit('room/add')
+            ->dontSee('Zaloguj')
+            ->see('Dodaj pokój')
+            ->see('Numer')
+            ->see('Piętro')
+            ->see('Pojemność')
+            ->see('Cena')
+            ->see('Komentarz')
+            ->see('Wyślij')
+            ->press('Wyślij');
+
+        //$this->seePageIs('room/add')
+        //->see('jest wymagane');
     }
 
     public function testTryEditInvalidId()
