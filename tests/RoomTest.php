@@ -2,19 +2,17 @@
 
 use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class RoomTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
-    use WithoutMiddleware;
 
     public function setUp()
     {
         parent::setUp();
+        Session::start();
 
         $user = factory(App\Models\User::class)->create();
-
         $this->actingAs($user);
     }
 
@@ -126,16 +124,10 @@ class RoomTest extends BrowserKitTestCase
 
     public function testTryStoreInvalidId()
     {
-        $this->markTestSkipped('Investigate redirects...');
-
-        $this->visit('room');
-
-        $this->call('POST', 'room/edit/1000', [
+        $this->makeRequest('POST', 'room/edit/1000', [
             '_token'   => csrf_token(),
         ]);
 
-        $this->assertRedirectedTo('/');
-
-        $this->seeInSession('message', 'Nie znaleziono obiektu');
+        $this->notSeeInDatabase('rooms', []);
     }
 }
