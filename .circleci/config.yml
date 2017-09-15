@@ -23,7 +23,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install -y libsqlite3-dev
 
-      - run: composer self-update
+      - run: sudo composer self-update
 
       # Download and cache dependencies
       - restore_cache:
