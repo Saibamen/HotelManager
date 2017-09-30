@@ -1,10 +1,10 @@
-[![Travis Build Status](https://travis-ci.org/Saibamen/HotelManager.svg?branch=master)](https://travis-ci.org/Saibamen/HotelManager)
-[![CircleCI Build Status](https://circleci.com/gh/Saibamen/HotelManager/tree/master.png?style=shield&circle-token=ac69eaabe4d9f3b11b08db5fffb27aa48c02ec2b)](https://circleci.com/gh/Saibamen/HotelManager)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/?branch=master)
+[![Travis Build Status](https://travis-ci.org/Saibamen/HotelManager.svg)](https://travis-ci.org/Saibamen/HotelManager)
+[![CircleCI Build Status](https://circleci.com/gh/Saibamen/HotelManager.svg?style=shield)](https://circleci.com/gh/Saibamen/HotelManager)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/quality-score.png)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/)
 [![Code Climate](https://codeclimate.com/github/Saibamen/HotelManager/badges/gpa.svg)](https://codeclimate.com/github/Saibamen/HotelManager)
-[![StyleCI](https://styleci.io/repos/77186372/shield?branch=master)](https://styleci.io/repos/77186372)
+[![StyleCI](https://styleci.io/repos/77186372/shield)](https://styleci.io/repos/77186372)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d/mini.png)](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d)
-[![Code Coverage](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/coverage.png)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/)
 
 # Hotel Manager
 
