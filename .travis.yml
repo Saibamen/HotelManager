@@ -24,7 +24,7 @@ addons:
     notification_email: saibamenppl@gmail.com
     build_command_prepend: "composer update --no-interaction"
     build_command: "php artisan key:generate"
-    branch_pattern: coverity_scan
+    branch_pattern: master
 
 php:
   - 7.0
