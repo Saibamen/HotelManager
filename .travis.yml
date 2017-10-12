@@ -5,6 +5,17 @@ os:
   # PHP is no supported on OS X: https://github.com/travis-ci/travis-ci/issues/2313
   #- osx
 
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - nightly
+
+matrix:
+  include:
+    - php: 7.0.0
+      dist: precise
+
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
@@ -25,12 +36,6 @@ addons:
     build_command_prepend: "composer update --no-interaction"
     build_command: "php artisan key:generate"
     branch_pattern: master
-
-php:
-  - 7.0
-  - 7.1
-  - 7.2
-  - nightly
 
 before_script:
   - chmod -R 777 bootstrap/cache
