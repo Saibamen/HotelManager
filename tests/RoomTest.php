@@ -108,24 +108,24 @@ class RoomTest extends BrowserKitTestCase
         $room = factory(Room::class)->create();
 
         $this->seeInDatabase('rooms', [
-            'ID'  => $room->id,
+            'ID' => $room->id,
         ]);
 
         $response = $this->call('DELETE', 'room/delete/'.$room->id, [
-            '_token'   => csrf_token(),
+            '_token' => csrf_token(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('rooms', [
-            'ID'  => $room->id,
+            'ID' => $room->id,
         ]);
     }
 
     public function testTryStoreInvalidId()
     {
         $this->makeRequest('POST', 'room/edit/1000', [
-            '_token'   => csrf_token(),
+            '_token' => csrf_token(),
         ]);
 
         $this->notSeeInDatabase('rooms', []);

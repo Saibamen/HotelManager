@@ -2,47 +2,47 @@
 
 return [
 
-    'accepted'             => ':Attribute musi zostać zaakceptowany.',
-    'active_url'           => ':Attribute jest nieprawidłowym adresem URL.',
-    'after'                => ':Attribute musi być datą późniejszą od :date.',
-    'alpha'                => ':Attribute może zawierać jedynie litery.',
-    'alpha_dash'           => ':Attribute może zawierać jedynie litery, cyfry i myślniki.',
-    'alpha_num'            => ':Attribute może zawierać jedynie litery i cyfry.',
-    'array'                => ':Attribute musi być tablicą.',
-    'before'               => ':Attribute musi być datą wcześniejszą od :date.',
-    'between'              => [
+    'accepted'   => ':Attribute musi zostać zaakceptowany.',
+    'active_url' => ':Attribute jest nieprawidłowym adresem URL.',
+    'after'      => ':Attribute musi być datą późniejszą od :date.',
+    'alpha'      => ':Attribute może zawierać jedynie litery.',
+    'alpha_dash' => ':Attribute może zawierać jedynie litery, cyfry i myślniki.',
+    'alpha_num'  => ':Attribute może zawierać jedynie litery i cyfry.',
+    'array'      => ':Attribute musi być tablicą.',
+    'before'     => ':Attribute musi być datą wcześniejszą od :date.',
+    'between'    => [
         'numeric' => ':Attribute musi zawierać się w granicach :min - :max.',
         'file'    => ':Attribute musi zawierać się w granicach :min - :max kilobajtów.',
         'string'  => ':Attribute musi zawierać się w granicach :min - :max znaków.',
         'array'   => ':Attribute musi składać się z :min - :max elementów.',
     ],
-    'boolean'              => ':Attribute musi mieć wartość prawda albo fałsz',
-    'confirmed'            => 'Potwierdzenie :attribute nie zgadza się.',
-    'date'                 => ':Attribute nie jest prawidłową datą.',
-    'date_format'          => ':Attribute nie jest w formacie :format.',
-    'different'            => ':Attribute oraz :other muszą się różnić.',
-    'digits'               => ':Attribute musi składać się z :digits cyfr.',
-    'digits_between'       => ':Attribute musi mieć od :min do :max cyfr.',
-    'distinct'             => 'The :attribute field has a duplicate value.',
-    'email'                => 'Format :attribute jest nieprawidłowy.',
-    'exists'               => 'Zaznaczony :attribute jest nieprawidłowy.',
-    'filled'               => 'Pole :attribute musi mieć wartość.',
-    'image'                => ':Attribute musi być obrazkiem.',
-    'in'                   => 'Zaznaczony :attribute jest nieprawidłowy.',
-    'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => ':Attribute musi być liczbą całkowitą.',
-    'ip'                   => ':Attribute musi być prawidłowym adresem IP.',
-    'ipv4'                 => ':Attribute musi być prawidłowym adresem IPv4.',
-    'ipv6'                 => ':Attribute musi być prawidłowym adresem IPv6.',
-    'json'                 => 'The :attribute must be a valid JSON string.',
-    'max'                  => [
+    'boolean'        => ':Attribute musi mieć wartość prawda albo fałsz',
+    'confirmed'      => 'Potwierdzenie :attribute nie zgadza się.',
+    'date'           => ':Attribute nie jest prawidłową datą.',
+    'date_format'    => ':Attribute nie jest w formacie :format.',
+    'different'      => ':Attribute oraz :other muszą się różnić.',
+    'digits'         => ':Attribute musi składać się z :digits cyfr.',
+    'digits_between' => ':Attribute musi mieć od :min do :max cyfr.',
+    'distinct'       => 'The :attribute field has a duplicate value.',
+    'email'          => 'Format :attribute jest nieprawidłowy.',
+    'exists'         => 'Zaznaczony :attribute jest nieprawidłowy.',
+    'filled'         => 'Pole :attribute musi mieć wartość.',
+    'image'          => ':Attribute musi być obrazkiem.',
+    'in'             => 'Zaznaczony :attribute jest nieprawidłowy.',
+    'in_array'       => 'The :attribute field does not exist in :other.',
+    'integer'        => ':Attribute musi być liczbą całkowitą.',
+    'ip'             => ':Attribute musi być prawidłowym adresem IP.',
+    'ipv4'           => ':Attribute musi być prawidłowym adresem IPv4.',
+    'ipv6'           => ':Attribute musi być prawidłowym adresem IPv6.',
+    'json'           => 'The :attribute must be a valid JSON string.',
+    'max'            => [
         'numeric' => ':Attribute nie może być większy niż :max.',
         'file'    => ':Attribute nie może być większy niż :max kilobajtów.',
         'string'  => ':Attribute nie może być dłuższy niż :max znaków.',
         'array'   => ':Attribute nie może mieć więcej niż :max elementów.',
     ],
-    'mimes'                => ':Attribute musi być plikiem typu :values.',
-    'min'                  => [
+    'mimes' => ':Attribute musi być plikiem typu :values.',
+    'min'   => [
         'numeric' => ':Attribute musi być nie mniejszy od :min.',
         'file'    => ':Attribute musi mieć przynajmniej :min kilobajtów.',
         'string'  => ':Attribute musi mieć przynajmniej :min znaków.',
@@ -66,10 +66,10 @@ return [
         'string'  => ':Attribute musi mieć :size znaków.',
         'array'   => ':Attribute musi zawierać :size elementów.',
     ],
-    'string'               => 'The :attribute must be a string.',
-    'timezone'             => ':Attribute musi być prawidłową strefą czasową.',
-    'unique'               => 'Taki :attribute już występuje.',
-    'url'                  => 'Format :attribute jest nieprawidłowy.',
+    'string'   => 'The :attribute must be a string.',
+    'timezone' => ':Attribute musi być prawidłową strefą czasową.',
+    'unique'   => 'Taki :attribute już występuje.',
+    'url'      => 'Format :attribute jest nieprawidłowy.',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'custom'               => [
+    'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'attributes'           => [
+    'attributes' => [
         'comment'  => 'komentarz',
         'date'     => 'data',
         'email'    => 'adres e-mail',

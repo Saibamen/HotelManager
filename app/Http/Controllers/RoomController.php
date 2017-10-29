@@ -87,11 +87,11 @@ class RoomController extends Controller
         $title .= ' '.mb_strtolower(trans('general.room'));
 
         $viewData = [
-            'dataset'      => $dataset,
-            'fields'       => $this->getFields(),
-            'title'        => $title,
-            'submitRoute'  => $submitRoute,
-            'routeName'    => $this->getRouteName(),
+            'dataset'     => $dataset,
+            'fields'      => $this->getFields(),
+            'title'       => $title,
+            'submitRoute' => $submitRoute,
+            'routeName'   => $this->getRouteName(),
         ];
 
         return view('addedit', $viewData);
