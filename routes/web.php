@@ -26,6 +26,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('room/edit/{id}', 'RoomController@showAddEditForm')->name('room.editform')->where(['id' => '[0-9]+']);
     Route::post('room/edit/{id}', 'RoomController@store')->name('room.postedit')->where(['id' => '[0-9]+']);
     Route::delete('room/delete/{id}', 'RoomController@delete')->name('room.delete')->where(['id' => '[0-9]+']);
+
+    Route::get('guest', 'GuestController@index')->name('guest.index');
+    Route::get('guest/add', 'GuestController@showAddEditForm')->name('guest.addform');
+    Route::post('guest/add', 'GuestController@store')->name('guest.postadd');
+    Route::get('guest/edit/{id}', 'GuestController@showAddEditForm')->name('guest.editform')->where(['id' => '[0-9]+']);
+    Route::post('guest/edit/{id}', 'GuestController@store')->name('guest.postedit')->where(['id' => '[0-9]+']);
+    Route::delete('guest/delete/{id}', 'GuestController@delete')->name('guest.delete')->where(['id' => '[0-9]+']);
 });
 
 Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');

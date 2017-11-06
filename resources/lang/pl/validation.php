@@ -72,6 +72,12 @@ return [
     'url'      => 'Format :attribute jest nieprawidłowy.',
 
     /*
+     * Custom validation rules
+     */
+    'alpha_spaces'         => ':Attribute może zawierać jedynie litery i spacje.',
+    'alpha_spaces_hyphens' => ':Attribute może zawierać jedynie litery, spacje i myślniki.',
+
+    /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
@@ -106,6 +112,13 @@ return [
         'name'     => 'nazwa',
         'password' => 'hasło',
         'value'    => 'wartość',
+
+        'first_name' => 'Imię',
+        'last_name'  => 'Nazwisko',
+        'address'    => 'Adres',
+        'zip_code'   => 'Kod pocztowy',
+        'place'      => 'Miejscowość',
+        'PESEL'      => 'PESEL',
     ],
 
 ];

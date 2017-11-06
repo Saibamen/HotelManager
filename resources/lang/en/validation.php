@@ -89,6 +89,12 @@ return [
     'url'      => 'The :attribute format is invalid.',
 
     /*
+     * Custom validation rules
+     */
+    'alpha_spaces'         => 'The :attribute may only contain letters and spaces.',
+    'alpha_spaces_hyphens' => 'The :attribute may only contain letters, spaces and hyphens.',
+
+    /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
@@ -116,6 +122,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'PESEL' => 'PESEL',
+    ],
 
 ];
