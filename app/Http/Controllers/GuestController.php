@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuestRequest;
 use App\Models\Guest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GuestController extends Controller
 {
@@ -57,7 +58,6 @@ class GuestController extends Controller
             ]);
     }
 
-    // TODO
     public function delete($id)
     {
         Guest::destroy($id);
