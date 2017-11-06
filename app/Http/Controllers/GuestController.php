@@ -31,7 +31,7 @@ class GuestController extends Controller
         return view('list', $viewData);
     }
 
-	// TODO
+    // TODO
     public function store(GuestRequest $request, $id = null)
     {
         if ($id === null) {
@@ -142,7 +142,7 @@ class GuestController extends Controller
                 },
                 'type'     => 'number',
                 'optional' => [
-                	'required' => 'required',
+                    'required'    => 'required',
                     'step'        => '0.01',
                     'placeholder' => '0.00',
                 ],

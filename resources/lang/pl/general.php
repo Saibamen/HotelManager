@@ -33,7 +33,7 @@ return [
     'floor'    => 'Piętro',
     'capacity' => 'Pojemność',
 
-    'guests' => 'Goście',
+    'guests'     => 'Goście',
     'first_name' => 'Imię',
     'last_name'  => 'Nazwisko',
     'address'    => 'Adres',
