@@ -41,7 +41,6 @@ class GuestTest extends BrowserKitTestCase
             //->see('Dodaj pokój')
             ->see('Imię')
             ->see('Nazwisko')
-            ->see('Pojemność')
             ->see('Adres')
             ->see('Kod pocztowy')
             ->see('Miejscowość')
@@ -71,6 +70,6 @@ class GuestTest extends BrowserKitTestCase
             '_token' => csrf_token(),
         ]);
 
-        $this->notSeeInDatabase('guest', []);
+        $this->notSeeInDatabase('guests', []);
     }
 }
