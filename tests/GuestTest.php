@@ -34,6 +34,28 @@ class GuestTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
+    public function testFilledIndex()
+    {
+        factory(Guest::class, 3)->create();
+
+        $this->visit('room')
+            ->dontSee('Zaloguj')
+            ->see('Goście')
+            ->see('Imię')
+            ->see('Nazwisko')
+            ->see('Adres')
+            ->see('Kod pocztowy')
+            ->see('Miejscowość')
+            ->see('PESEL')
+            ->see('Kontakt')
+            ->see('Akcje')
+            ->see('Edytuj')
+            ->see('Usuń')
+            ->see('test contact')
+            ->see('Dodaj');
+    }
+
+
     public function testAddEmptyForm()
     {
         $this->visit('guest/add')
@@ -62,6 +84,52 @@ class GuestTest extends BrowserKitTestCase
         $this->followRedirects();
 
         $this->see('Nie znaleziono obiektu');
+    }
+
+    public function testEditValidId()
+    {
+        $room = factory(Guest::class)->create();
+
+        $this->visit('guest')
+            ->see('Goście')
+            ->visit('room/edit/'.$room->id);
+
+        //$this->see('Edytuj pokój')
+        $this->see('Imię')
+            ->see('Nazwisko')
+            ->see('Adres')
+            ->see('Kod pocztowy')
+            ->see('Miejscowość')
+            ->see('PESEL')
+            ->see('Kontakt')
+            ->see('test contact')
+            ->see('Wyślij');
+
+        $this->type('Edycja kontaktu', 'contact')
+            ->press('Wyślij');
+
+        $this->seePageIs('guest')
+            ->see('Zapisano pomyślnie')
+            ->see('Edycja kontaktu');
+    }
+
+    public function testDelete()
+    {
+        $guest = factory(Guest::class)->create();
+
+        $this->seeInDatabase('guests', [
+            'ID' => $guest->id,
+        ]);
+
+        $response = $this->call('DELETE', 'guest/delete/'.$guest->id, [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->notSeeInDatabase('guests', [
+            'ID' => $guest->id,
+        ]);
     }
 
     public function testTryStoreInvalidId()
