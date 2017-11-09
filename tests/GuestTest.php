@@ -38,7 +38,7 @@ class GuestTest extends BrowserKitTestCase
     {
         factory(Guest::class, 3)->create();
 
-        $this->visit('room')
+        $this->visit('guest')
             ->dontSee('Zaloguj')
             ->see('Goście')
             ->see('Imię')
@@ -87,11 +87,11 @@ class GuestTest extends BrowserKitTestCase
 
     public function testEditValidId()
     {
-        $room = factory(Guest::class)->create();
+        $guest = factory(Guest::class)->create();
 
         $this->visit('guest')
             ->see('Goście')
-            ->visit('room/edit/'.$room->id);
+            ->visit('guest/edit/'.$guest->id);
 
         //$this->see('Edytuj pokój')
         $this->see('Imię')
