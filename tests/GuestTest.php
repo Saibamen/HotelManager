@@ -55,7 +55,6 @@ class GuestTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
-
     public function testAddEmptyForm()
     {
         $this->visit('guest/add')
