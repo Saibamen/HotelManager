@@ -17,9 +17,9 @@ class GuestRequest extends FormRequest
             'first_name' => 'required|alpha_spaces|min:2',
             'last_name'  => 'required|alpha_spaces|min:2',
             'address'    => 'required|min:2',
-            'zip_code'   => 'required|size:6',
-            'place'      => 'required|alpha_spaces_hyphens',
-            'PESEL'      => 'required|numeric|size:11',
+            'zip_code'   => 'required|regex:/^\d{2}-\d{3}$/|size:6',
+            'place'      => 'required|alpha_spaces_hyphens|min:2',
+            'PESEL'      => 'required|digits:11',
             'contact'    => 'nullable',
         ];
     }

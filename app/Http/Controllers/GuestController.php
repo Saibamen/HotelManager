@@ -140,11 +140,9 @@ class GuestController extends Controller
                 'value' => function (Guest $data) {
                     return $data->zip_code;
                 },
-                'type'     => 'number',
                 'optional' => [
                     'required'    => 'required',
-                    'step'        => '0.01',
-                    'placeholder' => '0.00',
+                    'placeholder' => '00-000',
                 ],
             ],
             [
@@ -163,9 +161,9 @@ class GuestController extends Controller
                 'value' => function (Guest $data) {
                     return $data->PESEL;
                 },
-                'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
+                    'placeholder' => '12345654321',
                 ],
             ],
             [
