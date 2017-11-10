@@ -34,7 +34,7 @@ return [
     'ip'             => ':Attribute musi być prawidłowym adresem IP.',
     'ipv4'           => ':Attribute musi być prawidłowym adresem IPv4.',
     'ipv6'           => ':Attribute musi być prawidłowym adresem IPv6.',
-    'json'           => 'The :attribute must be a valid JSON string.',
+    'json'           => ':Attribute musi być prawidłowym stringiem JSON.',
     'max'            => [
         'numeric' => ':Attribute nie może być większy niż :max.',
         'file'    => ':Attribute nie może być większy niż :max kilobajtów.',
@@ -113,11 +113,11 @@ return [
         'password' => 'hasło',
         'value'    => 'wartość',
 
-        'first_name' => 'Imię',
-        'last_name'  => 'Nazwisko',
-        'address'    => 'Adres',
-        'zip_code'   => 'Kod pocztowy',
-        'place'      => 'Miejscowość',
+        'first_name' => 'imię',
+        'last_name'  => 'nazwisko',
+        'address'    => 'adres',
+        'zip_code'   => 'kod pocztowy',
+        'place'      => 'miejscowość',
         'PESEL'      => 'PESEL',
     ],
 

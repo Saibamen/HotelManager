@@ -32,7 +32,6 @@ class GuestController extends Controller
         return view('list', $viewData);
     }
 
-    // TODO
     public function store(GuestRequest $request, $id = null)
     {
         if ($id === null) {
