@@ -2,17 +2,17 @@
 
 return [
 
-    'accepted'   => ':Attribute musi zostać zaakceptowany.',
-    'active_url' => ':Attribute jest nieprawidłowym adresem URL.',
-    'after'      => ':Attribute musi być datą późniejszą od :date.',
+    'accepted'        => ':Attribute musi zostać zaakceptowany.',
+    'active_url'      => ':Attribute jest nieprawidłowym adresem URL.',
+    'after'           => ':Attribute musi być datą późniejszą od :date.',
     'after_or_equal'  => ':Attribute musi być datą nie wcześniejszą niż :date.',
-    'alpha'      => ':Attribute może zawierać jedynie litery.',
-    'alpha_dash' => ':Attribute może zawierać jedynie litery, cyfry i myślniki.',
-    'alpha_num'  => ':Attribute może zawierać jedynie litery i cyfry.',
-    'array'      => ':Attribute musi być tablicą.',
-    'before'     => ':Attribute musi być datą wcześniejszą od :date.',
+    'alpha'           => ':Attribute może zawierać jedynie litery.',
+    'alpha_dash'      => ':Attribute może zawierać jedynie litery, cyfry i myślniki.',
+    'alpha_num'       => ':Attribute może zawierać jedynie litery i cyfry.',
+    'array'           => ':Attribute musi być tablicą.',
+    'before'          => ':Attribute musi być datą wcześniejszą od :date.',
     'before_or_equal' => ':Attribute musi być datą nie późniejszą niż :date.',
-    'between'    => [
+    'between'         => [
         'numeric' => ':Attribute musi zawierać się w granicach :min - :max.',
         'file'    => ':Attribute musi zawierać się w granicach :min - :max kilobajtów.',
         'string'  => ':Attribute musi zawierać się w granicach :min - :max znaków.',
@@ -45,9 +45,9 @@ return [
         'string'  => ':Attribute nie może być dłuższy niż :max znaków.',
         'array'   => ':Attribute nie może mieć więcej niż :max elementów.',
     ],
-    'mimes' => ':Attribute musi być plikiem typu :values.',
+    'mimes'     => ':Attribute musi być plikiem typu :values.',
     'mimetypes' => ':Attribute musi być plikiem typu :values.',
-    'min'   => [
+    'min'       => [
         'numeric' => ':Attribute musi być nie mniejszy od :min.',
         'file'    => ':Attribute musi mieć przynajmniej :min kilobajtów.',
         'string'  => ':Attribute musi mieć przynajmniej :min znaków.',
