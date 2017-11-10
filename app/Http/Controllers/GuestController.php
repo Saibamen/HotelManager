@@ -162,7 +162,7 @@ class GuestController extends Controller
                     return $data->PESEL;
                 },
                 'optional' => [
-                    'required' => 'required',
+                    'required'    => 'required',
                     'placeholder' => '12345654321',
                 ],
             ],
