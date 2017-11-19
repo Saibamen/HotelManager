@@ -41,3 +41,7 @@ exclude_paths:
 - tests/
 - vendor/
 - storage/
+
+plugins:
+  sonar-php:
+    enabled: true
