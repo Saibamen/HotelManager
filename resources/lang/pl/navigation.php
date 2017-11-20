@@ -6,8 +6,8 @@ return [
     'currently_free_rooms'     => 'Aktualnie wolne pokoje',
     'currently_occupied_rooms' => 'Aktualnie zajęte pokoje',
 
-    'show_guests' => 'Pokaż gości',
-    'add_guest'   => 'Dodaj gościa',
+    'show_guests'  => 'Pokaż gości',
+    'add_guest'    => 'Dodaj gościa',
     'edit_guest'   => 'Edytuj gościa',
 
     'all_reservations'     => 'Wszystkie rezerwacje',
