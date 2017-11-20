@@ -8,6 +8,7 @@ return [
 
     'show_guests' => 'Pokaż gości',
     'add_guest'   => 'Dodaj gościa',
+    'edit_guest'   => 'Edytuj gościa',
 
     'all_reservations'     => 'Wszystkie rezerwacje',
     'current_reservations' => 'Aktualne rezerwacje',

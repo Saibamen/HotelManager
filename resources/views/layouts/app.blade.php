@@ -58,8 +58,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.guests') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('guest.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.show_guests')</a></li>
-                                    <li><a href="{{ route('guest.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> !@lang('navigation.add_guest')</a></li>
+                                    <li><a href="{{ route('guest.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('navigation.show_guests')</a></li>
+                                    <li><a href="{{ route('guest.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('navigation.add_guest')</a></li>
                                 </ul>
                             </li>
 

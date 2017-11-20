@@ -13,7 +13,6 @@ class GuestController extends Controller
         return 'guest';
     }
 
-    // TODO
     public function index()
     {
         $title = trans('general.guests');
@@ -70,7 +69,7 @@ class GuestController extends Controller
     {
         if ($id === null) {
             $dataset = new Guest();
-            $title = trans('general.add');
+            $title = trans('navigation.add_guest');
             $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
@@ -82,11 +81,9 @@ class GuestController extends Controller
                 ]);
             }
 
-            $title = trans('general.edit');
+            $title = trans('navigation.edit_guest');
             $submitRoute = route($this->getRouteName().'.postedit', $id);
         }
-
-        $title .= ' '.mb_strtolower(trans('general.guest'));
 
         $viewData = [
             'dataset'     => $dataset,
