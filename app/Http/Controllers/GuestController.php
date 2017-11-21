@@ -168,12 +168,14 @@ class GuestController extends Controller
                 'value' => function (Guest $data) {
                     return $data->contact;
                 },
-                'type' => 'textarea',
+                'type'     => 'textarea',
+                'optional' => [
+                    'placeholder' => trans('general.contact_placeholder'),
+                ],
             ],
         ];
     }
 
-    // TODO
     private function getColumns()
     {
         $dataset = [
@@ -192,19 +194,7 @@ class GuestController extends Controller
             [
                 'title' => trans('general.address'),
                 'value' => function (Guest $data) {
-                    return $data->address;
-                },
-            ],
-            [
-                'title' => trans('general.zip_code'),
-                'value' => function (Guest $data) {
-                    return $data->zip_code;
-                },
-            ],
-            [
-                'title' => trans('general.place'),
-                'value' => function (Guest $data) {
-                    return $data->place;
+                    return $data->address.', '.$data->zip_code.' '.$data->place;
                 },
             ],
             [

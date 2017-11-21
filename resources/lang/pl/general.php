@@ -33,14 +33,15 @@ return [
     'floor'    => 'Piętro',
     'capacity' => 'Pojemność',
 
-    'guests'     => 'Goście',
-    'first_name' => 'Imię',
-    'last_name'  => 'Nazwisko',
-    'address'    => 'Adres',
-    'zip_code'   => 'Kod pocztowy',
-    'place'      => 'Miejscowość',
-    'PESEL'      => 'PESEL',
-    'contact'    => 'Kontakt',
+    'guests'              => 'Goście',
+    'first_name'          => 'Imię',
+    'last_name'           => 'Nazwisko',
+    'address'             => 'Adres',
+    'zip_code'            => 'Kod pocztowy',
+    'place'               => 'Miejscowość',
+    'PESEL'               => 'PESEL',
+    'contact'             => 'Kontakt',
+    'contact_placeholder' => 'Numer telefonu, e-mail itp.',
 
     'reservations' => 'Rezerwacje',
 

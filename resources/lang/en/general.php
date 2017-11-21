@@ -33,14 +33,15 @@ return [
     'floor'    => 'Floor',
     'capacity' => 'Capacity',
 
-    'guests'     => 'Guests',
-    'first_name' => 'First name',
-    'last_name'  => 'Last name',
-    'address'    => 'Address',
-    'zip_code'   => 'ZIP code',
-    'place'      => 'Place',
-    'PESEL'      => 'PESEL',
-    'contact'    => 'Contact',
+    'guests'              => 'Guests',
+    'first_name'          => 'First name',
+    'last_name'           => 'Last name',
+    'address'             => 'Address',
+    'zip_code'            => 'ZIP code',
+    'place'               => 'Place',
+    'PESEL'               => 'PESEL',
+    'contact'             => 'Contact',
+    'contact_placeholder' => 'Phone number, e-mail etc.',
 
     'reservations' => 'Reservations',
 
