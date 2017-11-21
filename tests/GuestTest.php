@@ -24,8 +24,6 @@ class GuestTest extends BrowserKitTestCase
             ->dontSee('Imię')
             ->dontSee('Nazwisko')
             ->dontSee('Adres')
-            ->dontSee('Kod pocztowy')
-            ->dontSee('Miejscowość')
             ->dontSee('PESEL')
             ->dontSee('Kontakt')
             ->dontSee('Akcje')
@@ -44,8 +42,6 @@ class GuestTest extends BrowserKitTestCase
             ->see('Imię')
             ->see('Nazwisko')
             ->see('Adres')
-            ->see('Kod pocztowy')
-            ->see('Miejscowość')
             ->see('PESEL')
             ->see('Kontakt')
             ->see('Akcje')
@@ -59,7 +55,7 @@ class GuestTest extends BrowserKitTestCase
     {
         $this->visit('guest/add')
             ->dontSee('Zaloguj')
-            //->see('Dodaj pokój')
+            ->see('Dodaj gościa')
             ->see('Imię')
             ->see('Nazwisko')
             ->see('Adres')
@@ -93,8 +89,8 @@ class GuestTest extends BrowserKitTestCase
             ->see('Goście')
             ->visit('guest/edit/'.$guest->id);
 
-        //$this->see('Edytuj pokój')
-        $this->see('Imię')
+        $this->see('Edytuj gościa')
+            ->see('Imię')
             ->see('Nazwisko')
             ->see('Adres')
             ->see('Kod pocztowy')
