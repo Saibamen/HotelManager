@@ -36,11 +36,11 @@ class Reservation extends Model
 
     public function room()
     {
-    	return $this->belongsTo('App\Models\Room');
+        return $this->belongsTo('App\Models\Room');
     }
 
     public function guest()
     {
-    	return $this->belongsTo('App\Models\Guest');
+        return $this->belongsTo('App\Models\Guest');
     }
 }
