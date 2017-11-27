@@ -12,18 +12,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $floor
  * @property int $capacity
  * @property float $price
- * @property string $comment
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property string|null $comment
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  *
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereCapacity($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereComment($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereFloor($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room wherePrice($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Room whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCapacity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereFloor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Room extends Model

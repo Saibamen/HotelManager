@@ -33,6 +33,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('guest/edit/{id}', 'GuestController@showAddEditForm')->name('guest.editform')->where(['id' => '[0-9]+']);
     Route::post('guest/edit/{id}', 'GuestController@store')->name('guest.postedit')->where(['id' => '[0-9]+']);
     Route::delete('guest/delete/{id}', 'GuestController@delete')->name('guest.delete')->where(['id' => '[0-9]+']);
+
+    Route::get('reservation', 'ReservationController@index')->name('reservation.index');
+    Route::get('reservation/add', 'ReservationController@showAddEditForm')->name('reservation.addform');
+    Route::post('reservation/add', 'ReservationController@store')->name('reservation.postadd');
+    Route::get('reservation/edit/{id}', 'ReservationController@showAddEditForm')->name('reservation.editform')->where(['id' => '[0-9]+']);
+    Route::post('reservation/edit/{id}', 'ReservationController@store')->name('reservation.postedit')->where(['id' => '[0-9]+']);
+    Route::delete('reservation/delete/{id}', 'ReservationController@delete')->name('reservation.delete')->where(['id' => '[0-9]+']);
 });
 
 Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');

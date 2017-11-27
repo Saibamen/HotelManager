@@ -25,6 +25,7 @@ class GuestController extends Controller
             'dataset'       => $dataset,
             'routeName'     => $this->getRouteName(),
             'title'         => $title,
+            // TODO
             'deleteMessage' => mb_strtolower(trans('general.guest')).' '.mb_strtolower(trans('general.number')),
         ];
 

@@ -16,6 +16,9 @@ class CreateReservationsTable extends Migration
             $table->date('date_end');
             $table->smallInteger('people')->unsigned();
             $table->timestamps();
+
+            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('guest_id')->references('id')->on('guests');
         });
     }
 

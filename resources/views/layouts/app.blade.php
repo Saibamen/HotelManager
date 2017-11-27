@@ -68,7 +68,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.reservations') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.all_reservations')</a></li>
+                                    <li><a href="{{ route('reservation.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.all_reservations')</a></li>
                                     <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.current_reservations')</a></li>
                                     <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.future_reservations')</a></li>
                                     <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> !@lang('navigation.add_reservation')</a></li>
