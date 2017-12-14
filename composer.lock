@@ -288,16 +288,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.24",
+            "version": "v5.5.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "06135405bb1f736dac5e9529ed1541fc446c9c0f"
+                "reference": "0a5b6112f325c56ae5a6679c08a0a10723153fe0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/06135405bb1f736dac5e9529ed1541fc446c9c0f",
-                "reference": "06135405bb1f736dac5e9529ed1541fc446c9c0f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0a5b6112f325c56ae5a6679c08a0a10723153fe0",
+                "reference": "0a5b6112f325c56ae5a6679c08a0a10723153fe0",
                 "shasum": ""
             },
             "require": {
@@ -377,6 +377,7 @@
                 "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~6.0).",
                 "laravel/tinker": "Required to use the tinker console command (~1.0).",
                 "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
+                "league/flysystem-cached-adapter": "Required to use Flysystem caching (~1.0).",
                 "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
                 "nexmo/client": "Required to use the Nexmo transport (~1.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
@@ -417,7 +418,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-12-07T01:28:21+00:00"
+            "time": "2017-12-11T14:59:28+00:00"
         },
         {
             "name": "laravelcollective/html",
@@ -4079,16 +4080,16 @@
         },
         {
             "name": "satooshi/php-coveralls",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-coveralls/php-coveralls.git",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127"
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/9c07b63acbc9709344948b6fd4f63a32b2ef4127",
-                "reference": "9c07b63acbc9709344948b6fd4f63a32b2ef4127",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
+                "reference": "37f8f83fe22224eb9d9c6d593cdeb33eedd2a9ad",
                 "shasum": ""
             },
             "require": {
@@ -4136,7 +4137,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-10-14T23:15:34+00:00"
+            "time": "2017-12-06T23:17:56+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
