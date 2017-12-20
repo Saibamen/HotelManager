@@ -288,16 +288,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.26",
+            "version": "v5.5.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d7e6a7aab600c5cfae595ea22074ac3c536cbc28"
+                "reference": "b4fb6eeb227b7327b4ca7f92263b693ec9ac9875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d7e6a7aab600c5cfae595ea22074ac3c536cbc28",
-                "reference": "d7e6a7aab600c5cfae595ea22074ac3c536cbc28",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b4fb6eeb227b7327b4ca7f92263b693ec9ac9875",
+                "reference": "b4fb6eeb227b7327b4ca7f92263b693ec9ac9875",
                 "shasum": ""
             },
             "require": {
@@ -418,7 +418,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-12-18T14:15:59+00:00"
+            "time": "2017-12-20T15:43:48+00:00"
         },
         {
             "name": "laravelcollective/html",
@@ -2181,18 +2181,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codacy/php-codacy-coverage.git",
-                "reference": "4d47299776a84d0e287df59d440c2e6ded3b9363"
+                "reference": "546ac2e000a004571c1000ecff4d68a98706db3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/4d47299776a84d0e287df59d440c2e6ded3b9363",
-                "reference": "4d47299776a84d0e287df59d440c2e6ded3b9363",
+                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/546ac2e000a004571c1000ecff4d68a98706db3a",
+                "reference": "546ac2e000a004571c1000ecff4d68a98706db3a",
                 "shasum": ""
             },
             "require": {
                 "gitonomy/gitlib": ">=1.0",
                 "php": ">=5.3.3",
-                "symfony/console": "~2.5|~3.0"
+                "symfony/console": "~2.5|~3.0|~4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~6.5"
@@ -2218,7 +2218,7 @@
             ],
             "description": "Sends PHP test coverage information to Codacy.",
             "homepage": "https://github.com/codacy/php-codacy-coverage",
-            "time": "2017-12-15T16:36:47+00:00"
+            "time": "2017-12-20T14:31:46+00:00"
         },
         {
             "name": "codeclimate/php-test-reporter",
@@ -3212,16 +3212,16 @@
         },
         {
             "name": "neronmoon/scriptsdev",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neronmoon/scriptsdev.git",
-                "reference": "2bda142b08900baa5476a40673f1465236831d1e"
+                "reference": "99739998e701f4825fc75521f99da6a3aa4780a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neronmoon/scriptsdev/zipball/2bda142b08900baa5476a40673f1465236831d1e",
-                "reference": "2bda142b08900baa5476a40673f1465236831d1e",
+                "url": "https://api.github.com/repos/neronmoon/scriptsdev/zipball/99739998e701f4825fc75521f99da6a3aa4780a2",
+                "reference": "99739998e701f4825fc75521f99da6a3aa4780a2",
                 "shasum": ""
             },
             "require": {
@@ -3258,7 +3258,7 @@
                 "dev",
                 "scripts"
             ],
-            "time": "2017-03-13T17:11:56+00:00"
+            "time": "2017-12-20T08:51:12+00:00"
         },
         {
             "name": "padraic/humbug_get_contents",
