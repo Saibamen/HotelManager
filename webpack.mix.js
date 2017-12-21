@@ -14,6 +14,7 @@ let mix = require("laravel-mix");
 mix.js("resources/assets/js/app.js", "public/js/app.min.js")
    .sass("resources/assets/sass/app.scss", "public/css/app.min.css");
 
+// My mixes
 mix.js("resources/assets/js/deletemodal.js", "public/js/deletemodal.min.js");
 
 // Cache busting
