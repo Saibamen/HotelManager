@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Session;
 
 class RoomController extends Controller
 {
@@ -27,6 +28,11 @@ class RoomController extends Controller
             'title'         => $title,
             'deleteMessage' => mb_strtolower(trans('general.room')).' '.mb_strtolower(trans('general.number')),
         ];
+
+        if ($dataset->isEmpty()) {
+            Session::flash('message', trans('general.no_rooms_in_database'));
+            Session::flash('alert-class', 'alert-danger');
+        }
 
         return view('list', $viewData);
     }

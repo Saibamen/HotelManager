@@ -2,3 +2,5 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <div id="alert-message">{{ Session::get('message') }}</div>
 </div>
+{{ Session::forget('message') }}
+{{ Session::forget('alert-class') }}
