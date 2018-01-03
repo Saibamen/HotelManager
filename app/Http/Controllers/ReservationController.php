@@ -48,7 +48,7 @@ class ReservationController extends Controller
             try {
                 $object = Reservation::findOrFail($id);
             } catch (ModelNotFoundException $e) {
-                return Controller::returnBack([
+                return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
                     'alert-class' => 'alert-danger',
                 ]);
@@ -84,7 +84,7 @@ class ReservationController extends Controller
             try {
                 $dataset = Reservation::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($id);
             } catch (ModelNotFoundException $e) {
-                return Controller::returnBack([
+                return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
                     'alert-class' => 'alert-danger',
                 ]);

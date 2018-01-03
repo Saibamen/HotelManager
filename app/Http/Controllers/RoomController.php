@@ -43,7 +43,7 @@ class RoomController extends Controller
             try {
                 $object = Room::findOrFail($id);
             } catch (ModelNotFoundException $e) {
-                return Controller::returnBack([
+                return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
                     'alert-class' => 'alert-danger',
                 ]);
@@ -78,7 +78,7 @@ class RoomController extends Controller
             try {
                 $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')->findOrFail($id);
             } catch (ModelNotFoundException $e) {
-                return Controller::returnBack([
+                return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
                     'alert-class' => 'alert-danger',
                 ]);

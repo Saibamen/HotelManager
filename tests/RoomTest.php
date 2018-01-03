@@ -65,8 +65,8 @@ class RoomTest extends BrowserKitTestCase
             ->see('Wyślij')
             ->press('Wyślij');
 
-        //$this->seePageIs('room/add')
-        //->see('jest wymagane');
+        $this->seePageIs('room/add')
+            ->see('jest wymagane');
     }
 
     public function testTryEditInvalidId()
@@ -75,9 +75,8 @@ class RoomTest extends BrowserKitTestCase
             ->see('Pokoje')
             ->visit('room/edit/10000');
 
-        $this->followRedirects();
-
-        $this->see('Nie znaleziono obiektu');
+        $this->seePageIs('room')
+            ->see('Nie znaleziono obiektu');
     }
 
     public function testEditValidId()

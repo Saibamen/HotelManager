@@ -68,8 +68,8 @@ class GuestTest extends BrowserKitTestCase
             ->see('Wyślij')
             ->press('Wyślij');
 
-        //$this->seePageIs('guest/add')
-        //->see('jest wymagane');
+        $this->seePageIs('guest/add')
+            ->see('jest wymagane');
     }
 
     public function testTryEditInvalidId()
@@ -78,9 +78,8 @@ class GuestTest extends BrowserKitTestCase
             ->see('Goście')
             ->visit('guest/edit/10000');
 
-        $this->followRedirects();
-
-        $this->see('Nie znaleziono obiektu');
+        $this->seePageIs('guest')
+            ->see('Nie znaleziono obiektu');
     }
 
     public function testEditValidId()
