@@ -29,6 +29,7 @@ class GuestTest extends BrowserKitTestCase
             ->dontSee('Akcje')
             ->dontSee('Edytuj')
             ->dontSee('Usuń')
+            ->see('Brak gości w bazie danych')
             ->see('Dodaj');
     }
 
@@ -48,6 +49,7 @@ class GuestTest extends BrowserKitTestCase
             ->see('Edytuj')
             ->see('Usuń')
             ->see('test contact')
+            ->dontSee('Brak gości w bazie danych')
             ->see('Dodaj');
     }
 

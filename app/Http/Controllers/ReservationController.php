@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GuestRequest;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Session;
 
 class ReservationController extends Controller
 {
@@ -24,6 +23,10 @@ class ReservationController extends Controller
             ->with('room:id,number')
             ->paginate($this->getItemsPerPage());
 
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_reservations_in_database'), 'alert-danger');
+        }
+
         $viewData = [
             'columns'       => $this->getColumns(),
             'dataset'       => $dataset,
@@ -32,11 +35,6 @@ class ReservationController extends Controller
             // TODO
             'deleteMessage' => mb_strtolower(trans('general.reservation')).' '.mb_strtolower(trans('general.number')),
         ];
-
-        if ($dataset->isEmpty() && !Session::has('message')) {
-            Session::flash('message', trans('general.no_reservations_in_database'));
-            Session::flash('alert-class', 'alert-danger');
-        }
 
         return view('list', $viewData);
     }

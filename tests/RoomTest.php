@@ -28,6 +28,7 @@ class RoomTest extends BrowserKitTestCase
             ->dontSee('Akcje')
             ->dontSee('Edytuj')
             ->dontSee('Usuń')
+            ->see('Brak pokoi w bazie danych')
             ->see('Dodaj');
     }
 
@@ -47,6 +48,7 @@ class RoomTest extends BrowserKitTestCase
             ->see('Edytuj')
             ->see('Usuń')
             ->see('test comment')
+            ->dontSee('Brak pokoi w bazie danych')
             ->see('Dodaj');
     }
 
