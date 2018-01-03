@@ -33,7 +33,7 @@ class ReservationController extends Controller
             'deleteMessage' => mb_strtolower(trans('general.reservation')).' '.mb_strtolower(trans('general.number')),
         ];
 
-        if ($dataset->isEmpty()) {
+        if ($dataset->isEmpty() && !Session::has('message')) {
             Session::flash('message', trans('general.no_reservations_in_database'));
             Session::flash('alert-class', 'alert-danger');
         }

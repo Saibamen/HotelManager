@@ -30,7 +30,7 @@ class GuestController extends Controller
             'deleteMessage' => mb_strtolower(trans('general.guest')).' '.mb_strtolower(trans('general.number')),
         ];
 
-        if ($dataset->isEmpty()) {
+        if ($dataset->isEmpty() && !Session::has('message')) {
             Session::flash('message', trans('general.no_guests_in_database'));
             Session::flash('alert-class', 'alert-danger');
         }
