@@ -56,7 +56,7 @@ class ReservationTest extends BrowserKitTestCase
     {
         $this->visit('reservation/add')
             ->dontSee('Zaloguj')
-            ->see('Dodaj pokój')
+            ->see('Dodaj rezerwację')
             ->see('Numer')
             ->see('Piętro')
             ->see('Pojemność')
@@ -69,22 +69,22 @@ class ReservationTest extends BrowserKitTestCase
             ->see('jest wymagane');
     }*/
 
-    /*public function testTryEditInvalidId()
+    public function testTryEditInvalidId()
     {
         $this->visit('reservation')
-            ->see('Pokoje')
+            ->see('Rezerwacje')
             ->visit('reservation/edit/10000');
 
         $this->seePageIs('reservation')
             ->see('Nie znaleziono obiektu');
-    }*/
+    }
 
     /*public function testEditValidId()
     {
         $reservation = factory(Reservation::class)->create();
 
         $this->visit('reservation')
-            ->see('Pokoje')
+            ->see('Rezerwacje')
             ->visit('reservation/edit/'.$reservation->id);
 
         $this->see('Edytuj pokój')

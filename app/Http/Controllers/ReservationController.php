@@ -78,11 +78,14 @@ class ReservationController extends Controller
     {
         if ($id === null) {
             $dataset = new Reservation();
-            $title = trans('navigation.add_guest');
+            $title = trans('navigation.add_reservation');
             $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
-                $dataset = Reservation::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($id);
+                $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
+                ->with('guest:id,first_name,last_name')
+                ->with('room:id,number')
+                ->findOrFail($id);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -90,7 +93,7 @@ class ReservationController extends Controller
                 ]);
             }
 
-            $title = trans('navigation.edit_guest');
+            $title = trans('navigation.edit_reservation');
             $submitRoute = route($this->getRouteName().'.postedit', $id);
         }
 
