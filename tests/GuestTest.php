@@ -68,8 +68,8 @@ class GuestTest extends BrowserKitTestCase
             ->see('Wyślij')
             ->press('Wyślij');
 
-        $this->seePageIs('guest/add')
-            ->see('jest wymagane');
+        $this->see('jest wymagane')
+            ->seePageIs('guest/add');
     }
 
     public function testTryEditInvalidId()
@@ -78,8 +78,8 @@ class GuestTest extends BrowserKitTestCase
             ->see('Goście')
             ->visit('guest/edit/10000');
 
-        $this->seePageIs('guest')
-            ->see('Nie znaleziono obiektu');
+        $this->see('Nie znaleziono obiektu')
+            ->seePageIs('guest');
     }
 
     public function testEditValidId()
@@ -104,8 +104,8 @@ class GuestTest extends BrowserKitTestCase
         $this->type('Edycja kontaktu', 'contact')
             ->press('Wyślij');
 
-        $this->seePageIs('guest')
-            ->see('Zapisano pomyślnie')
+        $this->see('Zapisano pomyślnie')
+            ->seePageIs('guest')
             ->see('Edycja kontaktu');
     }
 

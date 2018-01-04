@@ -65,8 +65,8 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Wyślij')
             ->press('Wyślij');
 
-        $this->seePageIs('reservation/add')
-            ->see('jest wymagane');
+        $this->see('jest wymagane')
+            ->seePageIs('reservation/add');
     }*/
 
     public function testTryEditInvalidId()
@@ -75,8 +75,8 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Rezerwacje')
             ->visit('reservation/edit/10000');
 
-        $this->seePageIs('reservation')
-            ->see('Nie znaleziono obiektu');
+        $this->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
     }
 
     /*public function testEditValidId()
@@ -99,8 +99,8 @@ class ReservationTest extends BrowserKitTestCase
         $this->type('Edycja komentarza', 'comment')
             ->press('Wyślij');
 
-        $this->seePageIs('reservation')
-            ->see('Zapisano pomyślnie')
+        $this->see('Zapisano pomyślnie')
+            ->seePageIs('reservation')
             ->see('Edycja komentarza');
     }*/
 
