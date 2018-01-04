@@ -37,13 +37,15 @@ addons:
     #build_command: "php artisan key:generate"
     #branch_pattern: master
 
-before_script:
+install:
   - chmod -R 777 bootstrap/cache
   - chmod -R 777 storage
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
-  - composer self-update
-  - composer update --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer update --no-interaction --no-suggest
+
+before_script:
   - php artisan key:generate
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv

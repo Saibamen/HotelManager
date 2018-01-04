@@ -40,7 +40,7 @@ jobs:
       - run: sudo chmod -R 775 storage
       - run: sudo chmod -R 775 bootstrap/cache
       - run: cp .env.circleci .env
-      - run: composer update --no-interaction
+      - run: composer update --no-interaction --no-suggest
       - run: php artisan key:generate
 
       - save_cache:
