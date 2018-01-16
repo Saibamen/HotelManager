@@ -13,7 +13,7 @@ Laravel 5.5
 
 ## Wymagania
 
-* PHP >= 7.0.0
+* PHP >= 7.0.8
 * OpenSSL PHP Extension
 * PDO PHP Extension
 * Mbstring PHP Extension
