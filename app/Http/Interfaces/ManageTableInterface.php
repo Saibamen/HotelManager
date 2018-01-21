@@ -2,7 +2,9 @@
 
 namespace App\Http\Interfaces;
 
-interface ManageTableInterface {
+interface ManageTableInterface
+{
     public function delete($objectId);
+
     public function getFields();
 }

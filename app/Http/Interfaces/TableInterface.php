@@ -2,7 +2,9 @@
 
 namespace App\Http\Interfaces;
 
-interface TableInterface {
+interface TableInterface
+{
     public function getColumns();
+
     public function getRouteName();
 }
