@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interfaces\ManageTableInterface;
+use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class RoomController extends Controller
+class RoomController extends Controller implements TableInterface, ManageTableInterface
 {
-    private function getRouteName()
+    public function getRouteName()
     {
         return 'room';
     }
@@ -35,13 +37,13 @@ class RoomController extends Controller
         return view('list', $viewData);
     }
 
-    public function store(RoomRequest $request, $id = null)
+    public function store(RoomRequest $request, $objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $object = new Room();
         } else {
             try {
-                $object = Room::findOrFail($id);
+                $object = Room::findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -60,23 +62,23 @@ class RoomController extends Controller
             ]);
     }
 
-    public function delete($id)
+    public function delete($objectId)
     {
-        Room::destroy($id);
+        Room::destroy($objectId);
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         return response()->json($data);
     }
 
-    public function showAddEditForm($id = null)
+    public function showAddEditForm($objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $dataset = new Room();
             $title = trans('general.add');
             $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
-                $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')->findOrFail($id);
+                $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')->findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -85,7 +87,7 @@ class RoomController extends Controller
             }
 
             $title = trans('general.edit');
-            $submitRoute = route($this->getRouteName().'.postedit', $id);
+            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
         }
 
         $title .= ' '.mb_strtolower(trans('general.room'));
@@ -101,7 +103,7 @@ class RoomController extends Controller
         return view('addedit', $viewData);
     }
 
-    private function getFields()
+    public function getFields()
     {
         return [
             [
@@ -159,7 +161,7 @@ class RoomController extends Controller
         ];
     }
 
-    private function getColumns()
+    public function getColumns()
     {
         $dataset = [
             [

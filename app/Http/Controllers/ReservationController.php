@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interfaces\ManageTableInterface;
+use App\Http\Interfaces\TableInterface;
 // TODO
 use App\Http\Requests\GuestRequest;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ReservationController extends Controller
+class ReservationController extends Controller implements TableInterface, ManageTableInterface
 {
-    private function getRouteName()
+    public function getRouteName()
     {
         return 'reservation';
     }
@@ -40,13 +42,13 @@ class ReservationController extends Controller
     }
 
     // TODO
-    public function store(GuestRequest $request, $id = null)
+    public function store(GuestRequest $request, $objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $object = new Reservation();
         } else {
             try {
-                $object = Reservation::findOrFail($id);
+                $object = Reservation::findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -65,18 +67,18 @@ class ReservationController extends Controller
             ]);
     }
 
-    public function delete($id)
+    public function delete($objectId)
     {
-        Reservation::destroy($id);
+        Reservation::destroy($objectId);
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         return response()->json($data);
     }
 
     // TODO
-    public function showAddEditForm($id = null)
+    public function showAddEditForm($objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $dataset = new Reservation();
             $title = trans('navigation.add_reservation');
             $submitRoute = route($this->getRouteName().'.postadd');
@@ -85,7 +87,7 @@ class ReservationController extends Controller
                 $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
                 ->with('guest:id,first_name,last_name')
                 ->with('room:id,number')
-                ->findOrFail($id);
+                ->findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -94,7 +96,7 @@ class ReservationController extends Controller
             }
 
             $title = trans('navigation.edit_reservation');
-            $submitRoute = route($this->getRouteName().'.postedit', $id);
+            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
         }
 
         $viewData = [
@@ -109,7 +111,7 @@ class ReservationController extends Controller
     }
 
     // TODO
-    private function getFields()
+    public function getFields()
     {
         return [
             [
@@ -189,7 +191,7 @@ class ReservationController extends Controller
     }
 
     // TODO
-    private function getColumns()
+    public function getColumns()
     {
         $dataset = [
             [

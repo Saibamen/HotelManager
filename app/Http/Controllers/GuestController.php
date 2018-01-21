@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interfaces\ManageTableInterface;
+use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\GuestRequest;
 use App\Models\Guest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class GuestController extends Controller
+class GuestController extends Controller implements TableInterface, ManageTableInterface
 {
-    private function getRouteName()
+    public function getRouteName()
     {
         return 'guest';
     }
@@ -36,13 +38,13 @@ class GuestController extends Controller
         return view('list', $viewData);
     }
 
-    public function store(GuestRequest $request, $id = null)
+    public function store(GuestRequest $request, $objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $object = new Guest();
         } else {
             try {
-                $object = Guest::findOrFail($id);
+                $object = Guest::findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -61,24 +63,24 @@ class GuestController extends Controller
             ]);
     }
 
-    public function delete($id)
+    public function delete($objectId)
     {
-        Guest::destroy($id);
+        Guest::destroy($objectId);
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         return response()->json($data);
     }
 
     // TODO
-    public function showAddEditForm($id = null)
+    public function showAddEditForm($objectId = null)
     {
-        if ($id === null) {
+        if ($objectId === null) {
             $dataset = new Guest();
             $title = trans('navigation.add_guest');
             $submitRoute = route($this->getRouteName().'.postadd');
         } else {
             try {
-                $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($id);
+                $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -87,7 +89,7 @@ class GuestController extends Controller
             }
 
             $title = trans('navigation.edit_guest');
-            $submitRoute = route($this->getRouteName().'.postedit', $id);
+            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
         }
 
         $viewData = [
@@ -102,7 +104,7 @@ class GuestController extends Controller
     }
 
     // TODO
-    private function getFields()
+    public function getFields()
     {
         return [
             [
@@ -181,7 +183,7 @@ class GuestController extends Controller
         ];
     }
 
-    private function getColumns()
+    public function getColumns()
     {
         $dataset = [
             [
