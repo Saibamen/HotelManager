@@ -47,6 +47,8 @@ return [
 
     'users' => 'Users',
 
+    'administration_panel' => 'Administration panel',
+
     'no_rooms_in_database'        => 'No rooms in database',
     'no_guests_in_database'       => 'No guests in database',
     'no_reservations_in_database' => 'No reservations in database',

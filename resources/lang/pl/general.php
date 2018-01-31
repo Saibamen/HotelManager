@@ -47,6 +47,8 @@ return [
 
     'users' => 'Użytkownicy',
 
+    'administration_panel' => 'Panel administracyjny',
+
     'no_rooms_in_database'        => 'Brak pokoi w bazie danych',
     'no_guests_in_database'       => 'Brak gości w bazie danych',
     'no_reservations_in_database' => 'Brak rezerwacji w bazie danych',
