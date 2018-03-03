@@ -42,6 +42,7 @@ return [
     'PESEL'               => 'PESEL',
     'contact'             => 'Contact',
     'contact_placeholder' => 'Phone number, e-mail etc.',
+    'choose_guest'        => 'Choose a guest',
 
     'reservations' => 'Reservations',
 
