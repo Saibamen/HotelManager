@@ -6,8 +6,10 @@ use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Interfaces\TableInterface;
 // TODO
 use App\Http\Requests\GuestRequest;
+use App\Models\Guest;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\GuestTableService;
 
 class ReservationController extends Controller implements TableInterface, ManageTableInterface
 {
@@ -36,6 +38,28 @@ class ReservationController extends Controller implements TableInterface, Manage
             'title'         => $title,
             // TODO
             'deleteMessage' => mb_strtolower(trans('general.reservation')).' '.mb_strtolower(trans('general.number')),
+        ];
+
+        return view('list', $viewData);
+    }
+
+    public function choose_guest(GuestTableService $guestTableService)
+    {
+        $title = trans('general.choose_guest');
+
+        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_guests_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'         => $guestTableService->getColumns(),
+            'dataset'         => $dataset,
+            'routeName'       => $guestTableService->getRouteName(),
+            'title'           => $title,
+            'routeChooseName' => $this->getRouteName().'.search'
         ];
 
         return view('list', $viewData);

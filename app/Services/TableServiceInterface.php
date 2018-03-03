@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Interfaces;
+namespace App\Services;
 
-interface TableInterface
+interface TableServiceInterface
 {
     public function getRouteName();
 
