@@ -8,8 +8,8 @@ use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\GuestRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Services\GuestTableService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReservationController extends Controller implements TableInterface, ManageTableInterface
 {
@@ -59,7 +59,7 @@ class ReservationController extends Controller implements TableInterface, Manage
             'dataset'         => $dataset,
             'routeName'       => $guestTableService->getRouteName(),
             'title'           => $title,
-            'routeChooseName' => $this->getRouteName().'.search'
+            'routeChooseName' => $this->getRouteName().'.search',
         ];
 
         return view('list', $viewData);

@@ -25,7 +25,7 @@ class TableServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('App\Services\GuestTableService', function ($app) {
-          return new GuestTableService();
+            return new GuestTableService();
         });
     }
 }
