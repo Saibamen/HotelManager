@@ -26,13 +26,13 @@ class TableServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Services\GuestTableService', function ($app) {
+        $this->app->bind('App\Services\GuestTableService', function () {
             return new GuestTableService();
         });
-        $this->app->bind('App\Services\ReservationTableService', function ($app) {
+        $this->app->bind('App\Services\ReservationTableService', function () {
             return new ReservationTableService();
         });
-        $this->app->bind('App\Services\RoomTableService', function ($app) {
+        $this->app->bind('App\Services\RoomTableService', function () {
             return new RoomTableService();
         });
     }
