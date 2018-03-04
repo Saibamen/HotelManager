@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Interfaces\ManageTableInterface;
-use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use App\Services\RoomTableService;
