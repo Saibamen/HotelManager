@@ -43,7 +43,7 @@ class ReservationController extends Controller implements TableInterface, Manage
         return view('list', $viewData);
     }
 
-    public function choose_guest(GuestTableService $guestTableService)
+    public function chooseGuest(GuestTableService $guestTableService)
     {
         $title = trans('general.choose_guest');
 
