@@ -6,13 +6,16 @@ use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\GuestRequest;
 use App\Models\Guest;
+use App\Services\GuestTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class GuestController extends Controller implements TableInterface, ManageTableInterface
+class GuestController extends Controller implements ManageTableInterface
 {
-    public function getRouteName()
+    protected $guestTableService;
+
+    public function __construct(GuestTableService $guestTableService)
     {
-        return 'guest';
+        $this->guestTableService = $guestTableService;
     }
 
     public function index()
@@ -27,9 +30,9 @@ class GuestController extends Controller implements TableInterface, ManageTableI
         }
 
         $viewData = [
-            'columns'       => $this->getColumns(),
+            'columns'       => $this->guestTableService->getColumns(),
             'dataset'       => $dataset,
-            'routeName'     => $this->getRouteName(),
+            'routeName'     => $this->guestTableService->getRouteName(),
             'title'         => $title,
             // TODO
             'deleteMessage' => mb_strtolower(trans('general.guest')).' '.mb_strtolower(trans('general.number')),
@@ -56,7 +59,7 @@ class GuestController extends Controller implements TableInterface, ManageTableI
         $object->fill($request->all());
         $object->save();
 
-        return redirect()->route($this->getRouteName().'.index')
+        return redirect()->route($this->guestTableService->getRouteName().'.index')
             ->with([
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',
@@ -77,7 +80,7 @@ class GuestController extends Controller implements TableInterface, ManageTableI
         if ($objectId === null) {
             $dataset = new Guest();
             $title = trans('navigation.add_guest');
-            $submitRoute = route($this->getRouteName().'.postadd');
+            $submitRoute = route($this->guestTableService->getRouteName().'.postadd');
         } else {
             try {
                 $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($objectId);
@@ -89,7 +92,7 @@ class GuestController extends Controller implements TableInterface, ManageTableI
             }
 
             $title = trans('navigation.edit_guest');
-            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
+            $submitRoute = route($this->guestTableService->getRouteName().'.postedit', $objectId);
         }
 
         $viewData = [
@@ -97,7 +100,7 @@ class GuestController extends Controller implements TableInterface, ManageTableI
             'fields'      => $this->getFields(),
             'title'       => $title,
             'submitRoute' => $submitRoute,
-            'routeName'   => $this->getRouteName(),
+            'routeName'   => $this->guestTableService->getRouteName(),
         ];
 
         return view('addedit', $viewData);
@@ -181,43 +184,5 @@ class GuestController extends Controller implements TableInterface, ManageTableI
                 ],
             ],
         ];
-    }
-
-    public function getColumns()
-    {
-        $dataset = [
-            [
-                'title' => trans('general.first_name'),
-                'value' => function (Guest $data) {
-                    return $data->first_name;
-                },
-            ],
-            [
-                'title' => trans('general.last_name'),
-                'value' => function (Guest $data) {
-                    return $data->last_name;
-                },
-            ],
-            [
-                'title' => trans('general.address'),
-                'value' => function (Guest $data) {
-                    return $data->address.', '.$data->zip_code.' '.$data->place;
-                },
-            ],
-            [
-                'title' => trans('general.PESEL'),
-                'value' => function (Guest $data) {
-                    return $data->PESEL;
-                },
-            ],
-            [
-                'title' => trans('general.contact'),
-                'value' => function (Guest $data) {
-                    return $data->contact;
-                },
-            ],
-        ];
-
-        return $dataset;
     }
 }

@@ -6,13 +6,16 @@ use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Interfaces\TableInterface;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
+use App\Services\RoomTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class RoomController extends Controller implements TableInterface, ManageTableInterface
+class RoomController extends Controller implements ManageTableInterface
 {
-    public function getRouteName()
+    protected $roomTableService;
+
+    public function __construct(RoomTableService $roomTableService)
     {
-        return 'room';
+        $this->roomTableService = $roomTableService;
     }
 
     public function index()
@@ -27,9 +30,9 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
         }
 
         $viewData = [
-            'columns'       => $this->getColumns(),
+            'columns'       => $this->roomTableService->getColumns(),
             'dataset'       => $dataset,
-            'routeName'     => $this->getRouteName(),
+            'routeName'     => $this->roomTableService->getRouteName(),
             'title'         => $title,
             'deleteMessage' => mb_strtolower(trans('general.room')).' '.mb_strtolower(trans('general.number')),
         ];
@@ -55,7 +58,7 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
         $object->fill($request->all());
         $object->save();
 
-        return redirect()->route($this->getRouteName().'.index')
+        return redirect()->route($this->roomTableService->getRouteName().'.index')
             ->with([
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',
@@ -75,7 +78,7 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
         if ($objectId === null) {
             $dataset = new Room();
             $title = trans('general.add');
-            $submitRoute = route($this->getRouteName().'.postadd');
+            $submitRoute = route($this->roomTableService->getRouteName().'.postadd');
         } else {
             try {
                 $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')->findOrFail($objectId);
@@ -87,7 +90,7 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
             }
 
             $title = trans('general.edit');
-            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
+            $submitRoute = route($this->roomTableService->getRouteName().'.postedit', $objectId);
         }
 
         $title .= ' '.mb_strtolower(trans('general.room'));
@@ -97,7 +100,7 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
             'fields'      => $this->getFields(),
             'title'       => $title,
             'submitRoute' => $submitRoute,
-            'routeName'   => $this->getRouteName(),
+            'routeName'   => $this->roomTableService->getRouteName(),
         ];
 
         return view('addedit', $viewData);
@@ -159,43 +162,5 @@ class RoomController extends Controller implements TableInterface, ManageTableIn
                 'type' => 'textarea',
             ],
         ];
-    }
-
-    public function getColumns()
-    {
-        $dataset = [
-            [
-                'title' => trans('general.number'),
-                'value' => function (Room $data) {
-                    return $data->number;
-                },
-            ],
-            [
-                'title' => trans('general.floor'),
-                'value' => function (Room $data) {
-                    return $data->floor;
-                },
-            ],
-            [
-                'title' => trans('general.capacity'),
-                'value' => function (Room $data) {
-                    return $data->capacity;
-                },
-            ],
-            [
-                'title' => trans('general.price'),
-                'value' => function (Room $data) {
-                    return $data->price;
-                },
-            ],
-            [
-                'title' => trans('general.comment'),
-                'value' => function (Room $data) {
-                    return $data->comment;
-                },
-            ],
-        ];
-
-        return $dataset;
     }
 }

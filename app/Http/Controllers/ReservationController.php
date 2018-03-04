@@ -9,13 +9,16 @@ use App\Http\Requests\GuestRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
 use App\Services\GuestTableService;
+use App\Services\ReservationTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ReservationController extends Controller implements TableInterface, ManageTableInterface
+class ReservationController extends Controller implements ManageTableInterface
 {
-    public function getRouteName()
+    protected $reservationTableService;
+
+    public function __construct(ReservationTableService $reservationTableService)
     {
-        return 'reservation';
+        $this->reservationTableService = $reservationTableService;
     }
 
     public function index()
@@ -32,9 +35,9 @@ class ReservationController extends Controller implements TableInterface, Manage
         }
 
         $viewData = [
-            'columns'       => $this->getColumns(),
+            'columns'       => $this->reservationTableService->getColumns(),
             'dataset'       => $dataset,
-            'routeName'     => $this->getRouteName(),
+            'routeName'     => $this->reservationTableService->getRouteName(),
             'title'         => $title,
             // TODO
             'deleteMessage' => mb_strtolower(trans('general.reservation')).' '.mb_strtolower(trans('general.number')),
@@ -59,7 +62,7 @@ class ReservationController extends Controller implements TableInterface, Manage
             'dataset'         => $dataset,
             'routeName'       => $guestTableService->getRouteName(),
             'title'           => $title,
-            'routeChooseName' => $this->getRouteName().'.search',
+            'routeChooseName' => $this->reservationTableService->getRouteName().'.search',
         ];
 
         return view('list', $viewData);
@@ -84,7 +87,7 @@ class ReservationController extends Controller implements TableInterface, Manage
         $object->fill($request->all());
         $object->save();
 
-        return redirect()->route($this->getRouteName().'.index')
+        return redirect()->route($this->reservationTableService->getRouteName().'.index')
             ->with([
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',
@@ -105,7 +108,7 @@ class ReservationController extends Controller implements TableInterface, Manage
         if ($objectId === null) {
             $dataset = new Reservation();
             $title = trans('navigation.add_reservation');
-            $submitRoute = route($this->getRouteName().'.postadd');
+            $submitRoute = route($this->reservationTableService->getRouteName().'.postadd');
         } else {
             try {
                 $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
@@ -120,7 +123,7 @@ class ReservationController extends Controller implements TableInterface, Manage
             }
 
             $title = trans('navigation.edit_reservation');
-            $submitRoute = route($this->getRouteName().'.postedit', $objectId);
+            $submitRoute = route($this->reservationTableService->getRouteName().'.postedit', $objectId);
         }
 
         $viewData = [
@@ -128,7 +131,7 @@ class ReservationController extends Controller implements TableInterface, Manage
             'fields'      => $this->getFields(),
             'title'       => $title,
             'submitRoute' => $submitRoute,
-            'routeName'   => $this->getRouteName(),
+            'routeName'   => $this->reservationTableService->getRouteName(),
         ];
 
         return view('addedit', $viewData);
@@ -212,44 +215,5 @@ class ReservationController extends Controller implements TableInterface, Manage
                 ],
             ],
         ];
-    }
-
-    // TODO
-    public function getColumns()
-    {
-        $dataset = [
-            [
-                'title' => trans('general.room'),
-                'value' => function (Reservation $data) {
-                    return $data->room->number;
-                },
-            ],
-            [
-                'title' => trans('general.guest'),
-                'value' => function (Reservation $data) {
-                    return $data->guest->first_name.' '.$data->guest->last_name;
-                },
-            ],
-            [
-                'title' => trans('general.date_start'),
-                'value' => function (Reservation $data) {
-                    return $data->date_start;
-                },
-            ],
-            [
-                'title' => trans('general.date_end'),
-                'value' => function (Reservation $data) {
-                    return $data->date_end;
-                },
-            ],
-            [
-                'title' => trans('general.people'),
-                'value' => function (Reservation $data) {
-                    return $data->people;
-                },
-            ],
-        ];
-
-        return $dataset;
     }
 }
