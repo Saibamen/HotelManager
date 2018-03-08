@@ -219,19 +219,20 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "6678d59be48c4be64eaca6ce70bea48a09488cc2"
+                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6678d59be48c4be64eaca6ce70bea48a09488cc2",
-                "reference": "6678d59be48c4be64eaca6ce70bea48a09488cc2",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
+                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
@@ -260,7 +261,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2018-02-28T11:41:37+00:00"
+            "time": "2018-03-08T01:11:30+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -408,16 +409,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.36",
+            "version": "v5.5.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9283cea4a5727aaf1def60a8fa820e49df2cf874"
+                "reference": "cf750b00c77d0d73e889c86f7db6a0e13b8dea8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9283cea4a5727aaf1def60a8fa820e49df2cf874",
-                "reference": "9283cea4a5727aaf1def60a8fa820e49df2cf874",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/cf750b00c77d0d73e889c86f7db6a0e13b8dea8c",
+                "reference": "cf750b00c77d0d73e889c86f7db6a0e13b8dea8c",
                 "shasum": ""
             },
             "require": {
@@ -538,20 +539,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-03-01T13:59:00+00:00"
+            "time": "2018-03-07T14:11:09+00:00"
         },
         {
             "name": "laravel/tinker",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8"
+                "reference": "94f6daf2131508cebd11cd6f8632ba586d7ecc41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8",
-                "reference": "eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/94f6daf2131508cebd11cd6f8632ba586d7ecc41",
+                "reference": "94f6daf2131508cebd11cd6f8632ba586d7ecc41",
                 "shasum": ""
             },
             "require": {
@@ -601,7 +602,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2018-03-06T13:48:07+00:00"
+            "time": "2018-03-06T17:34:36+00:00"
         },
         {
             "name": "laravelcollective/html",
