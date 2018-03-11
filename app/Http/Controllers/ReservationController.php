@@ -7,11 +7,11 @@ use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Requests\GuestRequest;
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
-use App\Models\Room;
 use App\Models\Reservation;
+use App\Models\Room;
 use App\Services\GuestTableService;
-use App\Services\RoomTableService;
 use App\Services\ReservationTableService;
+use App\Services\RoomTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReservationController extends Controller implements ManageTableInterface
