@@ -127,7 +127,7 @@ return [
 
         'date_start'   => 'start date',
         'date_end'     => 'end date',
-        'people'     => 'number of people',
+        'people'       => 'number of people',
     ],
 
 ];

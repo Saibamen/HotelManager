@@ -90,7 +90,7 @@ class ReservationController extends Controller implements ManageTableInterface
             'dataset'     => $dataset,
             'fields'      => $this->getSearchFields(),
             'title'       => $title,
-            'submitRoute' => $submitRoute
+            'submitRoute' => $submitRoute,
         ];
 
         return view('addedit', $viewData);
