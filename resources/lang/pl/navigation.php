@@ -10,8 +10,9 @@ return [
     'add_guest'    => 'Dodaj gościa',
     'edit_guest'   => 'Edytuj gościa',
 
-    'all_reservations'     => 'Wszystkie rezerwacje',
-    'current_reservations' => 'Aktualne rezerwacje',
-    'future_reservations'  => 'Przyszłe rezerwacje',
-    'add_reservation'      => 'Dodaj rezerwację',
+    'all_reservations'       => 'Wszystkie rezerwacje',
+    'current_reservations'   => 'Aktualne rezerwacje',
+    'future_reservations'    => 'Przyszłe rezerwacje',
+    'add_reservation'        => 'Dodaj rezerwację',
+    'search_free_rooms'      => 'Szukaj wolnych pokoi',
 ];

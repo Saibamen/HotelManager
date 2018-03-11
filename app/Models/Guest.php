@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $contact
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read string $full_name
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereContact($value)
@@ -35,4 +36,14 @@ class Guest extends Model
     protected $fillable = [
         'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact',
     ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

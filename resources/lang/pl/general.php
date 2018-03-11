@@ -33,6 +33,7 @@ return [
     'floor'    => 'Piętro',
     'capacity' => 'Pojemność',
 
+    'guest'               => 'Gość',
     'guests'              => 'Goście',
     'first_name'          => 'Imię',
     'last_name'           => 'Nazwisko',
@@ -44,7 +45,10 @@ return [
     'contact_placeholder' => 'Numer telefonu, e-mail itp.',
     'choose_guest'        => 'Wybierz gościa',
 
-    'reservations' => 'Rezerwacje',
+    'reservations'     => 'Rezerwacje',
+    'date_start'       => 'Data rozpoczęcia',
+    'date_end'         => 'Data zakończenia',
+    'number_of_people' => 'Ilość osób',
 
     'users' => 'Użytkownicy',
 

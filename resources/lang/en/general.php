@@ -33,6 +33,7 @@ return [
     'floor'    => 'Floor',
     'capacity' => 'Capacity',
 
+    'guest'               => 'Guest',
     'guests'              => 'Guests',
     'first_name'          => 'First name',
     'last_name'           => 'Last name',
@@ -44,7 +45,10 @@ return [
     'contact_placeholder' => 'Phone number, e-mail etc.',
     'choose_guest'        => 'Choose a guest',
 
-    'reservations' => 'Reservations',
+    'reservations'     => 'Reservations',
+    'date_start'       => 'Start date',
+    'date_end'         => 'End date',
+    'number_of_people' => 'Number of people',
 
     'users' => 'Users',
 

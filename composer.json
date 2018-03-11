@@ -9,7 +9,8 @@
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.5.0"
+        "laravelcollective/html": "^5.5.0",
+        "stevegrunwell/lost-in-translation": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.0",

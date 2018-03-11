@@ -119,12 +119,23 @@ return [
         'password' => 'hasło',
         'value'    => 'wartość',
 
+        'number'   => 'numer',
+        'floor'    => 'piętro',
+        'capacity' => 'pojemność',
+        'price'    => 'cena',
+
         'first_name' => 'imię',
         'last_name'  => 'nazwisko',
         'address'    => 'adres',
         'zip_code'   => 'kod pocztowy',
         'place'      => 'miejscowość',
         'PESEL'      => 'PESEL',
+        'contact'    => 'kontakt',
+
+        'guest'      => 'gość',
+        'date_start' => 'data rozpoczęcia',
+        'date_end'   => 'data zakończenia',
+        'people'     => 'ilość osób',
     ],
 
 ];

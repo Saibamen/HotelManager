@@ -124,6 +124,10 @@ return [
 
     'attributes' => [
         'PESEL' => 'PESEL',
+
+        'date_start'   => 'start date',
+        'date_end'     => 'end date',
+        'people'     => 'number of people',
     ],
 
 ];

@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    @if ($dataset->total() > 0)
+    @if (!isset($routeChooseName) && $dataset->total() > 0)
         @include('deletemodal')
     @endif
 

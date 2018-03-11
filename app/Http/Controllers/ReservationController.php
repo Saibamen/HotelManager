@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Interfaces\ManageTableInterface;
 // TODO
 use App\Http\Requests\GuestRequest;
+use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
 use App\Services\GuestTableService;
@@ -61,10 +62,47 @@ class ReservationController extends Controller implements ManageTableInterface
             'dataset'         => $dataset,
             'routeName'       => $guestTableService->getRouteName(),
             'title'           => $title,
-            'routeChooseName' => $this->reservationTableService->getRouteName().'.search',
+            'routeChooseName' => $this->reservationTableService->getRouteName().'.search_rooms',
         ];
 
         return view('list', $viewData);
+    }
+
+    public function searchRooms($guestId)
+    {
+        $dataset = new Reservation();
+        $dataset->guest_id = $guestId;
+        $title = trans('navigation.reservation_search_rooms');
+        $submitRoute = route($this->reservationTableService->getRouteName().'.post_choose_room', $guestId);
+
+        $viewData = [
+            'dataset'     => $dataset,
+            'fields'      => $this->getSearchFields(),
+            'title'       => $title,
+            'submitRoute' => $submitRoute
+        ];
+
+        return view('addedit', $viewData);
+    }
+
+    public function reservationSearch(ReservationSearchRequest $request, $guestId = null)
+    {
+        try {
+            $object = Guest::findOrFail($guestId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        dd($request->all());
+
+        return redirect()->route($this->reservationTableService->getRouteName().'.index')
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success',
+            ]);
     }
 
     // TODO
@@ -134,6 +172,57 @@ class ReservationController extends Controller implements ManageTableInterface
         ];
 
         return view('addedit', $viewData);
+    }
+
+    // TODO
+    public function getSearchFields()
+    {
+        return [
+            [
+                'id'    => 'guest',
+                'title' => trans('general.guest'),
+                'value' => function (Reservation $data) {
+                    return $data->guest->full_name;
+                },
+                'optional' => [
+                    'disabled' => 'disabled',
+                ],
+            ],
+            [
+                'id'    => 'date_start',
+                'title' => trans('general.reservation_date_of_stay_start'),
+                'value' => function (Reservation $data) {
+                    return $data->date_start;
+                },
+                'type'     => 'date',
+                /*'optional' => [
+                    'required' => 'required',
+                ],*/
+            ],
+            [
+                'id'    => 'date_end',
+                'title' => trans('general.reservation_date_of_stay_start_end'),
+                'value' => function (Reservation $data) {
+                    return $data->date_end;
+                },
+                //'type'     => 'date',
+                /*'optional' => [
+                    'required' => 'required',
+                ],*/
+            ],
+            [
+                'id'    => 'people',
+                'title' => trans('general.number_of_people'),
+                'value' => function () {
+                    // TODO
+                    return 1;
+                },
+                'type'     => 'number',
+                /*'optional' => [
+                    'required' => 'required',
+                ],*/
+            ],
+        ];
     }
 
     // TODO

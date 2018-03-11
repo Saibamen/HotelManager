@@ -16,8 +16,8 @@ class RoomRequest extends FormRequest
         return [
             'number'   => 'required',
             'floor'    => 'required|numeric',
-            'capacity' => 'required|digits_between:1,2',
-            'price'    => '',
+            'capacity' => 'required|numeric|min:1|digits_between:1,2',
+            'price'    => 'required|numeric',
             'comment'  => 'nullable',
         ];
     }
