@@ -7,8 +7,10 @@ use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Requests\GuestRequest;
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
+use App\Models\Room;
 use App\Models\Reservation;
 use App\Services\GuestTableService;
+use App\Services\RoomTableService;
 use App\Services\ReservationTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -62,18 +64,27 @@ class ReservationController extends Controller implements ManageTableInterface
             'dataset'         => $dataset,
             'routeName'       => $guestTableService->getRouteName(),
             'title'           => $title,
-            'routeChooseName' => $this->reservationTableService->getRouteName().'.search_rooms',
+            'routeChooseName' => $this->reservationTableService->getRouteName().'.search_free_rooms',
         ];
 
         return view('list', $viewData);
     }
 
-    public function searchRooms($guestId)
+    public function searchFreeRooms($guestId)
     {
+        try {
+            $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
         $dataset = new Reservation();
-        $dataset->guest_id = $guestId;
-        $title = trans('navigation.reservation_search_rooms');
-        $submitRoute = route($this->reservationTableService->getRouteName().'.post_choose_room', $guestId);
+        $dataset->guest()->associate($guest);
+        $title = trans('navigation.search_free_rooms');
+        $submitRoute = route($this->reservationTableService->getRouteName().'.post_search_free_rooms', $dataset->guest->id);
 
         $viewData = [
             'dataset'     => $dataset,
@@ -85,10 +96,10 @@ class ReservationController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
-    public function reservationSearch(ReservationSearchRequest $request, $guestId = null)
+    public function postSearchFreeRooms(ReservationSearchRequest $request, $guestId = null)
     {
         try {
-            $object = Guest::findOrFail($guestId);
+            $guest = Guest::select('id')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
@@ -96,13 +107,42 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        dd($request->all());
+        //dump($request->all());
+        //return view('home');
 
-        return redirect()->route($this->reservationTableService->getRouteName().'.index')
-            ->with([
-                'message'     => trans('general.saved'),
-                'alert-class' => 'alert-success',
+        return redirect()->route($this->reservationTableService->getRouteName().'.choose_free_room', $guest->id);
+    }
+
+    // TODO
+    public function chooseFreeRoom(RoomTableService $roomTableService, $guestId)
+    {
+        try {
+            $guest = Guest::select('id')->findOrFail($guestId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
             ]);
+        }
+
+        $title = trans('general.choose_room');
+
+        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_rooms_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'         => $roomTableService->getColumns(),
+            'dataset'         => $dataset,
+            'routeName'       => $roomTableService->getRouteName(),
+            'title'           => $title,
+            'routeChooseName' => $this->reservationTableService->getRouteName().'.search_free_rooms',
+        ];
+
+        return view('list', $viewData);
     }
 
     // TODO
@@ -185,12 +225,12 @@ class ReservationController extends Controller implements ManageTableInterface
                     return $data->guest->full_name;
                 },
                 'optional' => [
-                    'disabled' => 'disabled',
+                    'readonly' => 'readonly',
                 ],
             ],
             [
                 'id'    => 'date_start',
-                'title' => trans('general.reservation_date_of_stay_start'),
+                'title' => trans('general.date_start'),
                 'value' => function (Reservation $data) {
                     return $data->date_start;
                 },
@@ -201,11 +241,11 @@ class ReservationController extends Controller implements ManageTableInterface
             ],
             [
                 'id'    => 'date_end',
-                'title' => trans('general.reservation_date_of_stay_start_end'),
+                'title' => trans('general.date_end'),
                 'value' => function (Reservation $data) {
                     return $data->date_end;
                 },
-                //'type'     => 'date',
+                'type'     => 'date',
                 /*'optional' => [
                     'required' => 'required',
                 ],*/
