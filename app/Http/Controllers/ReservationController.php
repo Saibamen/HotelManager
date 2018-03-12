@@ -13,6 +13,7 @@ use App\Services\GuestTableService;
 use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Session;
 
 class ReservationController extends Controller implements ManageTableInterface
 {
@@ -50,7 +51,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
     public function chooseGuest(GuestTableService $guestTableService)
     {
-        $title = trans('general.choose_guest');
+        $title = trans('navigation.choose_guest');
 
         $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
             ->paginate($this->getItemsPerPage());
@@ -107,10 +108,10 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        //dump($request->all());
-        //return view('home');
+        $data = $request->only(['date_start', 'date_end', 'people']);
 
-        return redirect()->route($this->reservationTableService->getRouteName().'.choose_free_room', $guest->id);
+        return redirect()->route($this->reservationTableService->getRouteName().'.choose_free_room', $guest->id)
+            ->with($data);
     }
 
     // TODO
@@ -125,9 +126,28 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        $title = trans('general.choose_room');
+        // TODO: walidacja
+        Session::flash('date_start', '1');
+        Session::flash('date_end', '2');
+        Session::flash('people', '1');
+
+        $people = Session::get('people');
+
+        if (!Session::has(['date_start', 'date_end', 'people'])) {
+            dd('blaaaa');
+        }
+
+        Session::reflash();
+
+        $title = trans('navigation.choose_room');
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
+            ->whereNotIn('id', function($query) {
+                // TODO: daty
+                $query->select('room_id')->from('reservations');
+            })
+            ->where('capacity', '>=', $people)
+            ->orderBy('capacity')
             ->paginate($this->getItemsPerPage());
 
         if ($dataset->isEmpty()) {

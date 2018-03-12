@@ -5,10 +5,12 @@ return [
     'add_room'                 => 'Add room',
     'currently_free_rooms'     => 'Currently free rooms',
     'currently_occupied_rooms' => 'Currently occupied rooms',
+    'choose_room'              => 'Choose a room',
 
     'show_guests'  => 'Show guests',
     'add_guest'    => 'Add guest',
     'edit_guest'   => 'Edit guest',
+    'choose_guest' => 'Choose a guest',
 
     'all_reservations'       => 'All reservations',
     'current_reservations'   => 'Current reservations',

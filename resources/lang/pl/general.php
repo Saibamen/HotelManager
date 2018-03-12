@@ -43,7 +43,6 @@ return [
     'PESEL'               => 'PESEL',
     'contact'             => 'Kontakt',
     'contact_placeholder' => 'Numer telefonu, e-mail itp.',
-    'choose_guest'        => 'Wybierz gościa',
 
     'reservations'     => 'Rezerwacje',
     'date_start'       => 'Data rozpoczęcia',

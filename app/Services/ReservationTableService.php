@@ -23,7 +23,7 @@ class ReservationTableService implements TableServiceInterface
             [
                 'title' => trans('general.guest'),
                 'value' => function (Reservation $data) {
-                    return $data->guest->first_name.' '.$data->guest->last_name;
+                    return $data->guest->full_name;
                 },
             ],
             [
@@ -39,7 +39,7 @@ class ReservationTableService implements TableServiceInterface
                 },
             ],
             [
-                'title' => trans('general.people'),
+                'title' => trans('general.number_of_people'),
                 'value' => function (Reservation $data) {
                     return $data->people;
                 },
