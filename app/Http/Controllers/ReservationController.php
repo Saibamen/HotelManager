@@ -126,25 +126,24 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // TODO: walidacja
-        Session::flash('date_start', '1');
-        Session::flash('date_end', '2');
-        Session::flash('people', '1');
-
-        $people = Session::get('people');
-
         if (!Session::has(['date_start', 'date_end', 'people'])) {
             dd('blaaaa');
         }
+
+        // TODO: walidacja
+        $dateStart = Session::get('date_start');
+        $dateEnd = Session::get('date_end');
+        $people = Session::get('people');
 
         Session::reflash();
 
         $title = trans('navigation.choose_room');
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
-            ->whereNotIn('id', function($query) {
-                // TODO: daty
-                $query->select('room_id')->from('reservations');
+            ->whereNotIn('id', function($query) use ($dateStart, $dateEnd) {
+                $query->select('room_id')->from('reservations')
+                    ->where('date_start', '<', $dateEnd)
+                    ->where('date_end', '>', $dateStart);
             })
             ->where('capacity', '>=', $people)
             ->orderBy('capacity')
