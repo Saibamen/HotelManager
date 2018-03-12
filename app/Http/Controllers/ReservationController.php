@@ -140,7 +140,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $title = trans('navigation.choose_room');
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
-            ->whereNotIn('id', function($query) use ($dateStart, $dateEnd) {
+            ->whereNotIn('id', function ($query) use ($dateStart, $dateEnd) {
                 $query->select('room_id')->from('reservations')
                     ->where('date_start', '<', $dateEnd)
                     ->where('date_end', '>', $dateStart);
