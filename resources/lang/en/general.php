@@ -56,4 +56,10 @@ return [
     'no_rooms_in_database'        => 'No rooms in database',
     'no_guests_in_database'       => 'No guests in database',
     'no_reservations_in_database' => 'No reservations in database',
+    'no_users_in_database'        => 'No users in database',
+    'cannot_delete_admins'        => 'Administrators can not be deleted',
+
+    'created' => 'Created',
+    'updated' => 'Updated',
+    'deleted' => 'Deleted',
 ];

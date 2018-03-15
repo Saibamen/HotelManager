@@ -17,4 +17,7 @@ return [
     'future_reservations'    => 'Przyszłe rezerwacje',
     'add_reservation'        => 'Dodaj rezerwację',
     'search_free_rooms'      => 'Szukaj wolnych pokoi',
+
+    'show_users'  => 'Pokaż użytkowników',
+    'add_user'    => 'Dodaj użytkownika',
 ];

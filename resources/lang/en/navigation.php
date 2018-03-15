@@ -17,4 +17,7 @@ return [
     'future_reservations'    => 'Future reservations',
     'add_reservation'        => 'Add reservation',
     'search_free_rooms'      => 'Search free rooms',
+
+    'show_users'  => 'Show users',
+    'add_user'    => 'Add user',
 ];

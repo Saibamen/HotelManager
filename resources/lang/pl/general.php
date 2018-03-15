@@ -56,4 +56,10 @@ return [
     'no_rooms_in_database'        => 'Brak pokoi w bazie danych',
     'no_guests_in_database'       => 'Brak gości w bazie danych',
     'no_reservations_in_database' => 'Brak rezerwacji w bazie danych',
+    'no_users_in_database'        => 'Brak użytkowników w bazie danych',
+    'cannot_delete_admins'        => 'Nie można usuwać administratorów',
+
+    'created' => 'Utworzono',
+    'updated' => 'Zaktualizowano',
+    'deleted' => 'Usunięto',
 ];

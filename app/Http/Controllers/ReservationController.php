@@ -117,6 +117,13 @@ class ReservationController extends Controller implements ManageTableInterface
     // TODO
     public function chooseFreeRoom(RoomTableService $roomTableService, $guestId)
     {
+        if (!Session::has(['date_start', 'date_end', 'people'])) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
         try {
             $guest = Guest::select('id')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
@@ -124,10 +131,6 @@ class ReservationController extends Controller implements ManageTableInterface
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
             ]);
-        }
-
-        if (!Session::has(['date_start', 'date_end', 'people'])) {
-            dd('blaaaa');
         }
 
         // TODO: walidacja

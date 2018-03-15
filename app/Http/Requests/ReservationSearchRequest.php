@@ -15,13 +15,13 @@ class ReservationSearchRequest extends FormRequest
     public function rules()
     {
         $carbon = new Carbon();
-        $yesterday = $carbon->yesterday()->toDateString();
         $today = $carbon->today()->toDateString();
+        $tomorrow = $carbon->tomorrow()->toDateString();
 
         return [
             'guest'        => 'required',
-            'date_start'   => 'required|date|after:'.$yesterday.'|before:date_end',
-            'date_end'     => 'required|date|after:'.$today.'|after:date_start',
+            'date_start'   => 'required|date|after_or_equal:'.$today.'|before:date_end',
+            'date_end'     => 'required|date|after_or_equal:'.$tomorrow.'|after:date_start',
             'people'       => 'required|numeric|min:1|digits_between:1,2',
         ];
     }

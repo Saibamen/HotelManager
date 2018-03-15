@@ -22,9 +22,11 @@ $(document).ready(function() {
                 $("#alert-message").text(data.message);
                 $("#alert-box").show();
 
-                row.hide("slow", function() {
-                    $(this).remove();
-                });
+                if (data.class === "alert-success") {
+                    row.hide("slow", function() {
+                        $(this).remove();
+                    });
+                }
             }
         });
     });
