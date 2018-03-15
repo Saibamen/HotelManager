@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UserTableService;
 use App\Models\User;
+use App\Services\UserTableService;
 
 class UserController extends Controller
 {
