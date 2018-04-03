@@ -15,7 +15,8 @@ class CreateRoomsTable extends Migration
             $table->smallInteger('capacity')->unsigned();
             $table->double('price', 15, 2);
             $table->text('comment')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Interfaces\ManageTableInterface;
-// TODO
+// TODO: Change request
 use App\Http\Requests\GuestRequest;
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
@@ -115,9 +115,9 @@ class ReservationController extends Controller implements ManageTableInterface
             ->with($data);
     }
 
-    // TODO
-
     /**
+     * TODO
+     *
      * @param RoomTableService $roomTableService
      * @param int              $guestId
      *
