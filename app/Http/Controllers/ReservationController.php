@@ -133,7 +133,6 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // TODO: walidacja
         $dateStart = Session::get('date_start');
         $dateEnd = Session::get('date_end');
         $people = Session::get('people');
