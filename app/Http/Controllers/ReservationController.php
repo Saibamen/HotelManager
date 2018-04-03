@@ -116,7 +116,7 @@ class ReservationController extends Controller implements ManageTableInterface
     }
 
     /**
-     * TODO.
+     * @todo
      *
      * @param RoomTableService $roomTableService
      * @param int              $guestId
