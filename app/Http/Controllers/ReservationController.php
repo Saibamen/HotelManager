@@ -13,6 +13,7 @@ use App\Services\GuestTableService;
 use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ReservationController extends Controller implements ManageTableInterface
@@ -115,18 +116,29 @@ class ReservationController extends Controller implements ManageTableInterface
     }
 
     // TODO
+    /**
+     * @param RoomTableService $roomTableService
+     * @param int              $guestId
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function chooseFreeRoom(RoomTableService $roomTableService, $guestId)
     {
         if (!Session::has(['date_start', 'date_end', 'people'])) {
+            Log::error('Missing one of Session keys: date_start, date_end, people');
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
             ]);
         }
 
+        Session::reflash();
+
         try {
             $guest = Guest::select('id')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
+            // TODO: logger helper
+            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '. $e->getMessage());
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -136,8 +148,6 @@ class ReservationController extends Controller implements ManageTableInterface
         $dateStart = Session::get('date_start');
         $dateEnd = Session::get('date_end');
         $people = Session::get('people');
-
-        Session::reflash();
 
         $title = trans('navigation.choose_room');
 

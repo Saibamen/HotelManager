@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class Controller extends BaseController
@@ -33,6 +34,7 @@ class Controller extends BaseController
     {
         // Zapobiegaj infinite loop
         if (back()->getTargetUrl() === url()->current()) {
+            Log::info('Request loop: '. back()->getTargetUrl());
             return redirect(route('room.index'))->with($data);
         }
 
