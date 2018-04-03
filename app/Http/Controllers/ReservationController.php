@@ -116,6 +116,7 @@ class ReservationController extends Controller implements ManageTableInterface
     }
 
     // TODO
+
     /**
      * @param RoomTableService $roomTableService
      * @param int              $guestId
@@ -126,6 +127,7 @@ class ReservationController extends Controller implements ManageTableInterface
     {
         if (!Session::has(['date_start', 'date_end', 'people'])) {
             Log::error('Missing one of Session keys: date_start, date_end, people');
+
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -138,7 +140,8 @@ class ReservationController extends Controller implements ManageTableInterface
             $guest = Guest::select('id')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
             // TODO: logger helper
-            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '. $e->getMessage());
+            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
+
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',

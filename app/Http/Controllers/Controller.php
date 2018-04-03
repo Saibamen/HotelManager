@@ -34,7 +34,8 @@ class Controller extends BaseController
     {
         // Zapobiegaj infinite loop
         if (back()->getTargetUrl() === url()->current()) {
-            Log::info('Request loop: '. back()->getTargetUrl());
+            Log::info('Request loop: '.back()->getTargetUrl());
+
             return redirect(route('room.index'))->with($data);
         }
 
