@@ -16,7 +16,7 @@ class CreateReservationsTable extends Migration
             $table->date('date_end');
             $table->smallInteger('people')->unsigned();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->useCurrent();
 
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('guest_id')->references('id')->on('guests');
