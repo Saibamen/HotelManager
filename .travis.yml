@@ -21,9 +21,10 @@ matrix:
   include:
     - php: 7.0.0
       dist: precise
-      env:
-        - DB=sqlite
-        - DB=postgres
+      env: DB=sqlite DB_CONNECTION=sqlite
+    - php: 7.0.0
+      dist: precise
+      env: DB=postgres DB_CONNECTION=pgsql
 
 addons:
   code_climate:
