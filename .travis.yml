@@ -9,7 +9,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - nightly
+  #- nightly
 
 env:
   - DB=sqlite DB_CONNECTION=sqlite
