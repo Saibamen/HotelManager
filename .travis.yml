@@ -12,10 +12,10 @@ php:
   - nightly
 
 env:
-  - DB=sqlite
+  - DB=sqlite DB_CONNECTION=sqlite
   - DB=mysql
   - DB=mariadb
-  - DB=postgres
+  - DB=postgres DB_CONNECTION=pgsql
 
 matrix:
   include:
@@ -23,7 +23,7 @@ matrix:
       sudo: required
       dist: precise
       env:
-        - DB=sqlit
+        - DB=sqlite
         - DB=postgres
 
 addons:
