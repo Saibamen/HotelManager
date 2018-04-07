@@ -16,15 +16,14 @@ env:
   - DB=mysql DB_CONNECTION=testing
   - DB=mariadb DB_CONNECTION=testing
   - DB=postgres DB_CONNECTION=pgsql
-  matrix:
-    - DB=sqlite
-    - DB=postgres
 
 matrix:
   include:
     - php: 7.0.0
-      sudo: required
       dist: precise
+      env:
+        - DB=sqlite
+        - DB=postgres
 
 addons:
   code_climate:
