@@ -11,13 +11,14 @@ php:
   - 7.2
   - nightly
 
+services:
+  - mysql
+
 matrix:
   include:
     - php: 7.0.0
       sudo: required
       dist: precise
-      services:
-        - mysql
       addons:
         apt:
           sources:
@@ -30,11 +31,13 @@ addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
 
+before_install:
+  - mysql -e 'CREATE DATABASE homestead_test;'
+
 install:
   - chmod -R 777 bootstrap/cache
   - chmod -R 777 storage
   - cp .env.travis .env
-  - mysql -e 'create database homestead_test;'
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --no-suggest
 
