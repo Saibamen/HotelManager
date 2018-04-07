@@ -109,7 +109,7 @@ class RoomTest extends BrowserKitTestCase
         $room = factory(Room::class)->create();
 
         $this->seeInDatabase('rooms', [
-            'ID' => $room->id,
+            'id' => $room->id,
         ]);
 
         $response = $this->call('DELETE', 'room/delete/'.$room->id, [
@@ -119,7 +119,7 @@ class RoomTest extends BrowserKitTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('rooms', [
-            'ID' => $room->id,
+            'id' => $room->id,
         ]);
     }
 
