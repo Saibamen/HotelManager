@@ -114,7 +114,7 @@ class GuestTest extends BrowserKitTestCase
         $guest = factory(Guest::class)->create();
 
         $this->seeInDatabase('guests', [
-            'ID' => $guest->id,
+            'id' => $guest->id,
         ]);
 
         $response = $this->call('DELETE', 'guest/delete/'.$guest->id, [
@@ -124,7 +124,7 @@ class GuestTest extends BrowserKitTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('guests', [
-            'ID' => $guest->id,
+            'id' => $guest->id,
         ]);
     }
 
