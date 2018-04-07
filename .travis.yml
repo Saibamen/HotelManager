@@ -16,6 +16,8 @@ matrix:
     - php: 7.0.0
       sudo: required
       dist: precise
+      services:
+        - mysql
       addons:
         apt:
           sources:
