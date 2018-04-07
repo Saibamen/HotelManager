@@ -18,13 +18,13 @@ env:
   - DB=postgres DB_CONNECTION=pgsql
 
 matrix:
+  env:
+    - DB=sqlite
+    - DB=postgres
   include:
     - php: 7.0.0
       sudo: required
       dist: precise
-      env:
-        - DB=sqlite
-        - DB=postgres
 
 addons:
   code_climate:
@@ -45,13 +45,13 @@ install:
 
 before_script:
   - php artisan key:generate
-  - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --env=testing --no-interaction -vvv
+  - php artisan migrate --env=testing --no-interaction -vvv --database=$DB_CONNECTION
+  - php artisan db:seed --env=testing --no-interaction -vvv --database=$DB_CONNECTION
 
 script:
   - vendor/bin/phpunit -v --coverage-clover build/logs/clover.xml
 
 after_script:
-  - php artisan migrate:rollback --env=testing --no-interaction -vvv
+  - php artisan migrate:rollback --env=testing --no-interaction -vvv --database=$DB_CONNECTION
   - php vendor/bin/codacycoverage clover
   - vendor/bin/test-reporter
