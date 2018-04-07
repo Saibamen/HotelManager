@@ -13,14 +13,14 @@ php:
 
 env:
   - DB=sqlite DB_CONNECTION=sqlite
-  - DB=mysql
-  - DB=mariadb
+  - DB=mysql DB_CONNECTION=testing
+  - DB=mariadb DB_CONNECTION=testing
   - DB=postgres DB_CONNECTION=pgsql
-
-matrix:
-  env:
+  matrix:
     - DB=sqlite
     - DB=postgres
+
+matrix:
   include:
     - php: 7.0.0
       sudo: required
