@@ -15,27 +15,17 @@ matrix:
   include:
     - php: 7.0.0
       dist: precise
-
-#env:
-  #global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   #- secure: "jJgqtGjKytEBCHAHtJG7OlvmBloPEkE1YwTY09l4WLCJJjCRaVS+lMtIsYt8HYUUYDPfzbE+woPiJRdJSCtmV7MV/qC2HBGa1lXxJTiticOUD2bprSpGkZiaXcu6VKSPvPkOouswQhDnKa7uaMWkIls8uwTiCsYV8NpQYVG0vO693nvTvlXiZ/+hsqOq8r8KWgIlDjgg6dlUVLoFNzpQL+MUEPtj/51zovOFF4jk6Peug3Z+qPTUwIBq3Egdrig74iBN9i0tPKAS32Uz3Jgk3lfaemJ+BZtYSO9e9Hz3fgCzDFYTRg910ERIStrkCRoiM1XmKvRLrOEQq5X7BRrZGULLgjBJ1PA+KQ9Z7MRtnNE99/XwLcIxgFY16Kvgtx5lb1Ye+JwRT97nMPVL20YtDuxT5jAzfHFyYXXhawjp+hQZS85ffraedRe2S5xqfVGZQM76P3vlzICo0BYnHLygqc9kiVGzrT4rZTHstK8ryh+fRkDfV3A84akS37IVpm+GDZQ80suFXBBWxJCVsA2cJJR571b2bQ28o/Ec3ulGSJLHTz+HlMlYNjMR39zF0AaXfCnxAevx+/CXqvJoZOG4SW/iVmCx+cOTMWzj6f6H7i5kIKk0wPtsdE+JtzmPuYzxyIF3FDJ6jpsFmIVWKnOLIZQGbGGdd57e2eOflqt5214="
-
-#before_install:
-  #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+      addons:
+        apt:
+          sources:
+            - mysql-5.7-trusty
+          packages:
+            - mysql-server
+            - mysql-client
 
 addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
-  #coverity_scan:
-    #project:
-      #name: "Saibamen/HotelManager"
-      #description: "Build submitted via Travis CI"
-    #notification_email: saibamenppl@gmail.com
-    #build_command_prepend: "composer update --no-interaction"
-    #build_command: "php artisan key:generate"
-    #branch_pattern: master
 
 install:
   - chmod -R 777 bootstrap/cache
