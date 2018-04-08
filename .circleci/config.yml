@@ -16,6 +16,9 @@ jobs:
 
     working_directory: ~/laravel
 
+    environment:
+      DB_CONNECTION: sqlite
+
     steps:
       - checkout
 
@@ -49,10 +52,10 @@ jobs:
             - vendor
 
       - run: touch database/database.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite --force
-      - run: php artisan db:seed --env=testing --database=sqlite --no-interaction -vvv
+      - run: php artisan migrate --env=testing --no-interaction -vvv --database=sqlite
+      - run: php artisan db:seed --env=testing --no-interaction -vvv --database=sqlite
 
       # run tests!
       - run: vendor/bin/phpunit -v
 
-      - run: php artisan migrate:rollback --env=testing --database=sqlite --no-interaction -vvv
+      - run: php artisan migrate:rollback --env=testing --no-interaction -vvv --database=sqlite
