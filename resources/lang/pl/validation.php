@@ -80,8 +80,9 @@ return [
     /*
      * Custom validation rules
      */
-    'alpha_spaces'         => ':Attribute może zawierać jedynie litery i spacje.',
-    'alpha_spaces_hyphens' => ':Attribute może zawierać jedynie litery, spacje i myślniki.',
+    'alpha_spaces'                     => ':Attribute może zawierać jedynie litery i spacje.',
+    'alpha_spaces_hyphens'             => ':Attribute może zawierać jedynie litery, spacje i myślniki.',
+    'alpha_spaces_hyphens_apostrophes' => ':Attribute może zawierać jedynie litery, spacje, myślniki i apostrofy.',
 
     /*
     |--------------------------------------------------------------------------

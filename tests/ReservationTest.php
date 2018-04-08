@@ -109,7 +109,7 @@ class ReservationTest extends BrowserKitTestCase
         $reservation = factory(Reservation::class)->create();
 
         $this->seeInDatabase('reservations', [
-            'ID' => $reservation->id,
+            'id' => $reservation->id,
         ]);
 
         $response = $this->call('DELETE', 'reservation/delete/'.$reservation->id, [
@@ -119,7 +119,7 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('reservations', [
-            'ID' => $reservation->id,
+            'id' => $reservation->id,
         ]);
     }*/
 

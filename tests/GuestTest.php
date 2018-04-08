@@ -109,12 +109,39 @@ class GuestTest extends BrowserKitTestCase
             ->see('Edycja kontaktu');
     }
 
+    public function testEditValidIdPolishGuest()
+    {
+        $guest = factory(Guest::class)->states('polish')->create();
+
+        $this->visit('guest')
+            ->see('Goście')
+            ->visit('guest/edit/'.$guest->id);
+
+        $this->see('Edytuj gościa')
+            ->see('Imię')
+            ->see('Nazwisko')
+            ->see('Adres')
+            ->see('Kod pocztowy')
+            ->see('Miejscowość')
+            ->see('PESEL')
+            ->see('Kontakt')
+            ->see('test contact')
+            ->see('Wyślij');
+
+        $this->type('Edycja kontaktu', 'contact')
+            ->press('Wyślij');
+
+        $this->see('Zapisano pomyślnie')
+            ->seePageIs('guest')
+            ->see('Edycja kontaktu');
+    }
+
     public function testDelete()
     {
         $guest = factory(Guest::class)->create();
 
         $this->seeInDatabase('guests', [
-            'ID' => $guest->id,
+            'id' => $guest->id,
         ]);
 
         $response = $this->call('DELETE', 'guest/delete/'.$guest->id, [
@@ -124,7 +151,7 @@ class GuestTest extends BrowserKitTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('guests', [
-            'ID' => $guest->id,
+            'id' => $guest->id,
         ]);
     }
 

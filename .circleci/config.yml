@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
 
-      # MySQL
+      # SQLite
       - run: sudo apt-get update
       - run: sudo apt install -y libsqlite3-dev
 

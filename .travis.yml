@@ -9,30 +9,32 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - nightly
+  #- nightly
 
-services:
-  - mysql
+env:
+  - DB=sqlite DB_CONNECTION=sqlite
+  - DB=mysql DB_CONNECTION=testing
+  - DB=mariadb DB_CONNECTION=testing
+  - DB=postgres DB_CONNECTION=pgsql
 
 matrix:
   include:
     - php: 7.0.0
-      sudo: required
       dist: precise
-      addons:
-        apt:
-          sources:
-            - mysql-5.7-trusty
-          packages:
-            - mysql-server
-            - mysql-client
+      env: DB=sqlite DB_CONNECTION=sqlite
+    - php: 7.0.0
+      dist: precise
+      env: DB=postgres DB_CONNECTION=pgsql
 
 addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
 
 before_install:
-  - mysql -e 'CREATE DATABASE homestead_test;'
+  - sh -c "if [ '$DB' = 'sqlite' ]; then touch database/database.sqlite; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS homestead_test;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'CREATE DATABASE homestead_test;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'mariadb' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS homestead_test;'; fi"
 
 install:
   - chmod -R 777 bootstrap/cache
@@ -43,13 +45,13 @@ install:
 
 before_script:
   - php artisan key:generate
-  - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --env=testing --no-interaction -vvv
+  - php artisan migrate --env=testing --no-interaction -vvv --database=$DB_CONNECTION
+  - php artisan db:seed --env=testing --no-interaction -vvv --database=$DB_CONNECTION
 
 script:
   - vendor/bin/phpunit -v --coverage-clover build/logs/clover.xml
 
 after_script:
-  - php artisan migrate:rollback --env=testing --no-interaction -vvv
+  - php artisan migrate:rollback --env=testing --no-interaction -vvv --database=$DB_CONNECTION
   - php vendor/bin/codacycoverage clover
   - vendor/bin/test-reporter
