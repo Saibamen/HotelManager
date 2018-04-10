@@ -13,6 +13,7 @@ use App\Services\GuestTableService;
 use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -155,7 +156,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $title = trans('navigation.choose_room');
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
-            ->whereNotIn('id', function ($query) use ($dateStart, $dateEnd) {
+            ->whereNotIn('id', function (Builder $query) use ($dateStart, $dateEnd) {
                 $query->select('room_id')->from('reservations')
                     ->where('date_start', '<', $dateEnd)
                     ->where('date_end', '>', $dateStart);

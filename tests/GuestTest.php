@@ -82,36 +82,25 @@ class GuestTest extends BrowserKitTestCase
             ->seePageIs('guest');
     }
 
-    public function testEditValidId()
+    public function multilangualGuestProvider()
     {
-        $guest = factory(Guest::class)->create();
+        $this->createApplication();
 
-        $this->visit('guest')
-            ->see('Goście')
-            ->visit('guest/edit/'.$guest->id);
-
-        $this->see('Edytuj gościa')
-            ->see('Imię')
-            ->see('Nazwisko')
-            ->see('Adres')
-            ->see('Kod pocztowy')
-            ->see('Miejscowość')
-            ->see('PESEL')
-            ->see('Kontakt')
-            ->see('test contact')
-            ->see('Wyślij');
-
-        $this->type('Edycja kontaktu', 'contact')
-            ->press('Wyślij');
-
-        $this->see('Zapisano pomyślnie')
-            ->seePageIs('guest')
-            ->see('Edycja kontaktu');
+        return [
+            [factory(Guest::class)->make()],
+            [factory(Guest::class)->states('polish')->make()],
+            [factory(Guest::class)->states('german')->make()],
+            [factory(Guest::class)->states('french')->make()],
+            [factory(Guest::class)->states('dutch')->make()],
+        ];
     }
 
-    public function testEditValidIdPolishGuest()
+    /**
+     * @dataProvider multilangualGuestProvider
+     */
+    public function testEditValidId($guest)
     {
-        $guest = factory(Guest::class)->states('polish')->create();
+        $guest->save();
 
         $this->visit('guest')
             ->see('Goście')
