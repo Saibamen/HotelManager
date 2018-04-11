@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses_slashes', function ($attribute, $value) {
             // Accept only alpha, spaces, hyphens, apostrophes, parentheses and slashes.
             return preg_match('/^[\pL\s-\'()\/]+$/u', $value);
-;        });
+        });
     }
 
     /**
