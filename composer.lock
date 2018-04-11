@@ -2586,12 +2586,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeclimate/php-test-reporter.git",
-                "reference": "22b07b85a996d2e173fac6838033a0e0cc2b465d"
+                "reference": "f35752238d994c8894a3c079bdbe2c535e0265af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/22b07b85a996d2e173fac6838033a0e0cc2b465d",
-                "reference": "22b07b85a996d2e173fac6838033a0e0cc2b465d",
+                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/f35752238d994c8894a3c079bdbe2c535e0265af",
+                "reference": "f35752238d994c8894a3c079bdbe2c535e0265af",
                 "shasum": ""
             },
             "require": {
@@ -2637,7 +2637,7 @@
                 "codeclimate",
                 "coverage"
             ],
-            "time": "2017-12-03T20:50:46+00:00"
+            "time": "2018-04-11T15:45:47+00:00"
         },
         {
             "name": "composer/ca-bundle",

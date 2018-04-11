@@ -14,7 +14,7 @@ class GuestRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|alpha_spaces|min:2',
+            'first_name' => 'required|alpha_spaces_hyphens|min:2',
             'last_name'  => 'required|alpha_spaces_hyphens_apostrophes|min:2',
             'address'    => 'required|min:2',
             'zip_code'   => 'required|regex:/^\d{2}-\d{3}$/|size:6',
