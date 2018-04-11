@@ -80,10 +80,11 @@ return [
     /*
      * Custom validation rules
      */
-    'alpha_spaces'                                 => ':Attribute może zawierać jedynie litery i spacje.',
-    'alpha_spaces_hyphens'                         => ':Attribute może zawierać jedynie litery, spacje i myślniki.',
-    'alpha_spaces_hyphens_apostrophes'             => ':Attribute może zawierać jedynie litery, spacje, myślniki i apostrofy.',
-    'alpha_spaces_hyphens_apostrophes_parentheses' => ':Attribute może zawierać jedynie litery, spacje, myślniki, apostrofy i nawiasy.',
+    'alpha_spaces'                                         => ':Attribute może zawierać jedynie litery i spacje.',
+    'alpha_spaces_hyphens'                                 => ':Attribute może zawierać jedynie litery, spacje i myślniki.',
+    'alpha_spaces_hyphens_apostrophes'                     => ':Attribute może zawierać jedynie litery, spacje, myślniki i apostrofy.',
+    'alpha_spaces_hyphens_apostrophes_parentheses'         => ':Attribute może zawierać jedynie litery, spacje, myślniki, apostrofy i nawiasy.',
+    'alpha_spaces_hyphens_apostrophes_parentheses_slashes' => ':Attribute może zawierać jedynie litery, spacje, myślniki, apostrofy, nawiasy i ukośniki.',
 
     /*
     |--------------------------------------------------------------------------

@@ -33,9 +33,14 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses', function ($attribute, $value) {
-            // Accept only alpha, spaces, hyphens and apostrophes.
+            // Accept only alpha, spaces, hyphens, apostrophes and parentheses.
             return preg_match('/^[\pL\s-\'()]+$/u', $value);
         });
+
+        Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses_slashes', function ($attribute, $value) {
+            // Accept only alpha, spaces, hyphens, apostrophes, parentheses and slashes.
+            return preg_match('/^[\pL\s-\'()\/]+$/u', $value);
+;        });
     }
 
     /**

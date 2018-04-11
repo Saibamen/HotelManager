@@ -91,10 +91,11 @@ return [
     /*
      * Custom validation rules
      */
-    'alpha_spaces'                                 => 'The :attribute may only contain letters and spaces.',
-    'alpha_spaces_hyphens'                         => 'The :attribute may only contain letters, spaces and hyphens.',
-    'alpha_spaces_hyphens_apostrophes'             => 'The :attribute may only contain letters, spaces, hyphens and apostrophes.',
-    'alpha_spaces_hyphens_apostrophes_parentheses' => 'The :attribute may only contain letters, spaces, hyphens, apostrophes and parentheses.',
+    'alpha_spaces'                                         => 'The :attribute may only contain letters and spaces.',
+    'alpha_spaces_hyphens'                                 => 'The :attribute may only contain letters, spaces and hyphens.',
+    'alpha_spaces_hyphens_apostrophes'                     => 'The :attribute may only contain letters, spaces, hyphens and apostrophes.',
+    'alpha_spaces_hyphens_apostrophes_parentheses'         => 'The :attribute may only contain letters, spaces, hyphens, apostrophes and parentheses.',
+    'alpha_spaces_hyphens_apostrophes_parentheses_slashes' => 'The :attribute may only contain letters, spaces, hyphens, apostrophes, parentheses and slashes.',
 
     /*
     |--------------------------------------------------------------------------
