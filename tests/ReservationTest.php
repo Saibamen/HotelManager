@@ -22,9 +22,10 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Zaloguj')
             ->see('Rezerwacje')
             ->dontSee('Numer')
-            ->dontSee('Piętro')
-            ->dontSee('Cena')
-            ->dontSee('Komentarz')
+            ->dontSee('Gość')
+            ->dontSee('Data rozpoczęcia')
+            ->dontSee('Data zakończenia')
+            ->dontSee('Ilość osób')
             ->dontSee('Akcje')
             ->dontSee('Edytuj')
             ->dontSee('Usuń')
@@ -32,25 +33,24 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
-    /*public function testFilledIndex()
+    public function testFilledIndex()
     {
         factory(Reservation::class, 3)->create();
 
         $this->visit('reservation')
             ->dontSee('Zaloguj')
             ->see('Rezerwacje')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
+            ->see('Pokój')
+            ->see('Gość')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see('Ilość osób')
             ->see('Akcje')
             ->see('Edytuj')
             ->see('Usuń')
-            ->see('test comment')
             ->dontSee('Brak rezerwacji w bazie danych')
             ->see('Dodaj');
-    }*/
+    }
 
     /*public function testAddEmptyForm()
     {
