@@ -41,6 +41,11 @@ class AppServiceProvider extends ServiceProvider
             // Accept only alpha, spaces, hyphens, apostrophes, parentheses and slashes.
             return preg_match('/^[\pL\s-\'()\/]+$/u', $value);
         });
+
+        Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses_slashes_dots', function ($attribute, $value) {
+            // Accept only alpha, spaces, hyphens, apostrophes, parentheses, slashes and dots.
+            return preg_match('/^[\pL\s-\'()\/.]+$/u', $value);
+        });
     }
 
     /**
