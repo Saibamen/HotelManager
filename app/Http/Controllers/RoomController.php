@@ -138,6 +138,7 @@ class RoomController extends Controller implements ManageTableInterface
                 'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
+                    'min'      => '1',
                 ],
             ],
             [
@@ -148,6 +149,8 @@ class RoomController extends Controller implements ManageTableInterface
                 },
                 'type'     => 'number',
                 'optional' => [
+                    'required'    => 'required',
+                    'min'         => '0',
                     'step'        => '0.01',
                     'placeholder' => '0.00',
                 ],

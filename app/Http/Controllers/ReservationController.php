@@ -270,9 +270,9 @@ class ReservationController extends Controller implements ManageTableInterface
                     return $data->date_start;
                 },
                 'type'     => 'date',
-                /*'optional' => [
+                'optional' => [
                     'required' => 'required',
-                ],*/
+                ],
             ],
             [
                 'id'    => 'date_end',
@@ -281,9 +281,9 @@ class ReservationController extends Controller implements ManageTableInterface
                     return $data->date_end;
                 },
                 'type'     => 'date',
-                /*'optional' => [
+                'optional' => [
                     'required' => 'required',
-                ],*/
+                ],
             ],
             [
                 'id'    => 'people',
@@ -293,9 +293,10 @@ class ReservationController extends Controller implements ManageTableInterface
                     return 1;
                 },
                 'type'     => 'number',
-                /*'optional' => [
+                'optional' => [
                     'required' => 'required',
-                ],*/
+                    'min'      => '1',
+                ],
             ],
         ];
     }
