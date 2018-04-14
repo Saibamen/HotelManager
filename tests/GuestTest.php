@@ -89,7 +89,6 @@ class GuestTest extends BrowserKitTestCase
         return [
             [factory(Guest::class)->make()],
             [factory(Guest::class)->states('polish')->make()],
-            [factory(Guest::class)->states('german')->make()],
             [factory(Guest::class)->states('french')->make()],
             [factory(Guest::class)->states('dutch')->make()],
         ];
