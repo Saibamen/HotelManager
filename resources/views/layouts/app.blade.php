@@ -139,7 +139,8 @@
             todayBtn: 'linked',
             todayHighlight: true,
             autoclose: true,
-            format: 'dd.mm.yyyy'
+            format: 'dd.mm.yyyy',
+            startDate: '0d',
         });</script>
     @yield('js')
 </body>
