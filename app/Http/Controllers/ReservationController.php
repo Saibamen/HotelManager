@@ -138,7 +138,7 @@ class ReservationController extends Controller implements ManageTableInterface
         Session::reflash();
 
         try {
-            $guest = Guest::select('id')->findOrFail($guestId);
+            $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
             // TODO: logger helper
             Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
@@ -153,7 +153,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $dateEnd = Session::get('date_end');
         $people = Session::get('people');
 
-        $title = trans('navigation.choose_room');
+        $title = trans('navigation.choose_room_for').' '.$guest->fullName;
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
             ->whereNotIn('id', function (Builder $query) use ($dateStart, $dateEnd) {
@@ -269,9 +269,11 @@ class ReservationController extends Controller implements ManageTableInterface
                 'value' => function (Reservation $data) {
                     return $data->date_start;
                 },
-                'type'     => 'date',
+                'type'     => 'text',
                 'optional' => [
-                    'required' => 'required',
+                    'required'    => 'required',
+                    'class'       => 'datepicker',
+                    'placeholder' => 'dd.mm.rrrr',
                 ],
             ],
             [
@@ -280,9 +282,11 @@ class ReservationController extends Controller implements ManageTableInterface
                 'value' => function (Reservation $data) {
                     return $data->date_end;
                 },
-                'type'     => 'date',
+                'type'     => 'text',
                 'optional' => [
-                    'required' => 'required',
+                    'required'    => 'required',
+                    'class'       => 'datepicker',
+                    'placeholder' => 'dd.mm.rrrr',
                 ],
             ],
             [

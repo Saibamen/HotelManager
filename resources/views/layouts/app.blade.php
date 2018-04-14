@@ -133,6 +133,14 @@
 
     <!-- Scripts -->
     {!! Html::script('/js/app.min.js') !!}
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js') !!}
+    <script>$('.datepicker').datepicker({
+            todayBtn: 'linked',
+            todayHighlight: true,
+            autoclose: true,
+            format: 'dd.mm.yyyy'
+        });</script>
     @yield('js')
 </body>
 </html>

@@ -28,8 +28,9 @@
                                     {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
 
                                     @php(isset($field['optional']) ? $fields_attributes = $fields_class + $field['optional'] : $fields_attributes = $fields_class)
+                                    @php(!isset($field['optional']['class']) ?: $fields_attributes['class'] .= ' '. $field['optional']['class'])
 
-                                    {{-- Autofocus na pierwsze pole w formularzu --}}
+                                    {{-- Autofocus on first field in form --}}
                                     @if ($loop->first)
                                         @php($fields_attributes['autofocus'] = 'autofocus')
                                     @elseif ($loop->index === 1)
