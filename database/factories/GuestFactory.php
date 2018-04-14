@@ -21,9 +21,9 @@ $factory->state(App\Models\Guest::class, 'polish', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
+        'zip_code'   => $faker->postcode(),
         'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'PESEL'      => $faker->pesel(),
         'contact'    => 'test contact',
     ];
 });
