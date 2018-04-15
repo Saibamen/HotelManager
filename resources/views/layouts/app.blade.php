@@ -47,10 +47,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.rooms') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('room.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('navigation.show_rooms')</a></li>
+                                    <li><a href="{{ route('room.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.show_rooms')</a></li>
                                     <li><a href="{{ route('room.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('navigation.add_room')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.currently_free_rooms')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.currently_occupied_rooms')</a></li>
+                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.currently_free_rooms')</a></li>
+                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.currently_occupied_rooms')</a></li>
                                 </ul>
                             </li>
 
@@ -59,7 +59,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.guests') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('guest.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('navigation.show_guests')</a></li>
+                                    <li><a href="{{ route('guest.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.show_guests')</a></li>
                                     <li><a href="{{ route('guest.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('navigation.add_guest')</a></li>
                                 </ul>
                             </li>
@@ -69,9 +69,9 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.reservations') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('reservation.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.all_reservations')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.current_reservations')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.future_reservations')</a></li>
+                                    <li><a href="{{ route('reservation.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.all_reservations')</a></li>
+                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.current_reservations')</a></li>
+                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.future_reservations')</a></li>
                                     <li><a href="{{ route('reservation.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> !@lang('navigation.add_reservation')</a></li>
                                 </ul>
                             </li>
@@ -81,8 +81,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@lang('general.users') <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('user.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.show_users')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> !@lang('navigation.add_user')</a></li>
+                                    <li><a href="{{ route('user.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.show_users')</a></li>
+                                    <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> !@lang('navigation.add_user')</a></li>
                                 </ul>
                             </li>
                         </ul>
