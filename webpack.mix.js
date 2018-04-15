@@ -16,6 +16,7 @@ mix.js("resources/assets/js/app.js", "public/js/app.min.js")
 
 // My mixes
 mix.js("resources/assets/js/deletemodal.js", "public/js/deletemodal.min.js");
+mix.js("resources/assets/js/datepickersettings.js", "public/js/datepickersettings.min.js");
 
 // Cache busting
 mix.version();

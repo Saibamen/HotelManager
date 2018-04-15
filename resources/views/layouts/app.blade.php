@@ -11,10 +11,11 @@
     <title>@if(isset($title)){{ $title }} | @endif{{ config('app.name', 'Hotel Manager') }}</title>
 
     <!-- Fonts -->
-    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') !!}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     {!! Html::style('css/app.min.css') !!}
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css') !!}
     @yield('css')
 </head>
 <body>
@@ -113,6 +114,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-power-off" aria-hidden="true"></i>
                                             @lang('auth.logout')
                                         </a>
 
@@ -133,15 +135,8 @@
 
     <!-- Scripts -->
     {!! Html::script('/js/app.min.js') !!}
-    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js') !!}
-    <script>$('.datepicker').datepicker({
-            todayBtn: 'linked',
-            todayHighlight: true,
-            autoclose: true,
-            format: 'dd.mm.yyyy',
-            startDate: '0d',
-        });</script>
+    {!! Html::script('/js/datepickersettings.min.js') !!}
     @yield('js')
 </body>
 </html>

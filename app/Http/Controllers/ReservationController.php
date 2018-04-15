@@ -272,7 +272,7 @@ class ReservationController extends Controller implements ManageTableInterface
                 'type'     => 'text',
                 'optional' => [
                     'required'    => 'required',
-                    'class'       => 'datepicker',
+                    'class'       => 'datepicker start-date',
                     'placeholder' => 'dd.mm.rrrr',
                 ],
             ],
@@ -285,7 +285,7 @@ class ReservationController extends Controller implements ManageTableInterface
                 'type'     => 'text',
                 'optional' => [
                     'required'    => 'required',
-                    'class'       => 'datepicker',
+                    'class'       => 'datepicker end-date',
                     'placeholder' => 'dd.mm.rrrr',
                 ],
             ],
