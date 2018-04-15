@@ -16,6 +16,7 @@
     <!-- Styles -->
     {!! Html::style('css/app.min.css') !!}
     {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css') !!}
+    {!! Html::style('css/fixes.min.css') !!}
     @yield('css')
 </head>
 <body>
