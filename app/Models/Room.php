@@ -31,4 +31,20 @@ class Room extends Model
     protected $fillable = [
         'number', 'floor', 'capacity', 'price', 'comment',
     ];
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFreeRoomsForReservation($query, $dateStart, $dateEnd, $people)
+    {
+        return $query->whereNotIn('id', function ($query) use ($dateStart, $dateEnd) {
+            $query->select('room_id')->from('reservations')
+                ->where('date_start', '<', $dateEnd)
+                ->where('date_end', '>', $dateStart);
+            })
+            ->where('capacity', '>=', $people)
+            ->orderBy('capacity');
+    }
 }

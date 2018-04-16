@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Interfaces\ManageTableInterface;
 use App\Http\Requests\GuestRequest;
-// TODO: Change request
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
@@ -14,7 +13,6 @@ use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -160,13 +158,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $title = trans('navigation.choose_room_for').' '.$guest->fullName;
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
-            ->whereNotIn('id', function (Builder $query) use ($dateStart, $dateEnd) {
-                $query->select('room_id')->from('reservations')
-                    ->where('date_start', '<', $dateEnd)
-                    ->where('date_end', '>', $dateStart);
-            })
-            ->where('capacity', '>=', $people)
-            ->orderBy('capacity')
+            ->freeRoomsForReservation($dateStart, $dateEnd, $people)
             ->paginate($this->getItemsPerPage());
 
         if ($dataset->isEmpty()) {
