@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Http\Interfaces\ManageTableInterface;
-// TODO: Change request
 use App\Http\Requests\GuestRequest;
+// TODO: Change request
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
@@ -13,6 +12,7 @@ use App\Models\Room;
 use App\Services\GuestTableService;
 use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Log;
@@ -224,7 +224,7 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        $reservation = new Reservation;
+        $reservation = new Reservation();
         $reservation->guest_id = $guest->id;
         $reservation->room_id = $room->id;
         $reservation->date_start = $dateStart;
