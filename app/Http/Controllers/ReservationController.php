@@ -125,16 +125,12 @@ class ReservationController extends Controller implements ManageTableInterface
      */
     public function chooseFreeRoom(RoomTableService $roomTableService, $guestId)
     {
-        if (!Session::has(['date_start', 'date_end', 'people'])) {
-            Log::error('Missing one of Session keys: date_start, date_end, people');
-
+        if(! $this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
             ]);
         }
-
-        Session::reflash();
 
         try {
             $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
@@ -179,23 +175,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
     public function add($roomId, $guestId)
     {
-        if (!Session::has(['date_start', 'date_end', 'people'])) {
-            Log::error('Missing one of Session keys: date_start, date_end, people');
-
-            return $this->returnBack([
-                'message'     => trans('general.object_not_found'),
-                'alert-class' => 'alert-danger',
-            ]);
-        }
-
-        Session::reflash();
-
-        try {
-            $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
-        } catch (ModelNotFoundException $e) {
-            // TODO: logger helper
-            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
-
+        if(! $this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -210,6 +190,8 @@ class ReservationController extends Controller implements ManageTableInterface
             $guest = Guest::select('id')->findOrFail($guestId);
             $room = Room::select('id')->findOrFail($roomId);
         } catch (ModelNotFoundException $e) {
+            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
+
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -431,5 +413,17 @@ class ReservationController extends Controller implements ManageTableInterface
                 ],
             ],
         ];
+    }
+
+    private function isReservationDataInSessionCorrect()
+    {
+        if (!Session::has(['date_start', 'date_end', 'people'])) {
+            Log::error('Missing one of Session keys: date_start, date_end, people');
+
+            return false;
+        }
+
+        Session::reflash();
+        return true;
     }
 }
