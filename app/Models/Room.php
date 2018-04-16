@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Models\Room.
@@ -39,7 +40,7 @@ class Room extends Model
      */
     public function scopeFreeRoomsForReservation($query, $dateStart, $dateEnd, $people)
     {
-        return $query->whereNotIn('id', function ($query) use ($dateStart, $dateEnd) {
+        return $query->whereNotIn('id', function (Builder $query) use ($dateStart, $dateEnd) {
             $query->select('room_id')->from('reservations')
                 ->where('date_start', '<', $dateEnd)
                 ->where('date_end', '>', $dateStart);
