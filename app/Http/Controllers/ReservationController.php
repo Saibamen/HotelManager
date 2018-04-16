@@ -125,7 +125,7 @@ class ReservationController extends Controller implements ManageTableInterface
      */
     public function chooseFreeRoom(RoomTableService $roomTableService, $guestId)
     {
-        if(! $this->isReservationDataInSessionCorrect()) {
+        if (!$this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -175,7 +175,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
     public function add($roomId, $guestId)
     {
-        if(! $this->isReservationDataInSessionCorrect()) {
+        if (!$this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
                 'alert-class' => 'alert-danger',
@@ -424,6 +424,7 @@ class ReservationController extends Controller implements ManageTableInterface
         }
 
         Session::reflash();
+
         return true;
     }
 }
