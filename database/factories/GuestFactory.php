@@ -28,8 +28,8 @@ $factory->state(App\Models\Guest::class, 'polish', function () {
     ];
 });
 
-$factory->state(App\Models\Guest::class, 'german', function () {
-    $faker = \Faker\Factory::create('de_DE');
+$factory->state(App\Models\Guest::class, 'belarus', function () {
+    $faker = \Faker\Factory::create('bg_BG');
 
     return [
         'first_name' => $faker->firstName(),
@@ -56,8 +56,8 @@ $factory->state(App\Models\Guest::class, 'french', function () {
     ];
 });
 
-$factory->state(App\Models\Guest::class, 'dutch', function () {
-    $faker = \Faker\Factory::create('nl_NL');
+$factory->state(App\Models\Guest::class, 'czech', function () {
+    $faker = \Faker\Factory::create('cs_CZ');
 
     return [
         'first_name' => $faker->firstName(),
