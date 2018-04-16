@@ -43,7 +43,7 @@ class Room extends Model
             $query->select('room_id')->from('reservations')
                 ->where('date_start', '<', $dateEnd)
                 ->where('date_end', '>', $dateStart);
-            })
+        })
             ->where('capacity', '>=', $people)
             ->orderBy('capacity');
     }
