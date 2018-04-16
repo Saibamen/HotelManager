@@ -8,7 +8,6 @@ return [
     'comment'               => 'Komentarz',
     'date'                  => 'Data',
     'delete'                => 'Usuń',
-    'deleted'               => 'Usunięto pomyślnie',
     'edit'                  => 'Edytuj',
     'language'              => 'Język',
     'mail_action_trouble_1' => 'Jeśli masz problem z kliknięciem na przycisk',

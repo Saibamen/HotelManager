@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reservation/search_free_rooms/{guestId}', 'ReservationController@searchFreeRooms')->name('reservation.search_free_rooms')->where(['guestId' => '[0-9]+']);
     Route::post('reservation/search_free_rooms/{guestId}', 'ReservationController@postSearchFreeRooms')->name('reservation.post_search_free_rooms')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/choose_room/{guestId}', 'ReservationController@chooseFreeRoom')->name('reservation.choose_free_room')->where(['guestId' => '[0-9]+']);
+    Route::get('reservation/add/{roomId}/{guestId}', 'ReservationController@add')->name('reservation.add')->where(['roomId' => '[0-9]+', 'guestId' => '[0-9]+']);
 
     Route::get('user', 'UserController@index')->name('user.index');
     Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');

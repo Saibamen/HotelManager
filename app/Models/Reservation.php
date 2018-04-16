@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $date_start
  * @property string $date_end
  * @property int $people
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read \App\Models\Guest $guest
  * @property-read \App\Models\Room $room
  *
@@ -33,6 +34,16 @@ class Reservation extends Model
     protected $fillable = [
         'room_id', 'guest_id', 'date_start', 'date_end', 'people',
     ];
+
+    public function setDateStartAttribute($value)
+    {
+        $this->attributes['date_start'] = Carbon::parse($value);
+    }
+
+    public function setDateEndAttribute($value)
+    {
+        $this->attributes['date_end'] = Carbon::parse($value);
+    }
 
     public function room()
     {

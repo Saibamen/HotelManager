@@ -40,7 +40,9 @@
                                                     {{ Html::link(route($routeName.'.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) }}
                                                     {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-name' => $data->name ?: $deleteMessage . ' ' . $data->id]) }}
                                                 @else
-                                                    {{ Html::link(route($routeChooseName, $data->id), trans('general.select'), ['class' => 'btn btn-sm btn-primary']) }}
+                                                    @php($routeParams = [$data->id])
+                                                    @php(!isset($secondRouteChooseParam) ?: array_push($routeParams, $secondRouteChooseParam))
+                                                    {{ Html::link(route($routeChooseName, $routeParams), trans('general.select'), ['class' => 'btn btn-sm btn-primary']) }}
                                                 @endif
                                             </td>
                                         </tr>

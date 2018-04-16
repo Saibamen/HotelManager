@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Interfaces\ManageTableInterface;
 // TODO: Change request
 use App\Http\Requests\GuestRequest;
@@ -153,6 +154,9 @@ class ReservationController extends Controller implements ManageTableInterface
         $dateEnd = Session::get('date_end');
         $people = Session::get('people');
 
+        $dateStart = Carbon::parse($dateStart);
+        $dateEnd = Carbon::parse($dateEnd);
+
         $title = trans('navigation.choose_room_for').' '.$guest->fullName;
 
         $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
@@ -170,14 +174,68 @@ class ReservationController extends Controller implements ManageTableInterface
         }
 
         $viewData = [
-            'columns'         => $roomTableService->getColumns(),
-            'dataset'         => $dataset,
-            'routeName'       => $roomTableService->getRouteName(),
-            'title'           => $title,
-            'routeChooseName' => $this->reservationTableService->getRouteName().'.search_free_rooms',
+            'columns'                => $roomTableService->getColumns(),
+            'dataset'                => $dataset,
+            'routeName'              => $roomTableService->getRouteName(),
+            'title'                  => $title,
+            'routeChooseName'        => $this->reservationTableService->getRouteName().'.add',
+            'secondRouteChooseParam' => $guest->id,
         ];
 
         return view('list', $viewData);
+    }
+
+    public function add($roomId, $guestId)
+    {
+        if (!Session::has(['date_start', 'date_end', 'people'])) {
+            Log::error('Missing one of Session keys: date_start, date_end, people');
+
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        Session::reflash();
+
+        try {
+            $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
+        } catch (ModelNotFoundException $e) {
+            // TODO: logger helper
+            Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
+
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $dateStart = Session::get('date_start');
+        $dateEnd = Session::get('date_end');
+        $people = Session::get('people');
+
+        try {
+            $guest = Guest::select('id')->findOrFail($guestId);
+            $room = Room::select('id')->findOrFail($roomId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $reservation = new Reservation;
+        $reservation->guest_id = $guest->id;
+        $reservation->room_id = $room->id;
+        $reservation->date_start = $dateStart;
+        $reservation->date_end = $dateEnd;
+        $reservation->people = $people;
+
+        $reservation->save();
+
+        $this->addFlashMessage(trans('general.saved'), 'alert-success');
+
+        return redirect()->route($this->reservationTableService->getRouteName().'.index');
     }
 
     // TODO
@@ -249,7 +307,6 @@ class ReservationController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
-    // TODO
     public function getSearchFields()
     {
         return [
