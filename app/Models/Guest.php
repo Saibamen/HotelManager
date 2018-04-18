@@ -15,9 +15,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $place
  * @property string $PESEL
  * @property string|null $contact
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property-read string $full_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Room[] $rooms
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereContact($value)
@@ -45,5 +47,15 @@ class Guest extends Model
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\Models\Reservation');
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany('App\Models\Room', 'reservations');
     }
 }

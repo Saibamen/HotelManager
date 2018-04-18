@@ -14,9 +14,12 @@ use Illuminate\Database\Query\Builder;
  * @property int $capacity
  * @property float $price
  * @property string|null $comment
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Guest[] $guests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room freeRoomsForReservation($dateStart, $dateEnd, $people)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereComment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCreatedAt($value)
@@ -47,5 +50,15 @@ class Room extends Model
         })
             ->where('capacity', '>=', $people)
             ->orderBy('capacity');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\Models\Reservation');
+    }
+
+    public function guests()
+    {
+        return $this->belongsToMany('App\Models\Guest', 'reservations');
     }
 }

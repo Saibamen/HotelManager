@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $date_start
  * @property string $date_end
  * @property int $people
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property-read \App\Models\Guest $guest
  * @property-read \App\Models\Room $room
  *
@@ -43,6 +43,16 @@ class Reservation extends Model
     public function setDateEndAttribute($value)
     {
         $this->attributes['date_end'] = Carbon::parse($value);
+    }
+
+    public function getDateStartAttribute($value)
+    {
+        return Carbon::parse($value)->format('d.m.Y');
+    }
+
+    public function getDateEndAttribute($value)
+    {
+        return Carbon::parse($value)->format('d.m.Y');
     }
 
     public function room()

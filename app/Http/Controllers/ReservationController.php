@@ -27,7 +27,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
     public function index()
     {
-        $title = trans('general.reservations');
+        $title = trans('navigation.all_reservations');
 
         $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
             ->with('guest:id,first_name,last_name')
@@ -116,8 +116,6 @@ class ReservationController extends Controller implements ManageTableInterface
     }
 
     /**
-     * @todo
-     *
      * @param RoomTableService $roomTableService
      * @param int              $guestId
      *
