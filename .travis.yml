@@ -44,6 +44,9 @@ install:
   - travis_retry composer update --no-interaction --no-suggest
 
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - php artisan key:generate
   - php artisan migrate --env=testing --no-interaction -vvv --database=$DB_CONNECTION
   - php artisan db:seed --env=testing --no-interaction -vvv --database=$DB_CONNECTION
@@ -55,3 +58,4 @@ after_script:
   - php artisan migrate:rollback --env=testing --no-interaction -vvv --database=$DB_CONNECTION
   - php vendor/bin/codacycoverage clover
   - vendor/bin/test-reporter
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
