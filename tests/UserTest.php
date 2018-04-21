@@ -130,7 +130,8 @@ class UserTest extends BrowserKitTestCase
 
     public function testDelete()
     {
-        $object = factory(User::class)->create();
+        $objects = factory(User::class, 2)->create();
+        $object = $objects[1];
 
         $this->seeInDatabase('users', [
             'id' => $object->id,
