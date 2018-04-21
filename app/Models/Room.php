@@ -36,6 +36,11 @@ class Room extends Model
         'number', 'floor', 'capacity', 'price', 'comment',
     ];
 
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = round($value, 2);
+    }
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      *

@@ -7,7 +7,7 @@ $factory->define(App\Models\Room::class, function (Faker $faker) {
         'number'   => $faker->numerify(),
         'floor'    => $faker->numberBetween(-2, 50),
         'capacity' => $faker->numberBetween(1, 25),
-        'price'    => $faker->numerify(),
+        'price'    => $faker->randomFloat(),
         'comment'  => 'test comment',
     ];
 });
