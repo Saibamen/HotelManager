@@ -14,8 +14,8 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'number'   => 'required',
-            'floor'    => 'required|numeric',
+            'number'   => 'required|max:5',
+            'floor'    => 'required|numeric|min:-999|max:999',
             'capacity' => 'required|numeric|min:1|digits_between:1,2',
             'price'    => 'required|numeric|min:0',
             'comment'  => 'nullable',

@@ -70,6 +70,34 @@ class RoomTest extends BrowserKitTestCase
             ->seePageIs('room/add');
     }
 
+    public function testAddNewObject()
+    {
+        $object = factory(Room::class)->make();
+
+        $this->visit('room/add')
+            ->dontSee('Zaloguj')
+            ->see('Dodaj pokój')
+            ->type($object->number, 'number')
+            ->type($object->floor, 'floor')
+            ->type($object->capacity, 'capacity')
+            ->type($object->price, 'price')
+            ->type("test comment", 'comment')
+            ->press('Wyślij');
+
+        $this->see($object->number)
+            ->see($object->floor)
+            ->see($object->capacity)
+            ->see($object->price)
+            ->see("test comment")
+            ->dontSee('Brak pokoi w bazie danych')
+            ->see("Zapisano pomyślnie")
+            ->seePageIs('room');
+
+        $this->seeInDatabase('rooms', [
+            'number' => $object->number,
+        ]);
+    }
+
     public function testTryEditInvalidId()
     {
         $this->visit('room')

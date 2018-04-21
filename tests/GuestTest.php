@@ -73,6 +73,39 @@ class GuestTest extends BrowserKitTestCase
             ->seePageIs('guest/add');
     }
 
+    public function testAddNewObject()
+    {
+        $object = factory(Guest::class)->make();
+
+        $this->visit('guest/add')
+            ->dontSee('Zaloguj')
+            ->see('Dodaj gościa')
+            ->type($object->first_name, 'first_name')
+            ->type($object->last_name, 'last_name')
+            ->type($object->address, 'address')
+            ->type($object->zip_code, 'zip_code')
+            ->type($object->place, 'place')
+            ->type($object->PESEL, 'PESEL')
+            ->type("test contact", 'contact')
+            ->press('Wyślij');
+
+        $this->see($object->first_name)
+            ->see($object->last_name)
+            ->see($object->address)
+            ->see($object->zip_code)
+            ->see($object->place)
+            ->see($object->PESEL)
+            ->see("test contact")
+            ->dontSee('Brak gości w bazie danych')
+            ->see("Zapisano pomyślnie")
+            ->seePageIs('guest');
+
+        $this->seeInDatabase('guests', [
+            'first_name' => $object->first_name,
+            'last_name' => $object->last_name,
+        ]);
+    }
+
     public function testTryEditInvalidId()
     {
         $this->visit('guest')
