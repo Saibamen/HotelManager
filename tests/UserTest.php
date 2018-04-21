@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\Reservation;
-use App\Models\Room;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class RoomTest extends BrowserKitTestCase
+class UserTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
@@ -13,50 +12,45 @@ class RoomTest extends BrowserKitTestCase
         parent::setUp();
         Session::start();
 
-        $user = factory(App\Models\User::class)->create();
+        $user = factory(User::class)->make();
         $this->actingAs($user);
     }
 
     public function testEmptyIndex()
     {
-        $this->visit('room')
+        $this->visit('user')
             ->dontSee('Zaloguj')
-            ->see('Pokoje')
-            ->dontSee('Numer')
-            ->dontSee('Piętro')
-            ->dontSee('Pojemność')
-            ->dontSee('Cena')
-            ->dontSee('Komentarz')
+            ->see('Użytkownicy')
+            ->dontSee('Nazwa')
+            ->dontSee('Adres e-mail')
+            ->dontSee('Utworzono')
             ->dontSee('Akcje')
             ->dontSee('Edytuj')
             ->dontSee('Usuń')
-            ->see('Brak pokoi w bazie danych')
+            ->see('Brak użytkowników w bazie danych')
             ->see('Dodaj');
     }
 
     public function testFilledIndex()
     {
-        factory(Room::class, 3)->create();
+        factory(User::class, 3)->create();
 
-        $this->visit('room')
+        $this->visit('user')
             ->dontSee('Zaloguj')
-            ->see('Pokoje')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
+            ->see('Użytkownicy')
+            ->see('Nazwa')
+            ->see('Adres e-mail')
+            ->see('Utworzono')
             ->see('Akcje')
             ->see('Edytuj')
             ->see('Usuń')
-            ->see('test comment')
-            ->dontSee('Brak pokoi w bazie danych')
+            ->dontSee('Brak użytkowników w bazie danych')
             ->see('Dodaj');
     }
 
-    public function testAddEmptyForm()
+    /*public function testAddEmptyForm()
     {
-        $this->visit('room/add')
+        $this->visit('user/add')
             ->dontSee('Zaloguj')
             ->see('Dodaj pokój')
             ->see('Numer')
@@ -69,13 +63,13 @@ class RoomTest extends BrowserKitTestCase
 
         $this->see('jest wymagane')
             ->seePageIs('room/add');
-    }
+    }*/
 
-    public function testAddNewObject()
+    /*public function testAddNewObject()
     {
-        $object = factory(Room::class)->make();
+        $object = factory(User::class)->make();
 
-        $this->visit('room/add')
+        $this->visit('user/add')
             ->dontSee('Zaloguj')
             ->see('Dodaj pokój')
             ->type($object->number, 'number')
@@ -97,25 +91,25 @@ class RoomTest extends BrowserKitTestCase
         $this->seeInDatabase('rooms', [
             'number' => $object->number,
         ]);
-    }
+    }*/
 
-    public function testTryEditInvalidId()
+    /*public function testTryEditInvalidId()
     {
-        $this->visit('room')
+        $this->visit('user')
             ->see('Pokoje')
-            ->visit('room/edit/10000');
+            ->visit('user/edit/10000');
 
         $this->see('Nie znaleziono obiektu')
             ->seePageIs('room');
-    }
+    }*/
 
-    public function testEditValidId()
+    /*public function testEditValidId()
     {
         $room = factory(Room::class)->create();
 
-        $this->visit('room')
+        $this->visit('user')
             ->see('Pokoje')
-            ->visit('room/edit/'.$room->id);
+            ->visit('user/edit/'.$room->id);
 
         $this->see('Edytuj pokój')
             ->see('Numer')
@@ -130,70 +124,35 @@ class RoomTest extends BrowserKitTestCase
             ->press('Wyślij');
 
         $this->see('Zapisano pomyślnie')
-            ->seePageIs('room')
+            ->seePageIs('user')
             ->see('Edycja komentarza');
-    }
+    }*/
 
     public function testDelete()
     {
-        $object = factory(Room::class)->create();
+        $object = factory(User::class)->create();
 
-        $this->seeInDatabase('rooms', [
+        $this->seeInDatabase('users', [
             'id' => $object->id,
         ]);
 
-        $response = $this->call('DELETE', 'room/delete/'.$object->id, [
+        $response = $this->call('DELETE', 'user/delete/'.$object->id, [
             '_token' => csrf_token(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->notSeeInDatabase('rooms', [
+        $this->notSeeInDatabase('users', [
             'id' => $object->id,
         ]);
     }
 
-    public function testDeleteWithReservation()
+    /*public function testTryStoreInvalidId()
     {
-        $reservation = factory(Reservation::class)->create();
-
-        $this->seeInDatabase('reservations', [
-            'id' => $reservation->id,
-        ]);
-
-        $this->seeInDatabase('rooms', [
-            'id' => $reservation->room->id,
-        ]);
-
-        $this->seeInDatabase('guests', [
-            'id' => $reservation->guest->id,
-        ]);
-
-        $response = $this->call('DELETE', 'room/delete/'.$reservation->room->id, [
-            '_token' => csrf_token(),
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        $this->notSeeInDatabase('rooms', [
-            'id' => $reservation->room->id,
-        ]);
-
-        $this->notSeeInDatabase('reservations', [
-            'id' => $reservation->id,
-        ]);
-
-        $this->seeInDatabase('guests', [
-            'id' => $reservation->guest->id,
-        ]);
-    }
-
-    public function testTryStoreInvalidId()
-    {
-        $this->makeRequest('POST', 'room/edit/1000', [
+        $this->makeRequest('POST', 'user/edit/1000', [
             '_token' => csrf_token(),
         ]);
 
         $this->notSeeInDatabase('rooms', []);
-    }
+    }*/
 }

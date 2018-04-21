@@ -163,20 +163,20 @@ class GuestTest extends BrowserKitTestCase
 
     public function testDelete()
     {
-        $guest = factory(Guest::class)->create();
+        $object = factory(Guest::class)->create();
 
         $this->seeInDatabase('guests', [
-            'id' => $guest->id,
+            'id' => $object->id,
         ]);
 
-        $response = $this->call('DELETE', 'guest/delete/'.$guest->id, [
+        $response = $this->call('DELETE', 'guest/delete/'.$object->id, [
             '_token' => csrf_token(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->notSeeInDatabase('guests', [
-            'id' => $guest->id,
+            'id' => $object->id,
         ]);
     }
 
