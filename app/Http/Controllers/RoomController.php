@@ -70,6 +70,7 @@ class RoomController extends Controller implements ManageTableInterface
             $object = Room::findOrFail($objectId);
         } catch (ModelNotFoundException $e) {
             $data = ['class' => 'alert-danger', 'message' => trans('general.object_not_found')];
+
             return response()->json($data);
         }
 
@@ -77,6 +78,7 @@ class RoomController extends Controller implements ManageTableInterface
         $object->delete();
 
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
+
         return response()->json($data);
     }
 

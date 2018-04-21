@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Reservation;
 use App\Models\Guest;
+use App\Models\Reservation;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class GuestTest extends BrowserKitTestCase

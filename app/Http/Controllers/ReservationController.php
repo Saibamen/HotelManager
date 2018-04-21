@@ -242,12 +242,14 @@ class ReservationController extends Controller implements ManageTableInterface
             $object = Reservation::findOrFail($objectId);
         } catch (ModelNotFoundException $e) {
             $data = ['class' => 'alert-danger', 'message' => trans('general.object_not_found')];
+
             return response()->json($data);
         }
 
         $object->delete();
 
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
+
         return response()->json($data);
     }
 

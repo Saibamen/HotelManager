@@ -71,6 +71,7 @@ class GuestController extends Controller implements ManageTableInterface
             $object = Guest::findOrFail($objectId);
         } catch (ModelNotFoundException $e) {
             $data = ['class' => 'alert-danger', 'message' => trans('general.object_not_found')];
+
             return response()->json($data);
         }
 
@@ -78,6 +79,7 @@ class GuestController extends Controller implements ManageTableInterface
         $object->delete();
 
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
+
         return response()->json($data);
     }
 
