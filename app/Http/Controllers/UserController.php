@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\UserTableService;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -30,7 +31,7 @@ class UserController extends Controller
             'dataset'       => $dataset,
             'routeName'     => $this->userTableService->getRouteName(),
             'title'         => $title,
-            'deleteMessage' => mb_strtolower(trans('general.user')).' '.mb_strtolower(trans('general.number')),
+            'deleteMessage' => mb_strtolower(trans('general.user')),
         ];
 
         return view('list', $viewData);
@@ -42,7 +43,7 @@ class UserController extends Controller
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         // TODO: isAdmin()
-        if (!$object || $object->id === 1 /*|| $object->isAdmin()*/) {
+        if (!$object || $object->id === 1 || $object->id = Auth::user()->id /*|| $object->isAdmin()*/) {
             $data = ['class' => 'alert-danger', 'message' => trans('general.cannot_delete_admins')];
         } else {
             User::destroy($objectId);
