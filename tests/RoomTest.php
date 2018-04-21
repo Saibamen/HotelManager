@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -120,6 +121,41 @@ class RoomTest extends BrowserKitTestCase
 
         $this->notSeeInDatabase('rooms', [
             'id' => $room->id,
+        ]);
+    }
+
+    public function testDeleteWithReservation()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->seeInDatabase('reservations', [
+            'id' => $reservation->id,
+        ]);
+
+        $this->seeInDatabase('rooms', [
+            'id' => $reservation->room->id,
+        ]);
+
+        $this->seeInDatabase('guests', [
+            'id' => $reservation->guest->id,
+        ]);
+
+        $response = $this->call('DELETE', 'room/delete/'.$reservation->room->id, [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->notSeeInDatabase('rooms', [
+            'id' => $reservation->room->id,
+        ]);
+
+        $this->notSeeInDatabase('reservations', [
+            'id' => $reservation->id,
+        ]);
+
+        $this->seeInDatabase('guests', [
+            'id' => $reservation->guest->id,
         ]);
     }
 

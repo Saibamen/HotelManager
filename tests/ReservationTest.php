@@ -104,12 +104,20 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Edycja komentarza');
     }*/
 
-    /*public function testDelete()
+    public function testDelete()
     {
         $reservation = factory(Reservation::class)->create();
 
         $this->seeInDatabase('reservations', [
             'id' => $reservation->id,
+        ]);
+
+        $this->seeInDatabase('rooms', [
+            'id' => $reservation->room->id,
+        ]);
+
+        $this->seeInDatabase('guests', [
+            'id' => $reservation->guest->id,
         ]);
 
         $response = $this->call('DELETE', 'reservation/delete/'.$reservation->id, [
@@ -121,7 +129,15 @@ class ReservationTest extends BrowserKitTestCase
         $this->notSeeInDatabase('reservations', [
             'id' => $reservation->id,
         ]);
-    }*/
+
+        $this->seeInDatabase('rooms', [
+            'id' => $reservation->room->id,
+        ]);
+
+        $this->seeInDatabase('guests', [
+            'id' => $reservation->guest->id,
+        ]);
+    }
 
     /*public function testTryStoreInvalidId()
     {

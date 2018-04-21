@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Reservation;
 use App\Models\Guest;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -97,6 +98,8 @@ class GuestTest extends BrowserKitTestCase
 
     /**
      * @dataProvider multilangualGuestProvider
+     *
+     * @param Guest $guest
      */
     public function testEditValidId($guest)
     {
@@ -141,6 +144,41 @@ class GuestTest extends BrowserKitTestCase
 
         $this->notSeeInDatabase('guests', [
             'id' => $guest->id,
+        ]);
+    }
+
+    public function testDeleteWithReservation()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->seeInDatabase('reservations', [
+            'id' => $reservation->id,
+        ]);
+
+        $this->seeInDatabase('rooms', [
+            'id' => $reservation->room->id,
+        ]);
+
+        $this->seeInDatabase('guests', [
+            'id' => $reservation->guest->id,
+        ]);
+
+        $response = $this->call('DELETE', 'guest/delete/'.$reservation->guest->id, [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->notSeeInDatabase('guests', [
+            'id' => $reservation->guest->id,
+        ]);
+
+        $this->notSeeInDatabase('reservations', [
+            'id' => $reservation->id,
+        ]);
+
+        $this->seeInDatabase('rooms', [
+            'id' => $reservation->room->id,
         ]);
     }
 
