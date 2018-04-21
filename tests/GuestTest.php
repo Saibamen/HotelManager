@@ -86,7 +86,7 @@ class GuestTest extends BrowserKitTestCase
             ->type($object->zip_code, 'zip_code')
             ->type($object->place, 'place')
             ->type($object->PESEL, 'PESEL')
-            ->type("test contact", 'contact')
+            ->type('test contact', 'contact')
             ->press('Wyślij');
 
         $this->see($object->first_name)
@@ -95,14 +95,14 @@ class GuestTest extends BrowserKitTestCase
             ->see($object->zip_code)
             ->see($object->place)
             ->see($object->PESEL)
-            ->see("test contact")
+            ->see('test contact')
             ->dontSee('Brak gości w bazie danych')
-            ->see("Zapisano pomyślnie")
+            ->see('Zapisano pomyślnie')
             ->seePageIs('guest');
 
         $this->seeInDatabase('guests', [
             'first_name' => $object->first_name,
-            'last_name' => $object->last_name,
+            'last_name'  => $object->last_name,
         ]);
     }
 

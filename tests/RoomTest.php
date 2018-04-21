@@ -81,16 +81,16 @@ class RoomTest extends BrowserKitTestCase
             ->type($object->floor, 'floor')
             ->type($object->capacity, 'capacity')
             ->type($object->price, 'price')
-            ->type("test comment", 'comment')
+            ->type('test comment', 'comment')
             ->press('Wyślij');
 
         $this->see($object->number)
             ->see($object->floor)
             ->see($object->capacity)
             ->see($object->price)
-            ->see("test comment")
+            ->see('test comment')
             ->dontSee('Brak pokoi w bazie danych')
-            ->see("Zapisano pomyślnie")
+            ->see('Zapisano pomyślnie')
             ->seePageIs('room');
 
         $this->seeInDatabase('rooms', [
