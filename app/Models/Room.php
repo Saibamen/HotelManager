@@ -38,6 +38,7 @@ class Room extends Model
 
     public function setPriceAttribute($value)
     {
+        $value = str_replace(',', '.', $value);
         $this->attributes['price'] = round($value, 2);
     }
 

@@ -98,11 +98,11 @@ return [
     |
     */
 
-    /*'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    'custom' => [
+        'price' => [
+            'regex' => ':Attribute musi być liczbą dodatnią.',
         ],
-    ],*/
+    ],
 
     /*
     |--------------------------------------------------------------------------

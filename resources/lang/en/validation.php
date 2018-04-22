@@ -109,11 +109,11 @@ return [
     |
     */
 
-    /*'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    'custom' => [
+        'price' => [
+            'regex' => 'The :attribute must be a positive number.',
         ],
-    ],*/
+    ],
 
     /*
     |--------------------------------------------------------------------------

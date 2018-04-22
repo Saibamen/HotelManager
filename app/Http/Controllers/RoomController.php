@@ -157,11 +157,8 @@ class RoomController extends Controller implements ManageTableInterface
                 'value' => function (Room $data) {
                     return $data->price;
                 },
-                'type'     => 'number',
                 'optional' => [
                     'required'    => 'required',
-                    'min'         => '0',
-                    'step'        => '0.01',
                     'placeholder' => '0.00',
                 ],
             ],

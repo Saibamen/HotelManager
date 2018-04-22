@@ -17,7 +17,7 @@ class RoomRequest extends FormRequest
             'number'   => 'required|max:5',
             'floor'    => 'required|numeric|min:-999|max:999',
             'capacity' => 'required|numeric|min:1|digits_between:1,2',
-            'price'    => 'required|numeric|min:0',
+            'price'    => 'required|regex:[^\d+[.,]?\d*$]',
             'comment'  => 'nullable',
         ];
     }
