@@ -6,7 +6,7 @@
                 <h4 class="modal-title" id="myModalLabel">@lang('general.delete')</h4>
             </div>
             <div class="modal-body">
-                @lang('general.really_delete') <strong></strong>?
+                @lang('general.really_delete') <strong></strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">@lang('general.no')</button>

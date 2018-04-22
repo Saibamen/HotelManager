@@ -19,7 +19,7 @@ return [
     'no'                    => 'Nie',
     'object_not_found'      => 'Nie znaleziono obiektu',
     'price'                 => 'Cena',
-    'really_delete'         => 'Czy na pewno chcesz usunąć',
+    'really_delete'         => 'Czy na pewno chcesz to usunąć?',
     'saved'                 => 'Zapisano pomyślnie',
     'select'                => 'Wybierz',
     'send'                  => 'Wyślij',
@@ -51,6 +51,8 @@ return [
     'users' => 'Użytkownicy',
 
     'administration_panel' => 'Panel administracyjny',
+
+    'delete_associated_reservations' => 'Usuniesz również wszystkie powiązane rezerwacje',
 
     'no_rooms_in_database'        => 'Brak pokoi w bazie danych',
     'no_guests_in_database'       => 'Brak gości w bazie danych',

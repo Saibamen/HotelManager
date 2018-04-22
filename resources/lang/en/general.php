@@ -19,7 +19,7 @@ return [
     'no'                    => 'No',
     'object_not_found'      => "Can't find object",
     'price'                 => 'Price',
-    'really_delete'         => 'Do you really want to delete',
+    'really_delete'         => 'Do you really want to delete this?',
     'saved'                 => 'Saved successfully',
     'select'                => 'Select',
     'send'                  => 'Send',
@@ -51,6 +51,8 @@ return [
     'users' => 'Users',
 
     'administration_panel' => 'Administration panel',
+
+    'delete_associated_reservations' => 'You will also delete all associated reservations',
 
     'no_rooms_in_database'        => 'No rooms in database',
     'no_guests_in_database'       => 'No guests in database',

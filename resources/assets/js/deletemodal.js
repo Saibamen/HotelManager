@@ -5,13 +5,14 @@ $(document).ready(function() {
         row = $(modal.relatedTarget).closest("tr");
         row.addClass("danger");
         window.deleteId = $(modal.relatedTarget).data("id");
-        var name = $(modal.relatedTarget).data("name");
 
-        $(".modal-body strong:last").text(name);
+        var message = $(modal.relatedTarget).data("message");
+        $(".modal-body strong:last").text(message);
     });
 
     $("#delete-modal").on("hide.bs.modal", function() {
         row.removeClass("danger");
+        $(".modal-body strong:last").empty();
     });
 
     $("#delete-confirm").click(function() {

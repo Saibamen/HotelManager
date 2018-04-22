@@ -33,8 +33,7 @@ class GuestController extends Controller implements ManageTableInterface
             'dataset'       => $dataset,
             'routeName'     => $this->guestTableService->getRouteName(),
             'title'         => $title,
-            // TODO
-            'deleteMessage' => mb_strtolower(trans('general.guest')).' '.mb_strtolower(trans('general.number')),
+            'deleteMessage' => trans('general.delete_associated_reservations'),
         ];
 
         return view('list', $viewData);

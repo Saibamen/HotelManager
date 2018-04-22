@@ -43,8 +43,6 @@ class ReservationController extends Controller implements ManageTableInterface
             'dataset'       => $dataset,
             'routeName'     => $this->reservationTableService->getRouteName(),
             'title'         => $title,
-            // TODO
-            'deleteMessage' => mb_strtolower(trans('general.reservation')).' '.mb_strtolower(trans('general.number')),
         ];
 
         return view('list', $viewData);

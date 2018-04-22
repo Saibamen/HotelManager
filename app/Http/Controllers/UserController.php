@@ -31,7 +31,6 @@ class UserController extends Controller
             'dataset'       => $dataset,
             'routeName'     => $this->userTableService->getRouteName(),
             'title'         => $title,
-            'deleteMessage' => mb_strtolower(trans('general.user')),
         ];
 
         return view('list', $viewData);

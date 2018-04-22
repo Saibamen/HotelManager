@@ -33,7 +33,7 @@ class RoomController extends Controller implements ManageTableInterface
             'dataset'       => $dataset,
             'routeName'     => $this->roomTableService->getRouteName(),
             'title'         => $title,
-            'deleteMessage' => mb_strtolower(trans('general.room')).' '.mb_strtolower(trans('general.number')),
+            'deleteMessage' => trans('general.delete_associated_reservations'),
         ];
 
         return view('list', $viewData);
