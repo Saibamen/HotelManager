@@ -3,10 +3,15 @@ $(document).ready(function() {
 
     $("#delete-modal").on("show.bs.modal", function(modal) {
         row = $(modal.relatedTarget).closest("tr");
+        row.addClass("danger");
         window.deleteId = $(modal.relatedTarget).data("id");
         var name = $(modal.relatedTarget).data("name");
 
         $(".modal-body strong:last").text(name);
+    });
+
+    $("#delete-modal").on("hide.bs.modal", function() {
+        row.removeClass("danger");
     });
 
     $("#delete-confirm").click(function() {
