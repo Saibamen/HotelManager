@@ -43,9 +43,9 @@ class UserController extends Controller
 
         // TODO: isAdmin()
         if (!$object || $object->id === 1 || $object->id = Auth::user()->id /*|| $object->isAdmin()*/) {
-            $data = ['class' => 'alert-danger', 'message' => trans('general.cannot_delete_admins')];
+            $data = ['class' => 'alert-danger', 'message' => trans('general.cannot_delete_object')];
         } else {
-            User::destroy($objectId);
+            $object->delete();
         }
 
         return response()->json($data);

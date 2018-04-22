@@ -18,6 +18,7 @@ return [
     'number'                => 'Numer',
     'no'                    => 'Nie',
     'object_not_found'      => 'Nie znaleziono obiektu',
+    'cannot_delete_object'  => 'Nie można usunąć tego obiektu',
     'price'                 => 'Cena',
     'really_delete'         => 'Czy na pewno chcesz to usunąć?',
     'saved'                 => 'Zapisano pomyślnie',
@@ -58,7 +59,6 @@ return [
     'no_guests_in_database'       => 'Brak gości w bazie danych',
     'no_reservations_in_database' => 'Brak rezerwacji w bazie danych',
     'no_users_in_database'        => 'Brak użytkowników w bazie danych',
-    'cannot_delete_admins'        => 'Nie można usuwać administratorów',
 
     'created' => 'Utworzono',
     'updated' => 'Zaktualizowano',

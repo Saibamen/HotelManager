@@ -17,7 +17,8 @@ return [
     'name'                  => 'Name',
     'number'                => 'Number',
     'no'                    => 'No',
-    'object_not_found'      => "Can't find object",
+    'object_not_found'      => 'Can not find object',
+    'cannot_delete_object'  => 'Can not delete this object',
     'price'                 => 'Price',
     'really_delete'         => 'Do you really want to delete this?',
     'saved'                 => 'Saved successfully',
@@ -58,7 +59,6 @@ return [
     'no_guests_in_database'       => 'No guests in database',
     'no_reservations_in_database' => 'No reservations in database',
     'no_users_in_database'        => 'No users in database',
-    'cannot_delete_admins'        => 'Administrators can not be deleted',
 
     'created' => 'Created',
     'updated' => 'Updated',

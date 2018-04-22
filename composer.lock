@@ -3099,16 +3099,16 @@
         },
         {
             "name": "gitonomy/gitlib",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gitonomy/gitlib.git",
-                "reference": "1c2b0605115786613cb517798046c8ab57c17097"
+                "reference": "932a960221ae3484a3e82553b3be478e56beb68d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gitonomy/gitlib/zipball/1c2b0605115786613cb517798046c8ab57c17097",
-                "reference": "1c2b0605115786613cb517798046c8ab57c17097",
+                "url": "https://api.github.com/repos/gitonomy/gitlib/zipball/932a960221ae3484a3e82553b3be478e56beb68d",
+                "reference": "932a960221ae3484a3e82553b3be478e56beb68d",
                 "shasum": ""
             },
             "require": {
@@ -3151,7 +3151,7 @@
             ],
             "description": "Library for accessing git",
             "homepage": "http://gitonomy.com",
-            "time": "2018-01-10T11:34:47+00:00"
+            "time": "2018-04-22T19:55:36+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
