@@ -53,8 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Route::post('user/add', 'UserController@store')->name('user.postadd');
     Route::get('user/edit/{id}', 'UserController@showAddEditForm')->name('user.editform')->where(['id' => '[0-9]+']);
     Route::delete('user/delete/{id}', 'UserController@delete')->name('user.delete')->where(['id' => '[0-9]+']);
-    Route::get('user/change_password','UserController@changePassword')->name('user.change_password');
-    Route::post('user/change_password','UserController@postChangePassword')->name('user.post_change_password');
+    Route::get('user/change_password', 'UserController@changePassword')->name('user.change_password');
+    Route::post('user/change_password', 'UserController@postChangePassword')->name('user.post_change_password');
 });
 
 Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');
