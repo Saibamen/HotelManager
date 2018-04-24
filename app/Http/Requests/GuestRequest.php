@@ -20,7 +20,7 @@ class GuestRequest extends FormRequest
             'zip_code'   => 'required|regex:/^\d{2}-\d{3}$/|size:6',
             'place'      => 'required|alpha_spaces_hyphens_apostrophes_parentheses_slashes_dots|min:2',
             'PESEL'      => 'required|digits:11',
-            'contact'    => 'nullable',
+            'contact'    => 'nullable|string',
         ];
     }
 }
