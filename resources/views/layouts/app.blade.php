@@ -111,6 +111,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li><a href="{{ route('user.change_password') }}"><i class="fa fa-key" aria-hidden="true"></i> @lang('auth.change_password')</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

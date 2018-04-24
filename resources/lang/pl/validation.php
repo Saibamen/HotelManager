@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'accepted'        => ':Attribute musi zostać zaakceptowany.',
     'active_url'      => ':Attribute jest nieprawidłowym adresem URL.',
     'after'           => ':Attribute musi być datą późniejszą od :date.',
@@ -87,6 +86,8 @@ return [
     'alpha_spaces_hyphens_apostrophes_parentheses_slashes'      => ':Attribute może zawierać jedynie litery, spacje, myślniki, apostrofy, nawiasy i ukośniki.',
     'alpha_spaces_hyphens_apostrophes_parentheses_slashes_dots' => ':Attribute może zawierać jedynie litery, spacje, myślniki, apostrofy, nawiasy, ukośniki i kropki.',
 
+    'current_password' => ':Attribute jest nieprawidłowe.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -116,11 +117,14 @@ return [
     */
 
     'attributes' => [
+        'password'         => 'hasło',
+        'current_password' => 'aktualne hasło',
+        'new_password'     => 'nowe hasło',
+
         'comment'  => 'komentarz',
         'date'     => 'data',
         'email'    => 'adres e-mail',
         'name'     => 'nazwa',
-        'password' => 'hasło',
         'value'    => 'wartość',
 
         'number'   => 'numer',
@@ -141,5 +145,4 @@ return [
         'date_end'   => 'data zakończenia',
         'people'     => 'ilość osób',
     ],
-
 ];

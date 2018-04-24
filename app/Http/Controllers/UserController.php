@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\UserTableService;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -42,12 +44,30 @@ class UserController extends Controller
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
 
         // TODO: isAdmin()
-        if (!$object || $object->id === 1 || $object->id = Auth::user()->id /*|| $object->isAdmin()*/) {
+        if (!$object || $object->id === 1 || $object->id = Auth::user()->id) {
             $data = ['class' => 'alert-danger', 'message' => trans('general.cannot_delete_object')];
         } else {
             $object->delete();
         }
 
         return response()->json($data);
+    }
+
+    public function changePassword()
+    {
+        return view('auth.passwords.change');
+    }
+
+    public function postChangePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->route($this->userTableService->getRouteName().'.change_password')
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success',
+            ]);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -28,4 +27,7 @@ return [
     'have_account'          => 'Already have an account?',
     'sign_up'               => 'Sign up',
     'sign_in'               => 'Sign in',
+    'change_password'       => 'Change password',
+    'current_password'      => 'Current password',
+    'new_password'          => 'New password',
 ];

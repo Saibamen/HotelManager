@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'failed'   => 'Błędny login lub hasło.',
     'throttle' => 'Za dużo nieudanych prób logowania. Proszę spróbować za :seconds sekund.',
 
@@ -17,5 +16,7 @@ return [
     'have_account'          => 'Masz już konto?',
     'sign_up'               => 'Zarejestruj się',
     'sign_in'               => 'Zaloguj się',
-
+    'change_password'       => 'Zmień hasło',
+    'current_password'      => 'Aktualne hasło',
+    'new_password'          => 'Nowe hasło',
 ];

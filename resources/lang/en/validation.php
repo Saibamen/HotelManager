@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -98,6 +97,8 @@ return [
     'alpha_spaces_hyphens_apostrophes_parentheses_slashes'      => 'The :attribute may only contain letters, spaces, hyphens, apostrophes, parentheses and slashes.',
     'alpha_spaces_hyphens_apostrophes_parentheses_slashes_dots' => 'The :attribute may only contain letters, spaces, hyphens, apostrophes, parentheses, slashes and dots.',
 
+    'current_password' => 'The :attribute is incorrect.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -133,5 +134,4 @@ return [
         'date_end'     => 'end date',
         'people'       => 'number of people',
     ],
-
 ];

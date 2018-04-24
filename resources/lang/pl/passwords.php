@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'password' => 'Hasło musi mieć przynajmniej sześć znaków i zgadzać się z potwierdzeniem.',
     'reset'    => 'Hasło zostało zresetowane!',
     'sent'     => 'Przypomnienie hasła zostało wysłane!',
@@ -14,5 +13,4 @@ return [
     'mail_subject' => 'Zresetuj swoje hasło',
     'mail_line_1'  => 'Otrzymujesz tego e-maila, ponieważ dostaliśmy prośbę zrestartowania hasła dla Twojego konta.',
     'mail_line_2'  => 'Jeśli to nie Ty prosiłeś o restartowanie hasła, nie musisz podejmować żadnych działań.',
-
 ];

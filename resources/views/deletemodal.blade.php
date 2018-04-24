@@ -17,5 +17,5 @@
 </div>
 
 @section('js')
-    {!! Html::script(mix('js/deletemodal.min.js')) !!}
+{!! Html::script(mix('js/deletemodal.min.js')) !!}
 @endsection
