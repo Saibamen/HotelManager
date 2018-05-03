@@ -39,6 +39,52 @@ class RoomController extends Controller implements ManageTableInterface
         return view('list', $viewData);
     }
 
+    public function free()
+    {
+        $title = trans('navigation.currently_free_rooms');
+
+        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
+            ->currentlyFreeRooms()
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_rooms_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'       => $this->roomTableService->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->roomTableService->getRouteName(),
+            'title'         => $title,
+            'deleteMessage' => trans('general.delete_associated_reservations'),
+        ];
+
+        return view('list', $viewData);
+    }
+
+    public function occupied()
+    {
+        $title = trans('navigation.currently_occupied_rooms');
+
+        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
+            ->currentlyOccupiedRooms()
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_rooms_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'       => $this->roomTableService->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->roomTableService->getRouteName(),
+            'title'         => $title,
+            'deleteMessage' => trans('general.delete_associated_reservations'),
+        ];
+
+        return view('list', $viewData);
+    }
+
     public function store(RoomRequest $request, $objectId = null)
     {
         if ($objectId === null) {

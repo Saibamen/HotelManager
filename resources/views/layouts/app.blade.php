@@ -49,9 +49,9 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('room.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.show_rooms')</a></li>
+                                    <li><a href="{{ route('room.free') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.currently_free_rooms')</a></li>
+                                    <li><a href="{{ route('room.occupied') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.currently_occupied_rooms')</a></li>
                                     <li><a href="{{ route('room.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('navigation.add_room')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.currently_free_rooms')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.currently_occupied_rooms')</a></li>
                                 </ul>
                             </li>
 

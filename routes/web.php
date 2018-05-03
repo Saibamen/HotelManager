@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home');
 
     Route::get('room', 'RoomController@index')->name('room.index');
+    Route::get('room/free', 'RoomController@free')->name('room.free');
+    Route::get('room/occupied', 'RoomController@occupied')->name('room.occupied');
     Route::get('room/add', 'RoomController@showAddEditForm')->name('room.addform');
     Route::post('room/add', 'RoomController@store')->name('room.postadd');
     Route::get('room/edit/{id}', 'RoomController@showAddEditForm')->name('room.editform')->where(['id' => '[0-9]+']);

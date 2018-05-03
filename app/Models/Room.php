@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
@@ -19,6 +20,8 @@ use Illuminate\Database\Query\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Guest[] $guests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room currentlyFreeRooms()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room currentlyOccupiedRooms()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room freeRoomsForReservation($dateStart, $dateEnd, $people)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereComment($value)
@@ -59,6 +62,24 @@ class Room extends Model
         })
             ->where('capacity', '>=', $people)
             ->orderBy('capacity');
+    }
+
+    public function scopeCurrentlyFreeRooms($query)
+    {
+        return $query->whereNotIn('id', function (Builder $query) {
+            $query->select('room_id')->from('reservations')
+                ->where('date_start', '<=', Carbon::today())
+                ->where('date_end', '>', Carbon::today());
+        });
+    }
+
+    public function scopeCurrentlyOccupiedRooms($query)
+    {
+        return $query->whereIn('id', function (Builder $query) {
+            $query->select('room_id')->from('reservations')
+                ->where('date_start', '<=', Carbon::today())
+                ->where('date_end', '>', Carbon::today());
+        });
     }
 
     public function reservations()
