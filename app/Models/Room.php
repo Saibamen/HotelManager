@@ -44,6 +44,9 @@ class Room extends Model
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param $dateStart
+     * @param $dateEnd
+     * @param $people
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

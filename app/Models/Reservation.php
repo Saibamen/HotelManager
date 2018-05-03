@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Guest $guest
  * @property-read \App\Models\Room $room
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation getCurrentReservations()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation getFutureReservations()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereDateEnd($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereDateStart($value)
@@ -53,6 +55,17 @@ class Reservation extends Model
     public function getDateEndAttribute($value)
     {
         return Carbon::parse($value)->format('d.m.Y');
+    }
+
+    public function scopeGetCurrentReservations($query)
+    {
+        return $query->where('date_end', '>=', Carbon::today())
+            ->where('date_start', '<=', Carbon::today());
+    }
+
+    public function scopeGetFutureReservations($query)
+    {
+        return $query->where('date_start', '>', Carbon::today());
     }
 
     public function room()

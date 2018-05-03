@@ -32,6 +32,57 @@ class ReservationController extends Controller implements ManageTableInterface
         $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
             ->with('guest:id,first_name,last_name')
             ->with('room:id,number')
+            ->orderBy('date_end', 'DESC')
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_reservations_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'       => $this->reservationTableService->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->reservationTableService->getRouteName(),
+            'title'         => $title,
+        ];
+
+        return view('list', $viewData);
+    }
+
+    public function current()
+    {
+        $title = trans('navigation.current_reservations');
+
+        $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
+            ->with('guest:id,first_name,last_name')
+            ->with('room:id,number')
+            ->getCurrentReservations()
+            ->orderBy('date_end')
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_reservations_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'       => $this->reservationTableService->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->reservationTableService->getRouteName(),
+            'title'         => $title,
+        ];
+
+        return view('list', $viewData);
+    }
+
+    public function future()
+    {
+        $title = trans('navigation.future_reservations');
+
+        $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
+            ->with('guest:id,first_name,last_name')
+            ->with('room:id,number')
+            ->getFutureReservations()
+            ->orderBy('date_end')
             ->paginate($this->getItemsPerPage());
 
         if ($dataset->isEmpty()) {

@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('guest/delete/{id}', 'GuestController@delete')->name('guest.delete')->where(['id' => '[0-9]+']);
 
     Route::get('reservation', 'ReservationController@index')->name('reservation.index');
+    Route::get('reservation/current', 'ReservationController@current')->name('reservation.current');
+    Route::get('reservation/future', 'ReservationController@future')->name('reservation.future');
     Route::get('reservation/add', function () {
         return redirect()->route('reservation.choose_guest');
     })->name('reservation.addform');

@@ -71,8 +71,8 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('reservation.index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.all_reservations')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.current_reservations')</a></li>
-                                    <li><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> !@lang('navigation.future_reservations')</a></li>
+                                    <li><a href="{{ route('reservation.current') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.current_reservations')</a></li>
+                                    <li><a href="{{ route('reservation.future') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('navigation.future_reservations')</a></li>
                                     <li><a href="{{ route('reservation.addform') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('navigation.add_reservation')</a></li>
                                 </ul>
                             </li>
