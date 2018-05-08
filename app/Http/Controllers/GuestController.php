@@ -82,7 +82,6 @@ class GuestController extends Controller implements ManageTableInterface
         return response()->json($data);
     }
 
-    // TODO
     public function showAddEditForm($objectId = null)
     {
         if ($objectId === null) {
@@ -114,7 +113,6 @@ class GuestController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
-    // TODO
     public function getFields()
     {
         return [
