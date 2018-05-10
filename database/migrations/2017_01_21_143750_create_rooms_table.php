@@ -17,6 +17,7 @@ class CreateRoomsTable extends Migration
             $table->text('comment')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->unique(['number', 'floor']);
         });
     }
 
