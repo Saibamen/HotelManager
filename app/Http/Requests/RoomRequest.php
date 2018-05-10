@@ -13,6 +13,7 @@ class RoomRequest extends FormRequest
 
     public function rules()
     {
+        dd($this->id, 'blabla');
         return [
             'number'   => 'required|max:5|unique:rooms,number,'.$this->id.',id,floor,'.$this->floor,
             'floor'    => 'required|numeric|min:-999|max:999',
