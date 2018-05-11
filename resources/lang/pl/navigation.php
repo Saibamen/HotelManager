@@ -16,6 +16,7 @@ return [
     'current_reservations'   => 'Aktualne rezerwacje',
     'future_reservations'    => 'Przyszłe rezerwacje',
     'add_reservation'        => 'Dodaj rezerwację',
+    'edit_reservation'       => 'Edytuj rezerwację',
     'search_free_rooms'      => 'Szukaj wolnych pokoi',
 
     'show_users'  => 'Pokaż użytkowników',

@@ -379,8 +379,8 @@ class ReservationController extends Controller implements ManageTableInterface
             [
                 'id'    => 'people',
                 'title' => trans('general.number_of_people'),
-                'value' => function () {
-                    return 1;
+                'value' => function (Reservation $data) {
+                    return $data->people ?: 1;
                 },
                 'type'     => 'number',
                 'optional' => [
