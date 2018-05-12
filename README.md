@@ -6,12 +6,13 @@
 [![StyleCI](https://styleci.io/repos/77186372/shield)](https://styleci.io/repos/77186372)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d/mini.png)](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d)
 [![Code Coverage](https://scrutinizer-ci.com/g/Saibamen/HotelManager/badges/coverage.png)](https://scrutinizer-ci.com/g/Saibamen/HotelManager/)
+[![codecov](https://codecov.io/gh/Saibamen/HotelManager/branch/master/graph/badge.svg)](https://codecov.io/gh/Saibamen/HotelManager)
 
 # Hotel Manager
 
-Laravel 5.5
+Web app for managing hotels written in Laravel
 
-## Wymagania
+## Requirements
 
 * PHP >= 7.0.0
 * OpenSSL PHP Extension
@@ -19,12 +20,8 @@ Laravel 5.5
 * Mbstring PHP Extension
 * Tokenizer PHP Extension
 * XML PHP Extension
+* [Composer](https://getcomposer.org/)
 
-## O autorze
+## Author
 
-Adam "Saibamen" Stachowicz<br />
-Państwowa Wyższa Szkoła Zawodowa im. Witelona w Legnicy<br />
-Kierunek Informatyka spec. Systemy i Sieci Komputerowe
-
-Programista od 14 roku życia, głównie webdev (PHP, .Net Core).<br />
-W wolnych chwilach rowerzysta, DJ oraz fotograf.
+[Adam Stachowicz](https://github.com/Saibamen) <saibamenppl@gmail.com>
