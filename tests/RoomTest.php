@@ -22,6 +22,7 @@ class RoomTest extends BrowserKitTestCase
         $this->visit('room')
             ->dontSee('Zaloguj')
             ->see('Pokoje')
+            ->dontSee('Użytkownicy')
             ->dontSee('Numer')
             ->dontSee('Piętro')
             ->dontSee('Pojemność')

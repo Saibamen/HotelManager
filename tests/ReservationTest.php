@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Reservation;
+use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ReservationTest extends BrowserKitTestCase
@@ -147,4 +148,60 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->notSeeInDatabase('reservations', []);
     }*/
+
+    public function testEmptyFreeRooms()
+    {
+        $this->visit('room/free')
+            ->dontSee('Zaloguj')
+            ->see('Aktualnie wolne pokoje')
+            ->dontSee('Użytkownicy')
+            ->dontSee('Numer')
+            ->dontSee('Piętro')
+            ->dontSee('Pojemność')
+            ->dontSee('Cena')
+            ->dontSee('Komentarz')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Brak pokoi w bazie danych')
+            ->see('Dodaj');
+    }
+
+    public function testFilledFreeRooms()
+    {
+        factory(Room::class, 3)->create();
+
+        $this->visit('room/free')
+            ->dontSee('Zaloguj')
+            ->see('Pokoje')
+            ->see('Numer')
+            ->see('Piętro')
+            ->see('Pojemność')
+            ->see('Cena')
+            ->see('Komentarz')
+            ->see('Akcje')
+            ->see('Edytuj')
+            ->see('Usuń')
+            ->see('test comment')
+            ->dontSee('Brak pokoi w bazie danych')
+            ->see('Dodaj');
+    }
+
+    public function testEmptyOccupiedRooms()
+    {
+        $this->visit('room/occupied')
+            ->dontSee('Zaloguj')
+            ->see('Aktualnie zajęte pokoje')
+            ->dontSee('Użytkownicy')
+            ->dontSee('Numer')
+            ->dontSee('Piętro')
+            ->dontSee('Pojemność')
+            ->dontSee('Cena')
+            ->dontSee('Komentarz')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Brak pokoi w bazie danych')
+            ->see('Dodaj');
+    }
 }
