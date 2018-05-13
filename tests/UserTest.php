@@ -12,7 +12,7 @@ class UserTest extends BrowserKitTestCase
         parent::setUp();
         Session::start();
 
-        $user = factory(User::class)->make();
+        $user = factory(User::class)->make(['is_admin' => true]);
         $this->actingAs($user);
     }
 
