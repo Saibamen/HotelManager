@@ -22,6 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'admin'], function () {
         Route::get('admin', 'AdminController@index')->name('admin.index');
+
+        Route::get('user', 'UserController@index')->name('user.index');
+        Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');
+        //Route::post('user/add', 'UserController@store')->name('user.postadd');
+        Route::get('user/edit/{id}', 'UserController@showAddEditForm')->name('user.editform')->where(['id' => '[0-9]+']);
+        Route::delete('user/delete/{id}', 'UserController@delete')->name('user.delete')->where(['id' => '[0-9]+']);
     });
 
     Route::get('room', 'RoomController@index')->name('room.index');
@@ -56,11 +62,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reservation/choose_room/{guestId}', 'ReservationController@chooseFreeRoom')->name('reservation.choose_free_room')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/add/{roomId}/{guestId}', 'ReservationController@add')->name('reservation.add')->where(['roomId' => '[0-9]+', 'guestId' => '[0-9]+']);
 
-    Route::get('user', 'UserController@index')->name('user.index');
-    Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');
-    //Route::post('user/add', 'UserController@store')->name('user.postadd');
-    Route::get('user/edit/{id}', 'UserController@showAddEditForm')->name('user.editform')->where(['id' => '[0-9]+']);
-    Route::delete('user/delete/{id}', 'UserController@delete')->name('user.delete')->where(['id' => '[0-9]+']);
     Route::get('user/change_password', 'UserController@changePassword')->name('user.change_password');
     Route::post('user/change_password', 'UserController@postChangePassword')->name('user.post_change_password');
 });
