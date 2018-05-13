@@ -10,7 +10,7 @@
 
 # Hotel Manager
 
-Web app for managing hotels written in Laravel
+Web app for managing hotel written in Laravel
 
 ## Requirements
 

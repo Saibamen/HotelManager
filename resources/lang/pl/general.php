@@ -27,6 +27,7 @@ return [
     'title'                 => 'Tytuł',
     'value'                 => 'Wartość',
     'yes'                   => 'Tak',
+    'warning'               => 'Uwaga!',
 
     'room'     => 'Pokój',
     'rooms'    => 'Pokoje',
@@ -63,4 +64,6 @@ return [
     'created' => 'Utworzono',
     'updated' => 'Zaktualizowano',
     'deleted' => 'Usunięto',
+
+    'remember_backup' => 'Pamiętaj o utworzeniu kopii zapasowej bazy danych!',
 ];

@@ -27,6 +27,7 @@ return [
     'title'                 => 'Title',
     'value'                 => 'Value',
     'yes'                   => 'Yes',
+    'warning'               => 'Warning!',
 
     'room'     => 'Room',
     'rooms'    => 'Rooms',
@@ -63,4 +64,6 @@ return [
     'created' => 'Created',
     'updated' => 'Updated',
     'deleted' => 'Deleted',
+
+    'remember_backup' => 'Remember to create a database backup!',
 ];
