@@ -171,11 +171,11 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Brak rezerwacji w bazie danych');
 
         $this->seeInDatabase('reservations', [
-            'room_id' => $room->id,
-            'guest_id' => $guest->id,
+            'room_id'    => $room->id,
+            'guest_id'   => $guest->id,
             'date_start' => $todayDate->toDateString(),
-            'date_end' => $tomorrowDate->toDateString(),
-            'people' => 1
+            'date_end'   => $tomorrowDate->toDateString(),
+            'people'     => 1,
         ]);
     }
 
