@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guest;
 use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -53,22 +54,43 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
-    /*public function testAddEmptyForm()
+    public function testChooseGuestEmpty()
     {
         $this->visit('reservation/add')
+            ->seePageIs('reservation/choose_guest')
             ->dontSee('Zaloguj')
-            ->see('Dodaj rezerwację')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
-            ->see('Wyślij')
-            ->press('Wyślij');
+            ->see('Wybierz gościa')
+            ->dontSee('Imię')
+            ->dontSee('Nazwisko')
+            ->dontSee('Adres')
+            ->dontSee('PESEL')
+            ->dontSee('Kontakt')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Brak gości w bazie danych')
+            ->see('Dodaj');
+    }
 
-        $this->see('jest wymagane')
-            ->seePageIs('reservation/add');
-    }*/
+    public function testChooseGuestFilled()
+    {
+        factory(Guest::class)->create();
+
+        $this->visit('reservation/add')
+            ->seePageIs('reservation/choose_guest')
+            ->dontSee('Zaloguj')
+            ->see('Wybierz gościa')
+            ->see('Imię')
+            ->see('Nazwisko')
+            ->see('Adres')
+            ->see('PESEL')
+            ->see('Kontakt')
+            ->see('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->dontSee('Brak gości w bazie danych')
+            ->see('Dodaj');
+    }
 
     public function testTryEditInvalidId()
     {
