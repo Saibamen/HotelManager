@@ -29,6 +29,11 @@ class UserTest extends BrowserKitTestCase
             ->dontSee('Usuń')
             ->see('Brak użytkowników w bazie danych')
             ->see('Dodaj');
+
+        $this->actingAs(factory(User::class)->make());
+
+        $this->visit('user')
+            ->seePageIs('home');
     }
 
     public function testFilledIndex()
