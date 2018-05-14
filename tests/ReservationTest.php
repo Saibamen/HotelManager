@@ -3,6 +3,7 @@
 use App\Models\Guest;
 use App\Models\Reservation;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ReservationTest extends BrowserKitTestCase
@@ -90,6 +91,92 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Usuń')
             ->dontSee('Brak gości w bazie danych')
             ->see('Dodaj');
+    }
+
+    public function testSearchFreeRoomsDefaultPost()
+    {
+        $guest = factory(Guest::class)->create();
+
+        $this->visit('reservation/add')
+            ->seePageIs('reservation/choose_guest')
+            ->dontSee('Zaloguj')
+            ->see('Wybierz gościa')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->dontSee('Brak gości w bazie danych')
+            ->see('Dodaj')
+            ->click('Wybierz')
+            ->seePageIs('reservation/search_free_rooms/'.$guest->id);
+
+        $todayDate = Carbon::today()->format('d.m.Y');
+
+        $this->see($guest->first_name.' '.$guest->last_name)
+            ->see($todayDate)
+            ->press('Wyślij');
+
+        $this->see($guest->first_name.' '.$guest->last_name)
+            ->see($todayDate)
+            ->see('Data rozpoczęcia musi być datą wcześniejszą od data zakończenia.');
+    }
+
+    public function testSearchFreeRoomsCorrectPostNoRooms()
+    {
+        $guest = factory(Guest::class)->create();
+
+        $this->visit('reservation/search_free_rooms/'.$guest->id);
+
+        $todayDate = Carbon::today()->format('d.m.Y');
+        $tomorrowDate = Carbon::tomorrow()->format('d.m.Y');
+
+        $this->see($guest->first_name.' '.$guest->last_name)
+            ->see($todayDate)
+            ->type($tomorrowDate, 'date_end')
+            ->press('Wyślij');
+
+        $this->seePageIs('reservation/choose_room/'.$guest->id)
+            ->see('Wybierz pokój dla '.$guest->first_name.' '.$guest->last_name)
+            ->see('Brak pokoi w bazie danych')
+            ->dontSee('Numer')
+            ->dontSee('Piętro');
+    }
+
+    public function testSearchFreeRoomsCorrectPostWithRoomsAndAddReservation()
+    {
+        $guest = factory(Guest::class)->create();
+        $room = factory(Room::class)->create();
+
+        $this->visit('reservation/search_free_rooms/'.$guest->id);
+
+        $todayDate = Carbon::today();
+        $tomorrowDate = Carbon::tomorrow();
+
+        $this->see($guest->first_name.' '.$guest->last_name)
+            ->see($todayDate->format('d.m.Y'))
+            ->type($tomorrowDate->format('d.m.Y'), 'date_end')
+            ->press('Wyślij');
+
+        $this->seePageIs('reservation/choose_room/'.$guest->id)
+            ->see('Wybierz pokój dla '.$guest->first_name.' '.$guest->last_name)
+            ->dontSee('Brak pokoi w bazie danych')
+            ->see('Numer')
+            ->see('Piętro')
+            ->see('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see($room->number);
+
+        $this->click('Wybierz')
+            ->seePageIs('reservation')
+            ->see('Zapisano pomyślnie')
+            ->dontSee('Brak rezerwacji w bazie danych');
+
+        $this->seeInDatabase('reservations', [
+            'room_id' => $room->id,
+            'guest_id' => $guest->id,
+            'date_start' => $todayDate->toDateString(),
+            'date_end' => $tomorrowDate->toDateString(),
+            'people' => 1
+        ]);
     }
 
     public function testTryEditInvalidId()
