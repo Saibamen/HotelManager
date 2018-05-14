@@ -154,6 +154,7 @@ class ReservationTest extends BrowserKitTestCase
         $this->visit('room/free')
             ->dontSee('Zaloguj')
             ->see('Aktualnie wolne pokoje')
+            ->see('Pokoje')
             ->dontSee('Użytkownicy')
             ->dontSee('Numer')
             ->dontSee('Piętro')
@@ -173,6 +174,7 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->visit('room/free')
             ->dontSee('Zaloguj')
+            ->see('Aktualnie wolne pokoje')
             ->see('Pokoje')
             ->see('Numer')
             ->see('Piętro')
@@ -193,6 +195,7 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Zaloguj')
             ->see('Aktualnie zajęte pokoje')
             ->dontSee('Użytkownicy')
+            ->see('Pokoje')
             ->dontSee('Numer')
             ->dontSee('Piętro')
             ->dontSee('Pojemność')
@@ -202,6 +205,28 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Edytuj')
             ->dontSee('Usuń')
             ->see('Brak pokoi w bazie danych')
+            ->see('Dodaj');
+    }
+
+    public function testFilledOccupiedRooms()
+    {
+        factory(Reservation::class)->create();
+
+        $this->visit('room/occupied')
+            ->dontSee('Zaloguj')
+            ->see('Aktualnie zajęte pokoje')
+            ->dontSee('Użytkownicy')
+            ->see('Pokoje')
+            ->see('Numer')
+            ->see('Piętro')
+            ->see('Pojemność')
+            ->see('Cena')
+            ->see('Komentarz')
+            ->see('Akcje')
+            ->see('Edytuj')
+            ->see('Usuń')
+            ->see('test comment')
+            ->dontSee('Brak pokoi w bazie danych')
             ->see('Dodaj');
     }
 }
