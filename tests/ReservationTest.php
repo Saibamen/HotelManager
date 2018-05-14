@@ -23,7 +23,7 @@ class ReservationTest extends BrowserKitTestCase
     {
         $this->visit('reservation')
             ->dontSee('Zaloguj')
-            ->see('Rezerwacje')
+            ->see('Wszystkie rezerwacje')
             ->dontSee('Numer')
             ->dontSee('Gość')
             ->dontSee('Data rozpoczęcia')
@@ -42,7 +42,7 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->visit('reservation')
             ->dontSee('Zaloguj')
-            ->see('Rezerwacje')
+            ->see('Wszystkie rezerwacje')
             ->see('Pokój')
             ->see('Gość')
             ->see('Data rozpoczęcia')
@@ -52,6 +52,40 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Edytuj')
             ->see('Usuń')
             ->dontSee('Brak rezerwacji w bazie danych')
+            ->see('Dodaj');
+    }
+
+    public function testEmptyCurrent()
+    {
+        $this->visit('reservation/current')
+            ->dontSee('Zaloguj')
+            ->see('Aktualne rezerwacje')
+            ->dontSee('Numer')
+            ->dontSee('Gość')
+            ->dontSee('Data rozpoczęcia')
+            ->dontSee('Data zakończenia')
+            ->dontSee('Ilość osób')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Brak rezerwacji w bazie danych')
+            ->see('Dodaj');
+    }
+
+    public function testEmptyFuture()
+    {
+        $this->visit('reservation/future')
+            ->dontSee('Zaloguj')
+            ->see('Przyszłe rezerwacje')
+            ->dontSee('Numer')
+            ->dontSee('Gość')
+            ->dontSee('Data rozpoczęcia')
+            ->dontSee('Data zakończenia')
+            ->dontSee('Ilość osób')
+            ->dontSee('Akcje')
+            ->dontSee('Edytuj')
+            ->dontSee('Usuń')
+            ->see('Brak rezerwacji w bazie danych')
             ->see('Dodaj');
     }
 
