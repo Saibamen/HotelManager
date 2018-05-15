@@ -165,7 +165,7 @@ class UserTest extends BrowserKitTestCase
     public function testChangePassword()
     {
         $user = factory(User::class)->create([
-            'password' => bcrypt('old_correct_pass')
+            'password' => bcrypt('old_correct_pass'),
         ]);
 
         $this->actingAs($user);
