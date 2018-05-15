@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Interfaces\ManageTableInterface;
-use App\Http\Requests\GuestRequest;
 use App\Http\Requests\ReservationSearchRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
@@ -137,9 +136,12 @@ class ReservationController extends Controller implements ManageTableInterface
         $title = trans('navigation.search_free_rooms');
         $submitRoute = route($this->reservationTableService->getRouteName().'.post_search_free_rooms', $dataset->guest->id);
 
+        $fiels = $this->getFields();
+        array_unshift($fiels, $this->getGuestField());
+
         $viewData = [
             'dataset'     => $dataset,
-            'fields'      => $this->getSearchFields(),
+            'fields'      => $fiels,
             'title'       => $title,
             'submitRoute' => $submitRoute,
         ];
@@ -260,7 +262,7 @@ class ReservationController extends Controller implements ManageTableInterface
     }
 
     // TODO
-    public function store(GuestRequest $request, $objectId = null)
+    public function store(ReservationSearchRequest $request, $objectId = null)
     {
         if ($objectId === null) {
             $object = new Reservation();
@@ -302,7 +304,6 @@ class ReservationController extends Controller implements ManageTableInterface
         return response()->json($data);
     }
 
-    // TODO
     public function showAddEditForm($objectId = null)
     {
         if ($objectId === null) {
@@ -326,9 +327,12 @@ class ReservationController extends Controller implements ManageTableInterface
             $submitRoute = route($this->reservationTableService->getRouteName().'.postedit', $objectId);
         }
 
+        $fiels = $this->getFields();
+        array_unshift($fiels, $this->getGuestField(), $this->getRoomField(), $this->getActionButtons());
+
         $viewData = [
             'dataset'     => $dataset,
-            'fields'      => $this->getFields(),
+            'fields'      => $fiels,
             'title'       => $title,
             'submitRoute' => $submitRoute,
             'routeName'   => $this->reservationTableService->getRouteName(),
@@ -337,19 +341,70 @@ class ReservationController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
-    public function getSearchFields()
+    public function getGuestField()
     {
         return [
-            [
-                'id'    => 'guest',
-                'title' => trans('general.guest'),
-                'value' => function (Reservation $data) {
-                    return $data->guest->full_name;
-                },
-                'optional' => [
-                    'readonly' => 'readonly',
+            'id'    => 'guest',
+            'title' => trans('general.guest'),
+            'value' => function (Reservation $data) {
+                return $data->guest->full_name;
+            },
+            'optional' => [
+                'readonly' => 'readonly',
+            ],
+        ];
+    }
+
+    public function getRoomField()
+    {
+        return [
+            'id'    => 'room',
+            'title' => trans('general.room'),
+            'value' => function (Reservation $data) {
+                return $data->room->number;
+            },
+            'optional' => [
+                'readonly' => 'readonly',
+            ],
+        ];
+    }
+
+    public function getActionButtons() {
+        return [
+            'id'    => 'action_buttons',
+            'type'       => 'buttons',
+            'buttons' => [
+                [
+                    'value' => function () {
+                        return 'Zmień gościa';
+                    },
+                    'route_name'  => 'reservation.change_guest',
+                    'route_param' => function (Reservation $data) {
+                        return $data->id;
+                    },
+                    'optional' => [
+                        'class' => 'btn btn-primary',
+                    ],
+                ],
+                [
+                    'value' => function () {
+                        return 'Zmień pokój';
+                    },
+                    'route_name' => 'reservation.change_room',
+                    'route_param' => function (Reservation $data) {
+                        return $data->id;
+                    },
+                    'optional' => [
+                        'class' => 'btn btn-primary',
+                    ],
                 ],
             ],
+        ];
+    }
+
+    public function getFields()
+    {
+        return [
             [
                 'id'    => 'date_start',
                 'title' => trans('general.date_start'),
@@ -386,86 +441,6 @@ class ReservationController extends Controller implements ManageTableInterface
                 'optional' => [
                     'required' => 'required',
                     'min'      => '1',
-                ],
-            ],
-        ];
-    }
-
-    // TODO
-    public function getFields()
-    {
-        return [
-            [
-                'id'    => 'first_name',
-                'title' => trans('general.first_name'),
-                'value' => function (Reservation $data) {
-                    return $data->first_name;
-                },
-                'optional' => [
-                    'required' => 'required',
-                ],
-            ],
-            [
-                'id'    => 'last_name',
-                'title' => trans('general.last_name'),
-                'value' => function (Reservation $data) {
-                    return $data->last_name;
-                },
-                'optional' => [
-                    'required' => 'required',
-                ],
-            ],
-            [
-                'id'    => 'address',
-                'title' => trans('general.address'),
-                'value' => function (Reservation $data) {
-                    return $data->address;
-                },
-                'optional' => [
-                    'required' => 'required',
-                ],
-            ],
-            [
-                'id'    => 'zip_code',
-                'title' => trans('general.zip_code'),
-                'value' => function (Reservation $data) {
-                    return $data->zip_code;
-                },
-                'optional' => [
-                    'required'    => 'required',
-                    'placeholder' => '00-000',
-                ],
-            ],
-            [
-                'id'    => 'place',
-                'title' => trans('general.place'),
-                'value' => function (Reservation $data) {
-                    return $data->place;
-                },
-                'optional' => [
-                    'required' => 'required',
-                ],
-            ],
-            [
-                'id'    => 'PESEL',
-                'title' => trans('general.PESEL'),
-                'value' => function (Reservation $data) {
-                    return $data->PESEL;
-                },
-                'optional' => [
-                    'required'    => 'required',
-                    'placeholder' => '12345654321',
-                ],
-            ],
-            [
-                'id'    => 'contact',
-                'title' => trans('general.contact'),
-                'value' => function (Reservation $data) {
-                    return $data->contact;
-                },
-                'type'     => 'textarea',
-                'optional' => [
-                    'placeholder' => trans('general.contact_placeholder'),
                 ],
             ],
         ];

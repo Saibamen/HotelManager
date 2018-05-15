@@ -25,10 +25,25 @@
 
                         @foreach ($fields as $field)
                             <div class="form-group{{ isset($errors) && $errors->has($field['id']) ? ' has-error' : '' }}">
-                                {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
+                                @if (isset($field['title']))
+                                    {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
+                                @endif
 
                                 @php(isset($field['optional']) ? $fields_attributes = $fields_class + $field['optional'] : $fields_attributes = $fields_class)
                                 @php(!isset($field['optional']['class']) ?: $fields_attributes['class'] .= ' '. $field['optional']['class'])
+                                @php(isset($field['type']) ? $type = $field['type'] : $type = 'text')
+
+                                @if ($type === 'buttons')
+                                    <div class="text-center">
+                                        @foreach ($field['buttons'] as $button)
+                                            @php(isset($button['route_param']) ? $route = route($button['route_name'], $button['route_param']($dataset))
+                                            : $route = route($button['route_name']))
+
+                                            {{ Html::link($route, $button['value']($dataset), $button['optional']) }}
+                                        @endforeach
+                                    </div></div>
+                                    @continue
+                                @endif
 
                                 {{-- Autofocus on first field in form --}}
                                 @if ($loop->first)
@@ -38,8 +53,6 @@
                                 @endif
 
                                 <div class="col-md-6">
-                                    @php(isset($field['type']) ? $type = $field['type'] : $type = 'text')
-
                                     @if ($type === 'select')
                                         {{ Form::$type($field['id'], $field['selectable'], $field['value']($dataset), $fields_attributes) }}
                                     @else
@@ -48,8 +61,8 @@
 
                                     @if (isset($errors) && $errors->has($field['id']))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first($field['id']) }}</strong>
-                                    </span>
+                                            <strong>{{ $errors->first($field['id']) }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>

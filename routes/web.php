@@ -62,6 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reservation/choose_room/{guestId}', 'ReservationController@chooseFreeRoom')->name('reservation.choose_free_room')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/add/{roomId}/{guestId}', 'ReservationController@add')->name('reservation.add')->where(['roomId' => '[0-9]+', 'guestId' => '[0-9]+']);
 
+    Route::get('reservation/change_guest/{reservationId}', 'ReservationController@changeGuest')->name('reservation.change_guest')->where(['reservationId' => '[0-9]+']);
+    Route::get('reservation/change_room/{reservationId}', 'ReservationController@changeRoom')->name('reservation.change_room')->where(['reservationId' => '[0-9]+']);
+
     Route::get('user/change_password', 'UserController@changePassword')->name('user.change_password');
     Route::post('user/change_password', 'UserController@postChangePassword')->name('user.post_change_password');
 });
