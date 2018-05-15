@@ -224,30 +224,21 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
     }
 
-    /*public function testEditValidId()
+    public function testShowEditForm()
     {
         $reservation = factory(Reservation::class)->create();
 
-        $this->visit('reservation')
-            ->see('Rezerwacje')
-            ->visit('reservation/edit/'.$reservation->id);
-
-        $this->see('Edytuj pokój')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
-            ->see('test comment')
+        $this->visit('reservation/edit/'.$reservation->id)
+            ->see('Edytuj rezerwację')
+            ->see('Gość')
+            ->see('Zmień gościa')
+            ->see('Zmień pokój')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see($reservation->guest->full_name)
+            ->see($reservation->room->number)
             ->see('Wyślij');
-
-        $this->type('Edycja komentarza', 'comment')
-            ->press('Wyślij');
-
-        $this->see('Zapisano pomyślnie')
-            ->seePageIs('reservation')
-            ->see('Edycja komentarza');
-    }*/
+    }
 
     public function testDelete()
     {
