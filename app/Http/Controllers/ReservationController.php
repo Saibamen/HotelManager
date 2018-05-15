@@ -304,28 +304,22 @@ class ReservationController extends Controller implements ManageTableInterface
         return response()->json($data);
     }
 
-    public function showAddEditForm($objectId = null)
+    public function showEditForm($objectId)
     {
-        if ($objectId === null) {
-            $dataset = new Reservation();
-            $title = trans('navigation.add_reservation');
-            $submitRoute = route($this->reservationTableService->getRouteName().'.postadd');
-        } else {
-            try {
-                $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
-                ->with('guest:id,first_name,last_name')
-                ->with('room:id,number')
-                ->findOrFail($objectId);
-            } catch (ModelNotFoundException $e) {
-                return $this->returnBack([
-                    'message'     => trans('general.object_not_found'),
-                    'alert-class' => 'alert-danger',
-                ]);
-            }
-
-            $title = trans('navigation.edit_reservation');
-            $submitRoute = route($this->reservationTableService->getRouteName().'.postedit', $objectId);
+        try {
+            $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
+            ->with('guest:id,first_name,last_name')
+            ->with('room:id,number')
+            ->findOrFail($objectId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
         }
+
+        $title = trans('navigation.edit_reservation');
+        $submitRoute = route($this->reservationTableService->getRouteName().'.postedit', $objectId);
 
         $fiels = $this->getFields();
         array_unshift($fiels, $this->getGuestField(), $this->getRoomField(), $this->getActionButtons());
