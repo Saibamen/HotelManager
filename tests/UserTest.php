@@ -200,7 +200,19 @@ class UserTest extends BrowserKitTestCase
             ->press('Wyślij link na email');
 
         Notification::assertSentTo(
-            [$user], \App\Notifications\ResetPasswordNotification::class
+            $user,
+            \App\Notifications\ResetPasswordNotification::class,
+            function ($notification) use ($user) {
+                $mailData = $notification->toMail($user)->toArray();
+
+                $this->assertContains('Zresetuj swoje hasło', $mailData['subject']);
+                $this->assertContains('Otrzymujesz tego e-maila, ponieważ dostaliśmy prośbę zrestartowania hasła dla Twojego konta.', $mailData['introLines']);
+                $this->assertEquals('Zresetuj hasło', $mailData['actionText']);
+                $this->assertEquals(route('password.reset', $notification->token), $mailData['actionUrl']);
+                $this->assertContains('Jeśli to nie Ty prosiłeś o restartowanie hasła, nie musisz podejmować żadnych działań.', $mailData['outroLines'][0]);
+
+                return true;
+            }
         );
     }
 }
