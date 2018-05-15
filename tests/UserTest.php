@@ -161,4 +161,29 @@ class UserTest extends BrowserKitTestCase
 
         $this->notSeeInDatabase('rooms', []);
     }*/
+
+    public function testChangePassword()
+    {
+        $user = factory(User::class)->create([
+            'password' => bcrypt('old_correct_pass')
+        ]);
+
+        $this->actingAs($user);
+
+        $this->visit('user/change_password')
+            ->seePageIs('user/change_password')
+            ->type('old_pass', 'current_password')
+            ->type('new_test_password', 'new_password')
+            ->type('new_test_password2', 'new_password_confirmation')
+            ->press('Zmień hasło')
+            ->see('Aktualne hasło jest nieprawidłowe.')
+            ->see('Potwierdzenie nowe hasło nie zgadza się.');
+
+        $this->type('old_correct_pass', 'current_password')
+            ->type('new_test_password', 'new_password')
+            ->type('new_test_password', 'new_password_confirmation')
+            ->press('Zmień hasło')
+            ->dontSee('Aktualne hasło jest nieprawidłowe.')
+            ->dontSee('Potwierdzenie nowe hasło nie zgadza się.');
+    }
 }
