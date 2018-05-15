@@ -186,4 +186,21 @@ class UserTest extends BrowserKitTestCase
             ->dontSee('Aktualne hasło jest nieprawidłowe.')
             ->dontSee('Potwierdzenie nowe hasło nie zgadza się.');
     }
+
+    public function testLogoutAndSentPasswordNotification()
+    {
+        $user = factory(User::class)->create();
+
+        Auth::logout();
+        Notification::fake();
+
+        $this->visit('password/reset')
+            ->see('Zaloguj')
+            ->type($user->email, 'email')
+            ->press('Wyślij link na email');
+
+        Notification::assertSentTo(
+            [$user], \App\Notifications\ResetPasswordNotification::class
+        );
+    }
 }
