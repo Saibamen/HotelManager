@@ -116,7 +116,7 @@ class ReservationTest extends BrowserKitTestCase
     public function testFilledFuture()
     {
         $reservation = factory(Reservation::class)->create([
-            'date_start' => Carbon::tomorrow()
+            'date_start' => Carbon::tomorrow(),
         ]);
 
         $this->visit('reservation/future')
