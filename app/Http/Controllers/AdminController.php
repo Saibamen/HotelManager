@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InitialStateRequest;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -44,7 +45,12 @@ class AdminController extends Controller
     public function postInitialState(InitialStateRequest $request)
     {
         factory(\App\Models\Room::class, (int) $request->input('rooms'))->create();
-        factory(\App\Models\Guest::class, (int) $request->input('guests'))->create();
+
+        if (App::isLocale('pl')) {
+            factory(\App\Models\Guest::class, (int) $request->input('guests'))->states('polish')->create();
+        } else {
+            factory(\App\Models\Guest::class, (int) $request->input('guests'))->create();
+        }
 
         return redirect()->route($this->getRouteName().'.index')
             ->with([
