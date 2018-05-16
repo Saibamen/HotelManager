@@ -21,7 +21,9 @@ class LanguageTest extends BrowserKitTestCase
 
     public function testLangSwitcherSetEnglishCookie()
     {
-        $this->visit('login');
+        $this->visit('login')
+            ->see('Zaloguj');
+
         $this->call('GET', '/lang/en');
         $this->assertRedirectedTo('login');
         $this->seeCookie('lang', 'en');
@@ -29,9 +31,30 @@ class LanguageTest extends BrowserKitTestCase
 
     public function testLangSwitcherSetPolishCookie()
     {
-        $this->visit('login');
+        $this->visit('login')
+            ->see('Zaloguj');
+
         $this->call('GET', '/lang/pl');
         $this->assertRedirectedTo('login');
         $this->seeCookie('lang', 'pl');
+
+        $this->visit('login')
+            ->see('Zaloguj');
+    }
+
+    public function testLangSwitcherSetEnglishFromRequestWithCookie()
+    {
+        $this->visit('login')
+            ->see('Zaloguj');
+
+        $cookie = ['lang' => Crypt::encrypt('en')];
+
+        $this->call('GET', '/lang/pl', [], $cookie);
+        $this->assertRedirectedTo('login');
+        $this->seeCookie('lang', 'pl');
+
+        $this->visit('login')
+            ->dontSee('Zaloguj')
+            ->see('Remember Me');
     }
 }
