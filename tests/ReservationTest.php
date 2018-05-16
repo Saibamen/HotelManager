@@ -38,7 +38,7 @@ class ReservationTest extends BrowserKitTestCase
 
     public function testFilledIndex()
     {
-        factory(Reservation::class, 3)->create();
+        $reservation = factory(Reservation::class)->create();
 
         $this->visit('reservation')
             ->dontSee('Zaloguj')
@@ -52,7 +52,12 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Edytuj')
             ->see('Usuń')
             ->dontSee('Brak rezerwacji w bazie danych')
-            ->see('Dodaj');
+            ->see('Dodaj')
+            ->see($reservation->room->number)
+            ->see($reservation->guest->rooms->first()->number)
+            ->see($reservation->guest->full_name)
+            ->see($reservation->date_start)
+            ->see($reservation->date_end);
     }
 
     public function testEmptyCurrent()
