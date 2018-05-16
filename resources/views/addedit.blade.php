@@ -15,7 +15,7 @@
                             <h2>{{ $title }}</h2>
                         @endif
 
-                        @if ($dataset->id)
+                        @if (isset($dataset->id))
                             {!! Form::model($dataset, ['url' => $submitRoute, 'class' => 'form-horizontal']) !!}
                         @else
                             {!! Form::open(['url' => $submitRoute, 'class' => 'form-horizontal']) !!}

@@ -144,5 +144,8 @@ return [
         'date_start' => 'data rozpoczęcia',
         'date_end'   => 'data zakończenia',
         'people'     => 'ilość osób',
+
+        'rooms'  => 'pokoje',
+        'guests' => 'goście',
     ],
 ];

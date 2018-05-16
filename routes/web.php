@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('admin/deleteRooms', 'AdminController@deleteAllRooms')->name('admin.delete_rooms');
         Route::delete('admin/deleteGuests', 'AdminController@deleteAllGuests')->name('admin.delete_guests');
         Route::delete('admin/deleteReservations', 'AdminController@deleteAllReservations')->name('admin.delete_reservations');
+        Route::get('admin/generateInitialState', 'AdminController@showInitialStateForm')->name('admin.generate');
+        Route::post('admin/generateInitialState', 'AdminController@postInitialState')->name('admin.postgenerate');
 
         Route::get('user', 'UserController@index')->name('user.index');
         Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');

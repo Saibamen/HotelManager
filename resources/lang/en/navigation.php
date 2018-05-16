@@ -21,4 +21,6 @@ return [
 
     'show_users'  => 'Show users',
     'add_user'    => 'Add user',
+
+    'generate_initial_state' => 'Generate initial state',
 ];
