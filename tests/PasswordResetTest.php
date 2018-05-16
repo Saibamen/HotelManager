@@ -79,7 +79,7 @@ class PasswordResetTest extends BrowserKitTestCase
         Notification::assertSentTo(
             $user,
             \App\Notifications\ResetPasswordNotification::class,
-            function ($notification) use ($user) {
+            function ($notification) use ($user, &$resetToken) {
                 $mailData = $notification->toMail($user)->toArray();
 
                 $this->assertContains('Zresetuj swoje hasło', $mailData['subject']);
@@ -88,9 +88,27 @@ class PasswordResetTest extends BrowserKitTestCase
                 $this->assertEquals(route('password.reset', $notification->token), $mailData['actionUrl']);
                 $this->assertContains('Jeśli to nie Ty prosiłeś o restartowanie hasła, nie musisz podejmować żadnych działań.', $mailData['outroLines'][0]);
 
+                $resetToken = $notification->token;
+
                 return true;
             }
         );
+
+        $this->visit(route('password.reset', $resetToken))
+            ->seePageIs('password/reset/'.$resetToken)
+            ->see('Zresetuj hasło')
+            ->see('Adres e-mail')
+            ->see('Hasło')
+            ->see('Powtórz hasło')
+            ->type($user->email, 'email')
+            ->type('new_password', 'password')
+            ->type('new_password', 'password_confirmation')
+            ->press('Zresetuj hasło');
+
+        $this->seePageIs('room')
+            ->dontSee('Zaloguj')
+            ->dontSee('Zresetuj hasło')
+            ->see('Pokoje');
     }
 
     public function testFactoryLoggedUserCannotResetPassword()
