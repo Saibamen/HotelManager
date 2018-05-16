@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'admin'], function () {
         Route::get('admin', 'AdminController@index')->name('admin.index');
+        Route::delete('admin/deleteRooms', 'AdminController@deleteAllRooms')->name('admin.delete_rooms');
+        Route::delete('admin/deleteGuests', 'AdminController@deleteAllGuests')->name('admin.delete_guests');
+        Route::delete('admin/deleteReservations', 'AdminController@deleteAllReservations')->name('admin.delete_reservations');
 
         Route::get('user', 'UserController@index')->name('user.index');
         Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');
