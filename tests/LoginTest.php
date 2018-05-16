@@ -52,9 +52,9 @@ class LoginTest extends BrowserKitTestCase
             ->type($this->fakeUser->email, 'email')
             ->type('testpass123', 'password')
             ->press('Zaloguj')
-            ->seePageIs('home')
+            ->seePageIs('room')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
+            ->see('Wyloguj')
             ->see('Pokoje')
             ->dontSee('Błędny login lub hasło.');
     }
@@ -71,14 +71,14 @@ class LoginTest extends BrowserKitTestCase
         ]);
 
         $this->assertEquals(302, $response->status());
-        $this->assertRedirectedToRoute('home');
+        $this->assertRedirectedToRoute('room.index');
 
         $this->visit('/')->dontSee('Zaloguj')->see($this->fakeUser->name)->dontSee('Pokoje');
 
         $response = $this->call('POST', 'logout', ['_token' => csrf_token()]);
 
         $this->assertEquals(302, $response->status());
-        $this->assertRedirectedTo('/');
+        $this->assertRedirectedToRoute('login');
 
         $this->visit('login')->seePageIs('login')->dontSee($this->fakeUser->name);
     }

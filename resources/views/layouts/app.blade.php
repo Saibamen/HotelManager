@@ -87,6 +87,9 @@
                                         <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> !@lang('navigation.add_user')</a></li>
                                     </ul>
                                 </li>
+
+                                <!-- Admin -->
+                                <li><a href="{{ route('admin.index') }}">@lang('general.administration_panel')</a></li>
                             @endauth
                         </ul>
                     @endauth
