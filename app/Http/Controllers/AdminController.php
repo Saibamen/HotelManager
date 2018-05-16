@@ -23,7 +23,8 @@ class AdminController extends Controller
         return view('admin', $viewData);
     }
 
-    public function deleteAllRooms() {
+    public function deleteAllRooms()
+    {
         DB::table('reservations')->delete();
         DB::table('rooms')->delete();
 
@@ -32,7 +33,8 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    public function deleteAllGuests() {
+    public function deleteAllGuests()
+    {
         DB::table('reservations')->delete();
         DB::table('guests')->delete();
 
@@ -41,7 +43,8 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    public function deleteAllReservations() {
+    public function deleteAllReservations()
+    {
         DB::table('reservations')->delete();
 
         $data = ['class' => 'alert-success', 'message' => trans('general.deleted')];
