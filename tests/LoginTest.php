@@ -73,14 +73,21 @@ class LoginTest extends BrowserKitTestCase
         $this->assertEquals(302, $response->status());
         $this->assertRedirectedToRoute('room.index');
 
-        $this->visit('/')->dontSee('Zaloguj')->see($this->fakeUser->name)->dontSee('Pokoje');
+        $this->visit('/')
+            ->dontSee('Zaloguj')
+            ->see($this->fakeUser->name)
+            ->see('Pokoje');
 
         $response = $this->call('POST', 'logout', ['_token' => csrf_token()]);
 
         $this->assertEquals(302, $response->status());
         $this->assertRedirectedToRoute('login');
 
-        $this->visit('login')->seePageIs('login')->dontSee($this->fakeUser->name);
+        $this->visit('login')
+            ->seePageIs('login')
+            ->see('Zaloguj')
+            ->dontSee($this->fakeUser->name)
+            ->dontSee('Pokoje');
     }
 
     public function testFactoryLoggedUserCannotLoginAgain()
@@ -90,14 +97,12 @@ class LoginTest extends BrowserKitTestCase
         }
 
         $this->actingAs($this->fakeUser)
-            ->visit('home')
+            ->visit('/')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje')
             ->visit('login')
-            ->seePageIs('home')
+            ->seePageIs('room')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje');
     }
 

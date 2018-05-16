@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('room.index');
 });
+
+Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', 'HomeController@index')->name('home');
-
     Route::group(['middleware' => 'admin'], function () {
         Route::get('admin', 'AdminController@index')->name('admin.index');
         Route::delete('admin/deleteRooms', 'AdminController@deleteAllRooms')->name('admin.delete_rooms');
@@ -71,5 +71,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('user/change_password', 'UserController@changePassword')->name('user.change_password');
     Route::post('user/change_password', 'UserController@postChangePassword')->name('user.post_change_password');
 });
-
-Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');

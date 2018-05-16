@@ -75,7 +75,7 @@ class RegisterTest extends BrowserKitTestCase
             ->type('correctpassword', 'password')
             ->type('correctpassword', 'password_confirmation')
             ->press('Zarejestruj')
-            ->seePageIs('home')
+            ->seePageIs('room')
             ->see('Wyloguj')
             ->see('Pokoje');
 
@@ -94,14 +94,12 @@ class RegisterTest extends BrowserKitTestCase
         }
 
         $this->actingAs($this->fakeUser)
-            ->visit('home')
+            ->visit('/')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje')
             ->visit('register')
-            ->seePageIs('home')
+            ->seePageIs('room')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje');
     }
 }

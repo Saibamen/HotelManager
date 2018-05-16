@@ -33,7 +33,7 @@ class UserTest extends BrowserKitTestCase
         $this->actingAs(factory(User::class)->make());
 
         $this->visit('user')
-            ->seePageIs('home');
+            ->seePageIs('room');
     }
 
     public function testFilledIndex()

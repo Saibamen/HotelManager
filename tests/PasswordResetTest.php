@@ -102,14 +102,12 @@ class PasswordResetTest extends BrowserKitTestCase
         }
 
         $this->actingAs($this->fakeUser)
-            ->visit('home')
+            ->visit('/')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje')
             ->visit('password/reset')
-            ->seePageIs('home')
+            ->seePageIs('room')
             ->see($this->fakeUser->name)
-            ->see('You are logged in!')
             ->see('Pokoje');
     }
 }
