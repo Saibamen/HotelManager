@@ -86,24 +86,24 @@ class AdminController extends Controller
     {
         return [
             [
-                'id' => 'rooms',
+                'id'    => 'rooms',
                 'title' => trans('general.rooms'),
                 'value' => function () {
                     return 1;
                 },
-                'type' => 'number',
+                'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
                     'min'      => '1',
                 ],
             ],
             [
-                'id' => 'guests',
+                'id'    => 'guests',
                 'title' => trans('general.guests'),
                 'value' => function () {
                     return 1;
                 },
-                'type' => 'number',
+                'type'     => 'number',
                 'optional' => [
                     'required' => 'required',
                     'min'      => '1',
