@@ -14,7 +14,7 @@ class LoginTest extends BrowserKitTestCase
         Session::start();
 
         $this->fakeUser = factory(App\Models\User::class)->create([
-            'password' => bcrypt('testpass123'),
+            'password' => Hash::make('testpass123'),
         ]);
     }
 
