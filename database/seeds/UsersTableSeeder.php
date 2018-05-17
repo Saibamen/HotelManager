@@ -25,8 +25,8 @@ class UsersTableSeeder extends Seeder
         ];
 
         $passwords = [
-            [ 'password' => Hash::make('testadmin') ],
-            [ 'password' => Hash::make('testuser') ],
+            ['password' => Hash::make('testadmin')],
+            ['password' => Hash::make('testuser')],
         ];
 
         foreach ($users as $key => $value) {
