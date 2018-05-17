@@ -16,18 +16,21 @@ class UsersTableSeeder extends Seeder
             [
                 'name'     => 'Admin',
                 'email'    => 'admin@example.com',
-                'password' => Hash::make('testadmin'),
                 'is_admin' => true,
             ],
             [
                 'name'     => 'User',
                 'email'    => 'user@example.com',
-                'password' => Hash::make('testuser'),
             ],
         ];
 
-        foreach ($users as $user) {
-            User::firstOrCreate($user);
+        $passwords = [
+            [ 'password' => Hash::make('testadmin') ],
+            [ 'password' => Hash::make('testuser') ],
+        ];
+
+        foreach ($users as $key => $value) {
+            User::firstOrCreate($value, $passwords[$key]);
         }
     }
 }
