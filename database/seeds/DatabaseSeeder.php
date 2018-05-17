@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (App::Environment() !== 'testing') {
+        if (App::environment() !== 'testing') {
             $this->call([
                 UsersTableSeeder::class,
             ]);
