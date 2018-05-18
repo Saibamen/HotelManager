@@ -236,12 +236,19 @@ class ReservationController extends Controller implements ManageTableInterface
 
         try {
             $guest = Guest::select('id')->findOrFail($guestId);
-            $room = Room::select('id')->findOrFail($roomId);
+            $room = Room::select('id', 'capacity')->findOrFail($roomId);
         } catch (ModelNotFoundException $e) {
             Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
 
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        if ($room->capacity < $people) {
+            return $this->returnBack([
+                'message'     => trans('general.people_exceeds_room_capacity'),
                 'alert-class' => 'alert-danger',
             ]);
         }
@@ -274,6 +281,14 @@ class ReservationController extends Controller implements ManageTableInterface
                     'alert-class' => 'alert-danger',
                 ]);
             }
+        }
+
+        // TODO
+        if ($object->room->capacity < $request->input('people')) {
+            return $this->returnBack([
+                'message'     => trans('general.people_exceeds_room_capacity'),
+                'alert-class' => 'alert-danger',
+            ]);
         }
 
         $object->fill($request->all());
@@ -429,11 +444,18 @@ class ReservationController extends Controller implements ManageTableInterface
     public function editChangeRoom($reservationId, $roomId)
     {
         try {
-            $reservation = Reservation::select('id')->findOrFail($reservationId);
-            $room = Room::select('id')->findOrFail($roomId);
+            $reservation = Reservation::select('id', 'people')->findOrFail($reservationId);
+            $room = Room::select('id', 'capacity')->findOrFail($roomId);
         } catch (ModelNotFoundException $e) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        if ($room->capacity < $reservation->people) {
+            return $this->returnBack([
+                'message'     => trans('general.people_exceeds_room_capacity'),
                 'alert-class' => 'alert-danger',
             ]);
         }
