@@ -52,7 +52,7 @@ class AdminTest extends BrowserKitTestCase
             'id' => $reservation->guest->id,
         ]);
 
-        $response = $this->call('DELETE', 'admin/deleteRooms', [
+        $response = $this->call('DELETE', 'admin/delete_rooms', [
             '_token' => csrf_token(),
         ]);
 
@@ -87,7 +87,7 @@ class AdminTest extends BrowserKitTestCase
             'id' => $reservation->guest->id,
         ]);
 
-        $response = $this->call('DELETE', 'admin/deleteGuests', [
+        $response = $this->call('DELETE', 'admin/delete_guests', [
             '_token' => csrf_token(),
         ]);
 
@@ -122,7 +122,7 @@ class AdminTest extends BrowserKitTestCase
             'id' => $reservation->guest->id,
         ]);
 
-        $response = $this->call('DELETE', 'admin/deleteReservations', [
+        $response = $this->call('DELETE', 'admin/delete_reservations', [
             '_token' => csrf_token(),
         ]);
 

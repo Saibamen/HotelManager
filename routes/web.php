@@ -22,11 +22,11 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::get('admin', 'AdminController@index')->name('admin.index');
-        Route::delete('admin/deleteRooms', 'AdminController@deleteAllRooms')->name('admin.delete_rooms');
-        Route::delete('admin/deleteGuests', 'AdminController@deleteAllGuests')->name('admin.delete_guests');
-        Route::delete('admin/deleteReservations', 'AdminController@deleteAllReservations')->name('admin.delete_reservations');
-        Route::get('admin/generateInitialState', 'AdminController@showInitialStateForm')->name('admin.generate');
-        Route::post('admin/generateInitialState', 'AdminController@postInitialState')->name('admin.postgenerate');
+        Route::delete('admin/delete_rooms', 'AdminController@deleteAllRooms')->name('admin.delete_rooms');
+        Route::delete('admin/delete_guests', 'AdminController@deleteAllGuests')->name('admin.delete_guests');
+        Route::delete('admin/delete_reservations', 'AdminController@deleteAllReservations')->name('admin.delete_reservations');
+        Route::get('admin/generate_initial_state', 'AdminController@showInitialStateForm')->name('admin.generate');
+        Route::post('admin/generate_initial_state', 'AdminController@postInitialState')->name('admin.postgenerate');
 
         Route::get('user', 'UserController@index')->name('user.index');
         Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');
@@ -65,10 +65,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reservation/search_free_rooms/{guestId}', 'ReservationController@searchFreeRooms')->name('reservation.search_free_rooms')->where(['guestId' => '[0-9]+']);
     Route::post('reservation/search_free_rooms/{guestId}', 'ReservationController@postSearchFreeRooms')->name('reservation.post_search_free_rooms')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/choose_room/{guestId}', 'ReservationController@chooseFreeRoom')->name('reservation.choose_free_room')->where(['guestId' => '[0-9]+']);
-    Route::get('reservation/add/{roomId}/{guestId}', 'ReservationController@add')->name('reservation.add')->where(['roomId' => '[0-9]+', 'guestId' => '[0-9]+']);
+    Route::get('reservation/add/{guestId}/{roomId}', 'ReservationController@add')->name('reservation.add')->where(['guestId' => '[0-9]+', 'roomId' => '[0-9]+']);
 
-    Route::get('reservation/change_guest/{reservationId}', 'ReservationController@changeGuest')->name('reservation.change_guest')->where(['reservationId' => '[0-9]+']);
-    Route::get('reservation/change_room/{reservationId}', 'ReservationController@changeRoom')->name('reservation.change_room')->where(['reservationId' => '[0-9]+']);
+    Route::get('reservation/edit_choose_guest/{reservationId}', 'ReservationController@editChooseGuest')->name('reservation.edit_choose_guest')->where(['reservationId' => '[0-9]+']);
+    Route::get('reservation/edit_change_guest/{reservationId}/{guestId}', 'ReservationController@editChangeGuest')->name('reservation.edit_change_guest')->where(['reservationId' => '[0-9]+', 'guestId' => '[0-9]+']);
+    Route::get('reservation/edit_choose_room/{reservationId}', 'ReservationController@editChooseRoom')->name('reservation.edit_choose_room')->where(['reservationId' => '[0-9]+']);
+    Route::get('reservation/edit_change_room/{reservationId}/{roomId}', 'ReservationController@editChangeRoom')->name('reservation.edit_change_room')->where(['reservationId' => '[0-9]+', 'roomId' => '[0-9]+']);
 
     Route::get('user/change_password', 'UserController@changePassword')->name('user.change_password');
     Route::post('user/change_password', 'UserController@postChangePassword')->name('user.post_change_password');

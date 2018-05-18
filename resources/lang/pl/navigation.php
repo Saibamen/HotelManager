@@ -19,6 +19,9 @@ return [
     'edit_reservation'       => 'Edytuj rezerwację',
     'search_free_rooms'      => 'Szukaj wolnych pokoi',
 
+    'change_guest_for_reservation' => 'Zmień gościa dla rezerwacji',
+    'change_room_for_reservation' => 'Zmień pokój dla rezerwacji',
+
     'show_users'  => 'Pokaż użytkowników',
     'add_user'    => 'Dodaj użytkownika',
 

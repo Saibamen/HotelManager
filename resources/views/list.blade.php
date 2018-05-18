@@ -41,7 +41,7 @@
                                                 {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-message' => isset($deleteMessage) ? $deleteMessage : '' ]) }}
                                             @else
                                                 @php($routeParams = [$data->id])
-                                                @php(!isset($secondRouteChooseParam) ?: array_push($routeParams, $secondRouteChooseParam))
+                                                @php(!isset($additionalRouteParams) ?: $routeParams = array_merge((array) $additionalRouteParams, $routeParams))
                                                 {{ Html::link(route($routeChooseName, $routeParams), trans('general.select'), ['class' => 'btn btn-sm btn-primary']) }}
                                             @endif
                                         </td>

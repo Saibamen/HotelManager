@@ -211,18 +211,18 @@ class ReservationController extends Controller implements ManageTableInterface
         }
 
         $viewData = [
-            'columns'                => $roomTableService->getColumns(),
-            'dataset'                => $dataset,
-            'routeName'              => $roomTableService->getRouteName(),
-            'title'                  => $title,
-            'routeChooseName'        => $this->reservationTableService->getRouteName().'.add',
-            'secondRouteChooseParam' => $guest->id,
+            'columns'               => $roomTableService->getColumns(),
+            'dataset'               => $dataset,
+            'routeName'             => $roomTableService->getRouteName(),
+            'title'                 => $title,
+            'routeChooseName'       => $this->reservationTableService->getRouteName().'.add',
+            'additionalRouteParams' => $guest->id,
         ];
 
         return view('list', $viewData);
     }
 
-    public function add($roomId, $guestId)
+    public function add($guestId, $roomId)
     {
         if (!$this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
@@ -335,6 +335,77 @@ class ReservationController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
+    public function editChooseGuest(GuestTableService $guestTableService, $reservationId)
+    {
+        try {
+            $reservation = Reservation::select('id', 'guest_id')
+                ->findOrFail($reservationId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $title = trans('navigation.change_guest_for_reservation');
+
+        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
+            ->whereNotIn('id', [$reservation->guest_id])
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_guests_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'               => $guestTableService->getColumns(),
+            'dataset'               => $dataset,
+            'routeName'             => $guestTableService->getRouteName(),
+            'title'                 => $title,
+            'routeChooseName'       => $this->reservationTableService->getRouteName().'.edit_change_guest',
+            'additionalRouteParams' => $reservation->id,
+        ];
+
+        return view('list', $viewData);
+    }
+
+    public function editChooseRoom(RoomTableService $roomTableService, $reservationId)
+    {
+        try {
+            $reservation = Reservation::select('id', 'guest_id', 'date_start', 'date_end', 'people')
+                ->findOrFail($reservationId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $dateStart = Carbon::parse($reservation->date_start);
+        $dateEnd = Carbon::parse($reservation->date_end);
+
+        $title = trans('navigation.change_room_for_reservation');
+
+        $dataset = Room::select('id', 'number', 'floor', 'capacity', 'price', 'comment')
+            ->freeRoomsForReservation($dateStart, $dateEnd, $reservation->people)
+            ->paginate($this->getItemsPerPage());
+
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_rooms_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'               => $roomTableService->getColumns(),
+            'dataset'               => $dataset,
+            'routeName'             => $roomTableService->getRouteName(),
+            'title'                 => $title,
+            'routeChooseName'       => $this->reservationTableService->getRouteName().'.edit_change_room',
+            'additionalRouteParams' => $reservation->id,
+        ];
+
+        return view('list', $viewData);
+    }
+
     public function getGuestField()
     {
         return [
@@ -373,7 +444,7 @@ class ReservationController extends Controller implements ManageTableInterface
                     'value' => function () {
                         return 'Zmień gościa';
                     },
-                    'route_name'  => 'reservation.change_guest',
+                    'route_name'  => 'reservation.edit_choose_guest',
                     'route_param' => function (Reservation $data) {
                         return $data->id;
                     },
@@ -385,7 +456,7 @@ class ReservationController extends Controller implements ManageTableInterface
                     'value' => function () {
                         return 'Zmień pokój';
                     },
-                    'route_name'  => 'reservation.change_room',
+                    'route_name'  => 'reservation.edit_choose_room',
                     'route_param' => function (Reservation $data) {
                         return $data->id;
                     },
