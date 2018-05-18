@@ -253,6 +253,8 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
+        // TODO: Check if room is free
+
         $reservation = new Reservation();
         $reservation->guest_id = $guest->id;
         $reservation->room_id = $room->id;
@@ -267,7 +269,7 @@ class ReservationController extends Controller implements ManageTableInterface
         return redirect()->route($this->reservationTableService->getRouteName().'.index');
     }
 
-    // TODO
+    // TODO: Rename and delete null check from objectId
     public function store(ReservationSearchRequest $request, $objectId = null)
     {
         if ($objectId === null) {
@@ -290,6 +292,8 @@ class ReservationController extends Controller implements ManageTableInterface
                 'alert-class' => 'alert-danger',
             ]);
         }
+
+        // TODO: Check if dates can be changed
 
         $object->fill($request->all());
         $object->save();
@@ -459,6 +463,8 @@ class ReservationController extends Controller implements ManageTableInterface
                 'alert-class' => 'alert-danger',
             ]);
         }
+
+        // Check if room is free
 
         $reservation->room_id = $room->id;
         $reservation->save();
