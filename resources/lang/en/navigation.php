@@ -20,7 +20,7 @@ return [
     'search_free_rooms'      => 'Search free rooms',
 
     'change_guest_for_reservation' => 'Change guest for reservation',
-    'change_room_for_reservation' => 'Change room for reservation',
+    'change_room_for_reservation'  => 'Change room for reservation',
 
     'show_users'  => 'Show users',
     'add_user'    => 'Add user',
