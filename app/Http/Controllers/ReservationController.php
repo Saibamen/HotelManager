@@ -274,7 +274,8 @@ class ReservationController extends Controller implements ManageTableInterface
             $object = new Reservation();
         } else {
             try {
-                $object = Reservation::findOrFail($objectId);
+                $object = Reservation::with('room:id,capacity')
+                    ->findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -283,9 +284,8 @@ class ReservationController extends Controller implements ManageTableInterface
             }
         }
 
-        // TODO
         if ($object->room->capacity < $request->input('people')) {
-            return $this->returnBack([
+            return redirect()->back()->with([
                 'message'     => trans('general.people_exceeds_room_capacity'),
                 'alert-class' => 'alert-danger',
             ]);
