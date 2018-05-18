@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect()->route('reservation.choose_guest');
     })->name('reservation.addform');
     Route::get('reservation/edit/{id}', 'ReservationController@showEditForm')->name('reservation.editform')->where(['id' => '[0-9]+']);
-    Route::post('reservation/edit/{id}', 'ReservationController@store')->name('reservation.postedit')->where(['id' => '[0-9]+']);
+    Route::post('reservation/edit/{id}', 'ReservationController@postEdit')->name('reservation.postedit')->where(['id' => '[0-9]+']);
     Route::delete('reservation/delete/{id}', 'ReservationController@delete')->name('reservation.delete')->where(['id' => '[0-9]+']);
 
     Route::get('reservation/choose_guest', 'ReservationController@chooseGuest')->name('reservation.choose_guest');

@@ -56,11 +56,12 @@ return [
 
     'delete_associated_reservations' => 'Usuniesz również wszystkie powiązane rezerwacje',
 
-    'no_rooms_in_database'         => 'Brak pokoi w bazie danych',
-    'no_guests_in_database'        => 'Brak gości w bazie danych',
-    'no_reservations_in_database'  => 'Brak rezerwacji w bazie danych',
-    'no_users_in_database'         => 'Brak użytkowników w bazie danych',
-    'people_exceeds_room_capacity' => 'Liczba osób przekracza pojemność pokoju',
+    'no_rooms_in_database'             => 'Brak pokoi w bazie danych',
+    'no_guests_in_database'            => 'Brak gości w bazie danych',
+    'no_reservations_in_database'      => 'Brak rezerwacji w bazie danych',
+    'no_users_in_database'             => 'Brak użytkowników w bazie danych',
+    'people_exceeds_room_capacity'     => 'Liczba osób przekracza pojemność pokoju',
+    'dates_coincide_different_booking' => 'Podane daty kolidują z inną rezerwacją na ten pokój.',
 
     'created' => 'Utworzono',
     'updated' => 'Zaktualizowano',

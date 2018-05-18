@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Interfaces\ManageTableInterface;
-use App\Http\Requests\ReservationSearchRequest;
+use App\Http\Requests\ReservationAddRequest;
+use App\Http\Requests\ReservationEditRequest;
 use App\Models\Guest;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -12,6 +13,7 @@ use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -136,7 +138,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $title = trans('navigation.search_free_rooms');
         $submitRoute = route($this->reservationTableService->getRouteName().'.post_search_free_rooms', $dataset->guest->id);
 
-        $fiels = $this->getFields();
+        $fiels = $this->getFields(true);
         array_unshift($fiels, $this->getGuestField());
 
         $viewData = [
@@ -149,7 +151,7 @@ class ReservationController extends Controller implements ManageTableInterface
         return view('addedit', $viewData);
     }
 
-    public function postSearchFreeRooms(ReservationSearchRequest $request, $guestId = null)
+    public function postSearchFreeRooms(ReservationAddRequest $request, $guestId = null)
     {
         try {
             $guest = Guest::select('id')->findOrFail($guestId);
@@ -269,23 +271,19 @@ class ReservationController extends Controller implements ManageTableInterface
         return redirect()->route($this->reservationTableService->getRouteName().'.index');
     }
 
-    // TODO: Rename and delete null check from objectId
-    public function store(ReservationSearchRequest $request, $objectId = null)
+    public function postEdit(ReservationEditRequest $request, $objectId)
     {
-        if ($objectId === null) {
-            $object = new Reservation();
-        } else {
-            try {
-                $object = Reservation::with('room:id,capacity')
-                    ->findOrFail($objectId);
-            } catch (ModelNotFoundException $e) {
-                return $this->returnBack([
-                    'message'     => trans('general.object_not_found'),
-                    'alert-class' => 'alert-danger',
-                ]);
-            }
+        try {
+            $object = Reservation::with('room:id,capacity')
+                ->findOrFail($objectId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
         }
 
+        // Check room capacity for people in reservation
         if ($object->room->capacity < $request->input('people')) {
             return redirect()->back()->with([
                 'message'     => trans('general.people_exceeds_room_capacity'),
@@ -293,7 +291,27 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // TODO: Check if dates can be changed
+        $dateStart = Carbon::parse($request->input('date_start'));
+        $dateEnd = Carbon::parse($request->input('date_end'));
+
+        // Check if dates can be changed
+        $reservationsIdsForDates = DB::table('reservations')
+            ->where('room_id', $object->room_id)
+            ->where('id', '!=', $object->id)
+            ->where(function ($query) use ($dateStart, $dateEnd) {
+                $query->where(function ($query) use ($dateStart, $dateEnd) {
+                    $query->where('date_start', '<', $dateEnd)
+                        ->where('date_end', '>', $dateStart);
+                });
+            })
+            ->count();
+
+        if ($reservationsIdsForDates > 0) {
+            return redirect()->back()->with([
+                'message'     => trans('general.dates_coincide_different_booking'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
 
         $object->fill($request->all());
         $object->save();
@@ -464,7 +482,7 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // Check if room is free
+        // TODO: Check if room is free
 
         $reservation->room_id = $room->id;
         $reservation->save();
@@ -538,7 +556,7 @@ class ReservationController extends Controller implements ManageTableInterface
         ];
     }
 
-    public function getFields()
+    public function getFields($forAdd = false)
     {
         return [
             [
@@ -550,7 +568,7 @@ class ReservationController extends Controller implements ManageTableInterface
                 'type'     => 'text',
                 'optional' => [
                     'required'    => 'required',
-                    'class'       => 'datepicker start-date',
+                    'class'       => 'datepicker'. ($forAdd ? ' start-date' : null),
                     'placeholder' => 'dd.mm.rrrr',
                 ],
             ],
@@ -563,7 +581,7 @@ class ReservationController extends Controller implements ManageTableInterface
                 'type'     => 'text',
                 'optional' => [
                     'required'    => 'required',
-                    'class'       => 'datepicker end-date',
+                    'class'       => 'datepicker'. ($forAdd ? ' end-date' : null),
                     'placeholder' => 'dd.mm.rrrr',
                 ],
             ],

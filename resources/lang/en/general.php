@@ -56,11 +56,12 @@ return [
 
     'delete_associated_reservations' => 'You will also delete all associated reservations',
 
-    'no_rooms_in_database'         => 'No rooms in database',
-    'no_guests_in_database'        => 'No guests in database',
-    'no_reservations_in_database'  => 'No reservations in database',
-    'no_users_in_database'         => 'No users in database',
-    'people_exceeds_room_capacity' => 'The number of people exceeds the room capacity',
+    'no_rooms_in_database'             => 'No rooms in database',
+    'no_guests_in_database'            => 'No guests in database',
+    'no_reservations_in_database'      => 'No reservations in database',
+    'no_users_in_database'             => 'No users in database',
+    'people_exceeds_room_capacity'     => 'The number of people exceeds the room capacity',
+    'dates_coincide_different_booking' => 'Given dates coincide with a different booking for this room.',
 
     'created' => 'Created',
     'updated' => 'Updated',

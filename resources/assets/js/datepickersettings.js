@@ -9,3 +9,5 @@ $(".datepicker.start-date").datepicker(startDateSettings);
 
 var endDateSettings = $.extend({}, generalSettings, { startDate: "+1d" });
 $(".datepicker.end-date").datepicker(endDateSettings);
+
+$(".datepicker").datepicker(generalSettings);
