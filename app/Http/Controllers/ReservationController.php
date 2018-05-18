@@ -184,7 +184,6 @@ class ReservationController extends Controller implements ManageTableInterface
         try {
             $guest = Guest::select('id', 'first_name', 'last_name')->findOrFail($guestId);
         } catch (ModelNotFoundException $e) {
-            // TODO: logger helper
             Log::warning(__CLASS__.'::'.__FUNCTION__.' at '.__LINE__.': '.$e->getMessage());
 
             return $this->returnBack([
@@ -338,8 +337,7 @@ class ReservationController extends Controller implements ManageTableInterface
     public function editChooseGuest(GuestTableService $guestTableService, $reservationId)
     {
         try {
-            $reservation = Reservation::select('id', 'guest_id')
-                ->findOrFail($reservationId);
+            $reservation = Reservation::select('id', 'guest_id')->findOrFail($reservationId);
         } catch (ModelNotFoundException $e) {
             return $this->returnBack([
                 'message'     => trans('general.object_not_found'),
@@ -367,6 +365,28 @@ class ReservationController extends Controller implements ManageTableInterface
         ];
 
         return view('list', $viewData);
+    }
+
+    public function editChangeGuest($reservationId, $guestId)
+    {
+        try {
+            $reservation = Reservation::select('id')->findOrFail($reservationId);
+            $guest = Guest::select('id')->findOrFail($guestId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $reservation->guest_id = $guest->id;
+        $reservation->save();
+
+        return redirect()->route($this->reservationTableService->getRouteName().'.editform', $reservation->id)
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success',
+            ]);
     }
 
     public function editChooseRoom(RoomTableService $roomTableService, $reservationId)
@@ -404,6 +424,28 @@ class ReservationController extends Controller implements ManageTableInterface
         ];
 
         return view('list', $viewData);
+    }
+
+    public function editChangeRoom($reservationId, $roomId)
+    {
+        try {
+            $reservation = Reservation::select('id')->findOrFail($reservationId);
+            $room = Room::select('id')->findOrFail($roomId);
+        } catch (ModelNotFoundException $e) {
+            return $this->returnBack([
+                'message'     => trans('general.object_not_found'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
+
+        $reservation->room_id = $room->id;
+        $reservation->save();
+
+        return redirect()->route($this->reservationTableService->getRouteName().'.editform', $reservation->id)
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success',
+            ]);
     }
 
     public function getGuestField()
