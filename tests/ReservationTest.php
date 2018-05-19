@@ -405,7 +405,7 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Data zakończenia')
             ->see($reservation->guest->full_name)
             ->see($reservation->room->number)
-            ->type($reservation->room->capacity + 10, 'people')
+            ->type(rand($reservation->room->capacity + 1, 99), 'people')
             ->press('Wyślij')
             ->see('Liczba osób przekracza pojemność pokoju')
             ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
