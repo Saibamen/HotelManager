@@ -183,6 +183,24 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
     }
 
+    public function testPostSearchFreeRoomsInvalidId()
+    {
+        $this->visit('reservation');
+
+        $response = $this->call('POST', 'reservation/search_free_rooms/1000', [
+            '_token'     => csrf_token(),
+            'guest'      => 'd',
+            'date_start' => Carbon::today(),
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => 1,
+        ]);
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('reservation.index')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+    }
+
     public function testSearchFreeRoomsDefaultPost()
     {
         $guest = factory(Guest::class)->create();
@@ -235,6 +253,12 @@ class ReservationTest extends BrowserKitTestCase
         $guest = factory(Guest::class)->create();
         $room = factory(Room::class)->create();
 
+        $this->assertFalse($room->reservations()->exists());
+        $this->assertFalse($room->guests()->exists());
+
+        $this->assertFalse($guest->reservations()->exists());
+        $this->assertFalse($guest->rooms()->exists());
+
         $this->visit('reservation/search_free_rooms/'.$guest->id);
 
         $todayDate = Carbon::today();
@@ -269,6 +293,12 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->see($todayDate->format('d.m.Y'))
             ->see($tomorrowDate->format('d.m.Y'));
+
+        $this->assertTrue($room->reservations()->exists());
+        $this->assertTrue($room->guests()->exists());
+
+        $this->assertTrue($guest->reservations()->exists());
+        $this->assertTrue($guest->rooms()->exists());
     }
 
     public function testTryEditInvalidId()
@@ -385,7 +415,7 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Brak pokoi w bazie danych')
             ->dontSee('Wybierz');
 
-        factory(Room::class, 20)->create([
+        factory(Room::class)->create([
             'capacity' => rand($reservation->people, 99),
         ]);
 
