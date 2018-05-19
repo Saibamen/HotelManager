@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Input;
 
 class UserTest extends BrowserKitTestCase
 {
@@ -53,50 +54,121 @@ class UserTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
-    /*public function testAddEmptyForm()
+    public function testAddEmptyForm()
     {
         $this->visit('user/add')
-            ->dontSee('Zaloguj')
-            ->see('Dodaj pokój')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
-            ->see('Wyślij')
-            ->press('Wyślij');
-
-        $this->see('jest wymagane')
-            ->seePageIs('user/add');
-    }*/
-
-    /*public function testAddNewObject()
-    {
-        $object = factory(User::class)->make();
-
-        $this->visit('user/add')
-            ->dontSee('Zaloguj')
+            ->seePageIs('user/add')
             ->see('Dodaj użytkownika')
-            ->type($object->number, 'number')
-            ->type($object->floor, 'floor')
-            ->type($object->capacity, 'capacity')
-            ->type($object->price, 'price')
-            ->type('test comment', 'comment')
-            ->press('Wyślij');
+            ->type('', 'name')
+            ->type('', 'email')
+            ->type('', 'password')
+            ->type('', 'password_confirmation')
+            ->press('Wyślij')
+            ->seePageIs('user/add')
+            ->see('Pole adres e-mail jest wymagane.')
+            ->see('Pole hasło jest wymagane.');
 
-        $this->see($object->number)
-            ->see($object->floor)
-            ->see($object->capacity)
-            ->see($object->price)
-            ->see('test comment')
-            ->dontSee('Brak pokoi w bazie danych')
-            ->see('Zapisano pomyślnie')
+        $this->actingAs(factory(User::class)->make());
+
+        $this->visit('user/add')
+            ->seePageIs('room');
+    }
+
+    public function testSimpleFailAddForm()
+    {
+        $this->visit('user/add')
+            ->seePageIs('user/add')
+            ->see('Dodaj użytkownika')
+            ->type('name', 'name')
+            ->type('badEmail', 'email')
+            ->type('bad', 'password')
+            ->type('badPassConfirm', 'password_confirmation')
+            ->press('Wyślij')
+            ->seePageIs('user/add')
+            ->see('Format adres e-mail jest nieprawidłowy.')
+            ->see('Hasło musi mieć przynajmniej 6 znaków.');
+    }
+
+    public function testSimpleFailAddFormBadPassConfirm()
+    {
+        $this->visit('user/add')
+            ->seePageIs('user/add')
+            ->see('Dodaj użytkownika')
+            ->type('name', 'name')
+            ->type('badEmail', 'email')
+            ->type('badPass4', 'password')
+            ->type('badPassConfirm', 'password_confirmation')
+            ->press('Wyślij')
+            ->seePageIs('user/add')
+            ->see('Format adres e-mail jest nieprawidłowy.')
+            ->see('Potwierdzenie hasło nie zgadza się.')
+            ->assertNull(Input::get('password'));
+    }
+
+    public function testSimpleFailAddFormDuplicatedEmail()
+    {
+        $user = factory(User::class)->create([
+            'email' => 'duplicate@example.com'
+        ]);
+
+        $this->seeInDatabase('users', [
+            'name'  => $user->name,
+            'email' => 'duplicate@example.com',
+            'is_admin' => false
+        ]);
+
+        $this->visit('user/add')
+            ->seePageIs('user/add')
+            ->see('Dodaj użytkownika')
+            ->type('name', 'name')
+            ->type($user->email, 'email')
+            ->type('correctpassword', 'password')
+            ->type('correctpassword', 'password_confirmation')
+            ->press('Wyślij')
+            ->seePageIs('user/add')
+            ->see('Taki adres e-mail już występuje.')
+            ->dontSee('Potwierdzenie hasło nie zgadza się.')
+            ->assertNull(Input::get('password'));
+    }
+
+    public function testSimpleCorrectAddForm()
+    {
+        $this->visit('user/add')
+            ->seePageIs('user/add')
+            ->see('Dodaj użytkownika')
+            ->type('Valid Name', 'name')
+            ->type('valid-email@test.com', 'email')
+            ->type('correctpassword', 'password')
+            ->type('correctpassword', 'password_confirmation')
+            ->press('Wyślij')
             ->seePageIs('user');
 
-        $this->seeInDatabase('rooms', [
-            'number' => $object->number,
+        $this->seeInDatabase('users', [
+            'name'     => 'Valid Name',
+            'email'    => 'valid-email@test.com',
+            'is_admin' => false
         ]);
-    }*/
+    }
+
+    public function testAdminCorrectAddForm()
+    {
+        $this->visit('user/add')
+            ->seePageIs('user/add')
+            ->see('Dodaj użytkownika')
+            ->type('Valid Name', 'name')
+            ->type('valid-email@test.com', 'email')
+            ->type('correctpassword', 'password')
+            ->type('correctpassword', 'password_confirmation')
+            ->check('is_admin')
+            ->press('Wyślij')
+            ->seePageIs('user');
+
+        $this->seeInDatabase('users', [
+            'name'  => 'Valid Name',
+            'email' => 'valid-email@test.com',
+            'is_admin' => true
+        ]);
+    }
 
     public function testDelete()
     {
