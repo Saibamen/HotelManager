@@ -386,7 +386,7 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Wybierz');
 
         factory(Room::class, 20)->create([
-            'capacity' => rand($reservation->people, 99)
+            'capacity' => rand($reservation->people, 99),
         ]);
 
         $this->visit('reservation/edit_choose_room/'.$reservation->id)
