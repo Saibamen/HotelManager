@@ -444,7 +444,14 @@ class ReservationTest extends BrowserKitTestCase
 
     public function testSendEditFormWithMorePeopleThanRoomCapacity()
     {
-        $reservation = factory(Reservation::class)->create();
+        $room = factory(Room::class)->create([
+            'capacity' => rand(1, 98),
+        ]);
+
+        $reservation = factory(Reservation::class)->create([
+            'room_id' => $room->id,
+            'people'  => rand(1, $room->capacity),
+        ]);
 
         $this->visit('reservation/edit/'.$reservation->id)
             ->see('Edytuj rezerwację')
