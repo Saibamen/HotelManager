@@ -465,8 +465,8 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Zapisano pomyślnie');
 
         $this->seeInDatabase('reservations', [
-            'id'      => $reservation->id,
-            'guest_id' => $guest->id
+            'id'       => $reservation->id,
+            'guest_id' => $guest->id,
         ]);
     }
 
@@ -527,7 +527,7 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->seeInDatabase('reservations', [
             'id'      => $reservation->id,
-            'room_id' => $room->id
+            'room_id' => $room->id,
         ]);
     }
 
