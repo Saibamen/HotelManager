@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Input;
 
 class RegisterTest extends BrowserKitTestCase
 {
@@ -13,9 +12,10 @@ class RegisterTest extends BrowserKitTestCase
         Session::start();
     }
 
-    public function testEmptyRegister()
+    /*public function testEmptyRegister()
     {
         $this->visit('register')
+            ->seePageIs('register')
             ->see('Zarejestruj')
             ->dontSee('Pokoje')
             ->type('', 'name')
@@ -28,11 +28,12 @@ class RegisterTest extends BrowserKitTestCase
             ->dontSee('Pokoje')
             ->see('Pole adres e-mail jest wymagane.')
             ->see('Pole hasło jest wymagane.');
-    }
+    }*/
 
-    public function testSimpleFailRegister()
+    /*public function testSimpleFailRegister()
     {
         $this->visit('register')
+            ->seePageIs('register')
             ->see('Zarejestruj')
             ->dontSee('Pokoje')
             ->type('name', 'name')
@@ -45,11 +46,12 @@ class RegisterTest extends BrowserKitTestCase
             ->dontSee('Pokoje')
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
-    }
+    }*/
 
-    public function testSimpleFailRegisterBadPassConfirm()
+    /*public function testSimpleFailRegisterBadPassConfirm()
     {
         $this->visit('register')
+            ->seePageIs('register')
             ->see('Zarejestruj')
             ->dontSee('Pokoje')
             ->type('name', 'name')
@@ -63,11 +65,12 @@ class RegisterTest extends BrowserKitTestCase
             ->see('Format adres e-mail jest nieprawidłowy.')
             ->see('Potwierdzenie hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
-    }
+    }*/
 
-    public function testSimpleCorrectRegister()
+    /*public function testSimpleCorrectRegister()
     {
         $this->visit('register')
+            ->seePageIs('register')
             ->see('Zarejestruj')
             ->dontSee('Pokoje')
             ->type('Valid Name', 'name')
@@ -83,7 +86,7 @@ class RegisterTest extends BrowserKitTestCase
             'name'  => 'Valid Name',
             'email' => 'valid-email@test.com',
         ]);
-    }
+    }*/
 
     public function testFactoryLoggedUserCannotRegister()
     {
@@ -95,11 +98,22 @@ class RegisterTest extends BrowserKitTestCase
 
         $this->actingAs($this->fakeUser)
             ->visit('/')
+            ->seePageIs('room')
             ->see($this->fakeUser->name)
             ->see('Pokoje')
             ->visit('register')
             ->seePageIs('room')
             ->see($this->fakeUser->name)
             ->see('Pokoje');
+    }
+
+    public function testRegisterIsDisabled()
+    {
+        $this->visit('login')
+            ->seePageIs('login')
+            ->see('Zaloguj')
+            ->dontSee('Zarejestruj')
+            ->visit('register')
+            ->seePageIs('login');
     }
 }
