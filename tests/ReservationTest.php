@@ -301,6 +301,19 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertTrue($guest->rooms()->exists());
     }
 
+    public function testPostChooseFreeRoomsWithIncorrectSession()
+    {
+        $response = $this->call('GET', 'reservation/choose_room/1000');
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects();
+        $this->seePageIs('room');
+    }
+
     public function testTryEditInvalidId()
     {
         $this->visit('reservation')
