@@ -442,7 +442,7 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Wybierz');
     }
 
-    public function testTryShowChooseRoomForEditWithIncorrectReservationId()
+    public function testTryShowChooseGuestForEditWithIncorrectReservationId()
     {
         $this->visit('reservation')
             ->visit('reservation/edit_choose_guest/1000')

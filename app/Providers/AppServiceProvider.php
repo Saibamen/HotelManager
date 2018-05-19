@@ -17,29 +17,9 @@ class AppServiceProvider extends ServiceProvider
         /*
          * Custom validation rules
          */
-        Validator::extend('alpha_spaces', function ($attribute, $value) {
-            // Accept only alpha and spaces.
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-
-        Validator::extend('alpha_spaces_hyphens', function ($attribute, $value) {
-            // Accept only alpha, spaces and hyphens.
-            return preg_match('/^[\pL\s-]+$/u', $value);
-        });
-
         Validator::extend('alpha_spaces_hyphens_apostrophes', function ($attribute, $value) {
             // Accept only alpha, spaces, hyphens and apostrophes.
             return preg_match('/^[\pL\s-\']+$/u', $value);
-        });
-
-        Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses', function ($attribute, $value) {
-            // Accept only alpha, spaces, hyphens, apostrophes and parentheses.
-            return preg_match('/^[\pL\s-\'()]+$/u', $value);
-        });
-
-        Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses_slashes', function ($attribute, $value) {
-            // Accept only alpha, spaces, hyphens, apostrophes, parentheses and slashes.
-            return preg_match('/^[\pL\s-\'()\/]+$/u', $value);
         });
 
         Validator::extend('alpha_spaces_hyphens_apostrophes_parentheses_slashes_dots', function ($attribute, $value) {
