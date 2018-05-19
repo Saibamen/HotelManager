@@ -10,6 +10,12 @@
                 <div class="panel-body">
                     @include('layouts.messages')
 
+                    <h4>{{ trans('general.options') }}</h4>
+
+                    <div class="text-center">
+                        {{ Html::link(route('admin.generate'), trans('navigation.generate_initial_state'), ['class' => 'btn btn-primary']) }}
+                    </div>
+
                     <h4>{{ trans('general.delete') }}</h4>
 
                     <div class="btn-group btn-group-justified">

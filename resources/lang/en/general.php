@@ -28,6 +28,7 @@ return [
     'value'                 => 'Value',
     'yes'                   => 'Yes',
     'warning'               => 'Warning!',
+    'options'               => 'Options',
 
     'room'     => 'Room',
     'rooms'    => 'Rooms',
