@@ -442,6 +442,34 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Wybierz');
     }
 
+    public function testTryShowChooseRoomForEditWithIncorrectReservationId()
+    {
+        $this->visit('reservation')
+            ->visit('reservation/edit_choose_guest/1000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+    }
+
+    public function testChangeGuestForReservation()
+    {
+        $reservation = factory(Reservation::class)->create();
+        $guest = factory(Guest::class)->create();
+
+        $this->visit('reservation/edit_choose_guest/'.$reservation->id)
+            ->seePageIs('reservation/edit_choose_guest/'.$reservation->id)
+            ->see('Zmień gościa dla rezerwacji')
+            ->dontSee('Brak gości w bazie danych')
+            ->see('Wybierz')
+            ->click('Wybierz')
+            ->seePageIs('reservation/edit/'.$reservation->id)
+            ->see('Zapisano pomyślnie');
+
+        $this->seeInDatabase('reservations', [
+            'id'      => $reservation->id,
+            'guest_id' => $guest->id
+        ]);
+    }
+
     public function testShowChooseRoomForEdit()
     {
         $reservation = factory(Reservation::class)->create();
@@ -471,6 +499,36 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Zmień pokój dla rezerwacji')
             ->dontSee('Brak pokoi w bazie danych')
             ->see('Wybierz');
+    }
+
+    public function testTryShowChooseRoomForEditWithIncorrectReservationId()
+    {
+        $this->visit('reservation')
+            ->visit('reservation/edit_choose_room/1000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+    }
+
+    public function testChangeRoomForReservation()
+    {
+        $reservation = factory(Reservation::class)->create();
+        $room = factory(Room::class)->create([
+            'capacity' => rand($reservation->people, 99),
+        ]);
+
+        $this->visit('reservation/edit_choose_room/'.$reservation->id)
+            ->seePageIs('reservation/edit_choose_room/'.$reservation->id)
+            ->see('Zmień pokój dla rezerwacji')
+            ->dontSee('Brak pokoi w bazie danych')
+            ->see('Wybierz')
+            ->click('Wybierz')
+            ->seePageIs('reservation/edit/'.$reservation->id)
+            ->see('Zapisano pomyślnie');
+
+        $this->seeInDatabase('reservations', [
+            'id'      => $reservation->id,
+            'room_id' => $room->id
+        ]);
     }
 
     public function testDelete()
