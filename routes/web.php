@@ -29,9 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('admin/generate_initial_state', 'AdminController@postInitialState')->name('admin.postgenerate');
 
         Route::get('user', 'UserController@index')->name('user.index');
-        Route::get('user/add', 'UserController@showAddEditForm')->name('user.addform');
-        //Route::post('user/add', 'UserController@store')->name('user.postadd');
-        Route::get('user/edit/{id}', 'UserController@showAddEditForm')->name('user.editform')->where(['id' => '[0-9]+']);
+        Route::get('user/add', 'UserController@showAddForm')->name('user.addform');
+        //Route::post('user/add', 'UserController@postAdd')->name('user.postadd');
         Route::delete('user/delete/{id}', 'UserController@delete')->name('user.delete')->where(['id' => '[0-9]+']);
     });
 

@@ -37,7 +37,10 @@
                                         {{-- Akcje --}}
                                         <td>
                                             @if (!isset($routeChooseName))
-                                                {{ Html::link(route($routeName.'.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) }}
+                                                @if (!isset($disableEdit) || !$disableEdit)
+                                                    {{ Html::link(route($routeName.'.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) }}
+                                                @endif
+
                                                 {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-message' => isset($deleteMessage) ? $deleteMessage : '' ]) }}
                                             @else
                                                 @php($routeParams = [$data->id])

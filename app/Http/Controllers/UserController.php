@@ -33,6 +33,7 @@ class UserController extends Controller
             'dataset'       => $dataset,
             'routeName'     => $this->userTableService->getRouteName(),
             'title'         => $title,
+            'disableEdit'   => true
         ];
 
         return view('list', $viewData);
