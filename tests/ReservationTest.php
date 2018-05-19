@@ -301,8 +301,25 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertTrue($guest->rooms()->exists());
     }
 
-    public function testPostChooseFreeRoomsWithIncorrectSession()
+    public function testGetChooseFreeRoomsWithIncorrectSession()
     {
+        $response = $this->call('GET', 'reservation/choose_room/1000');
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects()
+            ->seePageIs('room');
+    }
+
+    public function testPostChooseFreeRoomsWithoutGuest()
+    {
+        $this->session([
+            'date_start', 'date_end', 'people'
+        ]);
+
         $response = $this->call('GET', 'reservation/choose_room/1000');
 
         $this->assertEquals(302, $response->status());
@@ -325,6 +342,39 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->followRedirects()
             ->seePageIs('room');
+    }
+
+    public function testTryAddWithoutGuestAndRoom()
+    {
+        $this->session([
+            'date_start' => 1, 'date_end' => 2, 'people' => 2
+        ]);
+
+        $response = $this->call('GET', 'reservation/add/1/2');
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects()
+            ->seePageIs('room');
+
+        $this->seeInSession(['date_start', 'date_end', 'people']);
+
+        $guest = factory(Guest::class)->create();
+
+        $response = $this->call('GET', 'reservation/add/'.$guest->id.'/2');
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('room.index')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects()
+            ->seePageIs('room');
+
+        $this->seeInSession(['date_start', 'date_end', 'people']);
     }
 
     public function testTryEditInvalidId()
