@@ -39,6 +39,22 @@ class UserController extends Controller
         return view('list', $viewData);
     }
 
+    public function showAddForm()
+    {
+        $dataset = new User();
+        $title = trans('navigation.add_user');
+
+        $viewData = [
+            'dataset'     => $dataset,
+            'fields'      => $this->getFields(),
+            'title'       => $title,
+            'submitRoute' => route($this->userTableService->getRouteName().'.postadd'),
+            'routeName'   => $this->userTableService->getRouteName(),
+        ];
+
+        return view('addedit', $viewData);
+    }
+
     public function delete($objectId)
     {
         $object = User::find($objectId);
@@ -69,5 +85,56 @@ class UserController extends Controller
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',
             ]);
+    }
+
+    public function getFields()
+    {
+        return [
+            [
+                'id'    => 'name',
+                'title' => trans('general.name'),
+                'value' => function (User $data) {
+                    return $data->name;
+                },
+                'optional' => [
+                    'required' => 'required',
+                ],
+            ],
+            [
+                'id'    => 'email',
+                'title' => trans('auth.email'),
+                'value' => function (User $data) {
+                    return $data->email;
+                },
+                'type'     => 'email',
+                'optional' => [
+                    'required' => 'required',
+                ],
+            ],
+            [
+                'id'    => 'password',
+                'title' => trans('auth.password'),
+                'type'     => 'password',
+                'optional' => [
+                    'required' => 'required',
+                ],
+            ],
+            [
+                'id'    => 'password-confirm',
+                'title' => trans('auth.password_confirmation'),
+                'type'     => 'password',
+                'optional' => [
+                    'required'    => 'required',
+                ],
+            ],
+            [
+                'id'    => 'is-admin',
+                'title' => trans('general.administrator'),
+                'value' => function () {
+                    return true;
+                },
+                'type'     => 'checkbox',
+            ],
+        ];
     }
 }

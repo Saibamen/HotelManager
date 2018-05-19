@@ -13,6 +13,7 @@ use App\Services\ReservationTableService;
 use App\Services\RoomTableService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -298,8 +299,8 @@ class ReservationController extends Controller implements ManageTableInterface
         $reservationsIdsForDates = DB::table('reservations')
             ->where('room_id', $object->room_id)
             ->where('id', '!=', $object->id)
-            ->where(function ($query) use ($dateStart, $dateEnd) {
-                $query->where(function ($query) use ($dateStart, $dateEnd) {
+            ->where(function (Builder $query) use ($dateStart, $dateEnd) {
+                $query->where(function (Builder $query) use ($dateStart, $dateEnd) {
                     $query->where('date_start', '<', $dateEnd)
                         ->where('date_end', '>', $dateStart);
                 });

@@ -55,6 +55,10 @@
                                 <div class="col-md-6">
                                     @if ($type === 'select')
                                         {{ Form::$type($field['id'], $field['selectable'], $field['value']($dataset), $fields_attributes) }}
+                                    @elseif ($type === 'checkbox' || $type === 'radio')
+                                        {{ Form::$type($field['id'], $field['value']($dataset)) }}
+                                    @elseif ($type === 'password')
+                                        {{ Form::$type($field['id'], $fields_attributes) }}
                                     @else
                                         {{ Form::$type($field['id'], $field['value']($dataset), $fields_attributes) }}
                                     @endif
