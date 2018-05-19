@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'hello' => 'Witaj,',
+
     'show_rooms'                   => 'Pokaż pokoje',
     'add_room'                     => 'Dodaj pokój',
     'currently_free_rooms'         => 'Aktualnie wolne pokoje',

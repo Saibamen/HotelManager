@@ -53,7 +53,7 @@ class LoginTest extends BrowserKitTestCase
             ->type('testpass123', 'password')
             ->press('Zaloguj')
             ->seePageIs('room')
-            ->see($this->fakeUser->name)
+            ->see('Witaj, '.$this->fakeUser->name)
             ->see('Wyloguj')
             ->see('Pokoje')
             ->dontSee('Błędny login lub hasło.');

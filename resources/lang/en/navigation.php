@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'hello' => 'Hello,',
+
     'show_rooms'                   => 'Show rooms',
     'add_room'                     => 'Add room',
     'currently_free_rooms'         => 'Currently free rooms',
