@@ -165,11 +165,11 @@ class GuestTest extends BrowserKitTestCase
     {
         $response = $this->call('POST', 'guest/edit/1000', [
             '_token'     => csrf_token(),
-            'first_name' => "aa",
-            'last_name'  => "aa",
-            'address'    => "aa",
-            'zip_code'   => "11-111",
-            'place'      => "aa",
+            'first_name' => 'aa',
+            'last_name'  => 'aa',
+            'address'    => 'aa',
+            'zip_code'   => '11-111',
+            'place'      => 'aa',
             'PESEL'      => 12345678912,
         ]);
 
