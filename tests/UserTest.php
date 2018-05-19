@@ -47,7 +47,7 @@ class UserTest extends BrowserKitTestCase
             ->see('Adres e-mail')
             ->see('Utworzono')
             ->see('Akcje')
-            ->see('Edytuj')
+            ->dontSee('Edytuj')
             ->see('Usuń')
             ->dontSee('Brak użytkowników w bazie danych')
             ->see('Dodaj');
@@ -67,7 +67,7 @@ class UserTest extends BrowserKitTestCase
             ->press('Wyślij');
 
         $this->see('jest wymagane')
-            ->seePageIs('room/add');
+            ->seePageIs('user/add');
     }*/
 
     /*public function testAddNewObject()
@@ -76,7 +76,7 @@ class UserTest extends BrowserKitTestCase
 
         $this->visit('user/add')
             ->dontSee('Zaloguj')
-            ->see('Dodaj pokój')
+            ->see('Dodaj użytkownika')
             ->type($object->number, 'number')
             ->type($object->floor, 'floor')
             ->type($object->capacity, 'capacity')
@@ -91,46 +91,11 @@ class UserTest extends BrowserKitTestCase
             ->see('test comment')
             ->dontSee('Brak pokoi w bazie danych')
             ->see('Zapisano pomyślnie')
-            ->seePageIs('room');
+            ->seePageIs('user');
 
         $this->seeInDatabase('rooms', [
             'number' => $object->number,
         ]);
-    }*/
-
-    /*public function testTryEditInvalidId()
-    {
-        $this->visit('user')
-            ->see('Pokoje')
-            ->visit('user/edit/10000');
-
-        $this->see('Nie znaleziono obiektu')
-            ->seePageIs('room');
-    }*/
-
-    /*public function testEditValidId()
-    {
-        $room = factory(Room::class)->create();
-
-        $this->visit('user')
-            ->see('Pokoje')
-            ->visit('user/edit/'.$room->id);
-
-        $this->see('Edytuj pokój')
-            ->see('Numer')
-            ->see('Piętro')
-            ->see('Pojemność')
-            ->see('Cena')
-            ->see('Komentarz')
-            ->see('test comment')
-            ->see('Wyślij');
-
-        $this->type('Edycja komentarza', 'comment')
-            ->press('Wyślij');
-
-        $this->see('Zapisano pomyślnie')
-            ->seePageIs('user')
-            ->see('Edycja komentarza');
     }*/
 
     public function testDelete()
@@ -152,15 +117,6 @@ class UserTest extends BrowserKitTestCase
             'id' => $object->id,
         ]);
     }
-
-    /*public function testTryStoreInvalidId()
-    {
-        $this->makeRequest('POST', 'user/edit/1000', [
-            '_token' => csrf_token(),
-        ]);
-
-        $this->notSeeInDatabase('rooms', []);
-    }*/
 
     public function testChangePassword()
     {
