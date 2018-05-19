@@ -317,7 +317,7 @@ class ReservationTest extends BrowserKitTestCase
     public function testPostChooseFreeRoomsWithoutGuest()
     {
         $this->session([
-            'date_start', 'date_end', 'people'
+            'date_start', 'date_end', 'people',
         ]);
 
         $response = $this->call('GET', 'reservation/choose_room/1000');
@@ -347,7 +347,7 @@ class ReservationTest extends BrowserKitTestCase
     public function testTryAddWithoutGuestAndRoom()
     {
         $this->session([
-            'date_start' => 1, 'date_end' => 2, 'people' => 2
+            'date_start' => 1, 'date_end' => 2, 'people' => 2,
         ]);
 
         $response = $this->call('GET', 'reservation/add/1/2');
