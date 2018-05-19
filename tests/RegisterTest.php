@@ -115,7 +115,6 @@ class RegisterTest extends BrowserKitTestCase
             ->see('Zaloguj')
             ->dontSee('Zarejestruj');
 
-
         $response = $this->call('GET', 'register');
 
         $this->assertEquals(404, $response->getStatusCode());
