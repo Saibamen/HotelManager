@@ -112,16 +112,16 @@ class UserController extends Controller
                 ],
             ],
             [
-                'id'    => 'password',
-                'title' => trans('auth.password'),
+                'id'       => 'password',
+                'title'    => trans('auth.password'),
                 'type'     => 'password',
                 'optional' => [
                     'required' => 'required',
                 ],
             ],
             [
-                'id'    => 'password-confirm',
-                'title' => trans('auth.password_confirmation'),
+                'id'       => 'password-confirm',
+                'title'    => trans('auth.password_confirmation'),
                 'type'     => 'password',
                 'optional' => [
                     'required'    => 'required',
