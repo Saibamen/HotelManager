@@ -175,6 +175,14 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Dodaj');
     }
 
+    public function testSearchFreeRoomsInvalidId()
+    {
+        $this->visit('reservation')
+            ->visit('reservation/search_free_rooms/1000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+    }
+
     public function testSearchFreeRoomsDefaultPost()
     {
         $guest = factory(Guest::class)->create();
@@ -285,8 +293,11 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->assertEquals(302, $response->status());
 
-        $this->assertRedirectedToRoute('home');
-        $this->seeInSession('message', 'Nie znaleziono obiektu');
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects()
+            ->seePageIs('room');
     }
 
     public function testShowEditForm()
@@ -322,6 +333,64 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Liczba osób przekracza pojemność pokoju')
             ->seePageIs('reservation')
             ->see('Zapisano pomyślnie');
+    }
+
+    public function testShowChooseGuestForEdit()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation/edit/'.$reservation->id)
+            ->see('Edytuj rezerwację')
+            ->see('Gość')
+            ->see('Zmień gościa')
+            ->see('Zmień pokój')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see($reservation->guest->full_name)
+            ->see($reservation->room->number)
+            ->see('Wyślij')
+            ->click('Zmień gościa');
+
+        $this->seePageIs('reservation/edit_choose_guest/'.$reservation->id)
+            ->see('Zmień gościa dla rezerwacji')
+            ->see('Brak gości w bazie danych')
+            ->dontSee('Wybierz');
+
+        factory(Guest::class)->create();
+
+        $this->visit('reservation/edit_choose_guest/'.$reservation->id)
+            ->see('Zmień gościa dla rezerwacji')
+            ->dontSee('Brak gości w bazie danych')
+            ->see('Wybierz');
+    }
+
+    public function testShowChooseRoomForEdit()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation/edit/'.$reservation->id)
+            ->see('Edytuj rezerwację')
+            ->see('Gość')
+            ->see('Zmień gościa')
+            ->see('Zmień pokój')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see($reservation->guest->full_name)
+            ->see($reservation->room->number)
+            ->see('Wyślij')
+            ->click('Zmień pokój');
+
+        $this->seePageIs('reservation/edit_choose_room/'.$reservation->id)
+            ->see('Zmień pokój dla rezerwacji')
+            ->see('Brak pokoi w bazie danych')
+            ->dontSee('Wybierz');
+
+        factory(Room::class)->create();
+
+        $this->visit('reservation/edit_choose_room/'.$reservation->id)
+            ->see('Zmień pokój dla rezerwacji')
+            ->dontSee('Brak pokoi w bazie danych')
+            ->see('Wybierz');
     }
 
     public function testDelete()

@@ -122,8 +122,8 @@ class RoomTest extends BrowserKitTestCase
 
         $this->assertEquals(302, $response->status());
 
-        $this->assertRedirectedToRoute('home');
-        $this->seeInSession('message', 'Nie znaleziono obiektu');
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
     }
 
     public function testEditValidId()

@@ -161,6 +161,24 @@ class GuestTest extends BrowserKitTestCase
             ->see('Edycja kontaktu');
     }
 
+    public function testTryStoreInvalidId()
+    {
+        $response = $this->call('POST', 'guest/edit/1000', [
+            '_token'     => csrf_token(),
+            'first_name' => "aa",
+            'last_name'  => "aa",
+            'address'    => "aa",
+            'zip_code'   => "11-111",
+            'place'      => "aa",
+            'PESEL'      => 12345678912,
+        ]);
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+    }
+
     public function testDelete()
     {
         $object = factory(Guest::class)->create();
@@ -223,14 +241,5 @@ class GuestTest extends BrowserKitTestCase
         $this->seeInDatabase('rooms', [
             'id' => $reservation->room->id,
         ]);
-    }
-
-    public function testTryStoreInvalidId()
-    {
-        $this->makeRequest('POST', 'guest/edit/1000', [
-            '_token' => csrf_token(),
-        ]);
-
-        $this->notSeeInDatabase('guests', []);
     }
 }
