@@ -248,6 +248,7 @@ class ReservationTest extends BrowserKitTestCase
             ->see($room->number);
 
         $this->click('Wybierz')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
             ->seePageIs('reservation')
             ->see('Zapisano pomyślnie')
             ->dontSee('Brak rezerwacji w bazie danych');
@@ -286,6 +287,25 @@ class ReservationTest extends BrowserKitTestCase
             ->see($reservation->guest->full_name)
             ->see($reservation->room->number)
             ->see('Wyślij');
+    }
+
+    public function testSendDefaultEditForm()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation/edit/'.$reservation->id)
+            ->see('Edytuj rezerwację')
+            ->see('Gość')
+            ->see('Zmień gościa')
+            ->see('Zmień pokój')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see($reservation->guest->full_name)
+            ->see($reservation->room->number)
+            ->press('Wyślij')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->seePageIs('reservation')
+            ->see('Zapisano pomyślnie');
     }
 
     public function testDelete()
