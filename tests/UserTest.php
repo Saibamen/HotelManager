@@ -190,6 +190,16 @@ class UserTest extends BrowserKitTestCase
         ]);
     }
 
+    public function testTryDeleteInvalidId()
+    {
+        $response = $this->call('DELETE', 'user/delete/1000', [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Nie można usunąć tego obiektu', $this->decodeResponseJson()['message']);
+    }
+
     public function testCannotDeleteYourself()
     {
         $object = factory(User::class)->create(['is_admin' => true]);

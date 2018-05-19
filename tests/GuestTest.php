@@ -180,6 +180,16 @@ class GuestTest extends BrowserKitTestCase
         ]);
     }
 
+    public function testTryDeleteInvalidId()
+    {
+        $response = $this->call('DELETE', 'guest/delete/1000', [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Nie znaleziono obiektu', $this->decodeResponseJson()['message']);
+    }
+
     public function testDeleteWithReservation()
     {
         $reservation = factory(Reservation::class)->create();

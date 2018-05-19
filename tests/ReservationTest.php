@@ -273,6 +273,22 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
     }
 
+    public function testTryPostEditInvalidId()
+    {
+        $response = $this->call('POST', 'reservation/edit/1000', [
+            '_token'     => csrf_token(),
+            'guest'      => 1,
+            'date_start' => Carbon::today(),
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => 1,
+        ]);
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home');
+        $this->seeInSession('message', 'Nie znaleziono obiektu');
+    }
+
     public function testShowEditForm()
     {
         $reservation = factory(Reservation::class)->create();
@@ -343,14 +359,15 @@ class ReservationTest extends BrowserKitTestCase
         ]);
     }
 
-    /*public function testTryStoreInvalidId()
+    public function testTryDeleteInvalidId()
     {
-        $this->makeRequest('POST', 'reservation/edit/1000', [
+        $response = $this->call('DELETE', 'reservation/delete/1000', [
             '_token' => csrf_token(),
         ]);
 
-        $this->notSeeInDatabase('reservations', []);
-    }*/
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Nie znaleziono obiektu', $this->decodeResponseJson()['message']);
+    }
 
     public function testEmptyFreeRooms()
     {

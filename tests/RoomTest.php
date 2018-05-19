@@ -124,8 +124,6 @@ class RoomTest extends BrowserKitTestCase
 
         $this->assertRedirectedToRoute('home');
         $this->seeInSession('message', 'Nie znaleziono obiektu');
-
-        $this->notSeeInDatabase('rooms', []);
     }
 
     public function testEditValidId()
@@ -172,7 +170,7 @@ class RoomTest extends BrowserKitTestCase
         ]);
     }
 
-    public function testDeleteInvalidId()
+    public function testTryDeleteInvalidId()
     {
         $response = $this->call('DELETE', 'room/delete/1000', [
             '_token' => csrf_token(),
@@ -180,8 +178,6 @@ class RoomTest extends BrowserKitTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals('Nie znaleziono obiektu', $this->decodeResponseJson()['message']);
-
-        $this->notSeeInDatabase('rooms', []);
     }
 
     public function testDeleteWithReservation()
