@@ -21,6 +21,8 @@ class AdminTest extends BrowserKitTestCase
         $this->visit('admin')
             ->seePageIs('admin')
             ->dontSee('Zaloguj')
+            ->see('Opcje')
+            ->see('Generuj stan początkowy')
             ->see('Wszystkie rezerwacje')
             ->see('Usuń')
             ->see('Pokoje')
@@ -139,5 +141,45 @@ class AdminTest extends BrowserKitTestCase
         $this->seeInDatabase('guests', [
             'id' => $reservation->guest->id,
         ]);
+    }
+
+    public function testGenerateInitialState()
+    {
+        $this->visit('admin/generate_initial_state')
+            ->seePageIs('admin/generate_initial_state')
+            ->dontSee('Zaloguj')
+            ->press('Wyślij');
+
+        $this->seePageIs('admin')
+            ->see('Zapisano pomyślnie');
+
+        $this->visit('room')
+            ->seePageIs('room')
+            ->dontSee('Brak pokoi w bazie danych');
+
+        $this->visit('guest')
+            ->seePageIs('guest')
+            ->dontSee('Brak gości w bazie danych');
+    }
+
+    public function testGenerateInitialStateEnglish()
+    {
+        App::setLocale('en');
+
+        $this->visit('admin/generate_initial_state')
+            ->seePageIs('admin/generate_initial_state')
+            ->dontSee('Login')
+            ->press('Send');
+
+        $this->seePageIs('admin')
+            ->see('Saved successfully');
+
+        $this->visit('room')
+            ->seePageIs('room')
+            ->dontSee('No rooms in database');
+
+        $this->visit('guest')
+            ->seePageIs('guest')
+            ->dontSee('No guests in database');
     }
 }
