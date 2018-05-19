@@ -450,6 +450,21 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
     }
 
+    public function testTryChangeGuestForReservationWithoutReservationAndGuest()
+    {
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_guest/1000/2000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_guest/'.$reservation->id.'/2000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+    }
+
     public function testChangeGuestForReservation()
     {
         $reservation = factory(Reservation::class)->create();
@@ -509,6 +524,37 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
     }
 
+    public function testTryChangeRoomForReservationWithoutReservationAndRoom()
+    {
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_room/1000/2000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_room/'.$reservation->id.'/2000')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('reservation');
+    }
+
+    public function testTryChangeRoomForReservationWithTooSmallCapacity()
+    {
+        $reservation = factory(Reservation::class)->create([
+            'people' => rand(2, 99),
+        ]);
+        $room = factory(Room::class)->create([
+            'capacity' => rand(1, $reservation->people - 1),
+        ]);
+
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_room/'.$reservation->id.'/'.$room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->see('Liczba osób przekracza pojemność pokoju')
+            ->seePageIs('reservation');
+    }
+
     public function testChangeRoomForReservation()
     {
         $reservation = factory(Reservation::class)->create();
@@ -523,7 +569,8 @@ class ReservationTest extends BrowserKitTestCase
             ->see('Wybierz')
             ->click('Wybierz')
             ->seePageIs('reservation/edit/'.$reservation->id)
-            ->see('Zapisano pomyślnie');
+            ->see('Zapisano pomyślnie')
+            ->dontSee('Liczba osób przekracza pojemność pokoju');
 
         $this->seeInDatabase('reservations', [
             'id'      => $reservation->id,
