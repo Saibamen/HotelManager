@@ -108,13 +108,13 @@ class UserTest extends BrowserKitTestCase
     public function testSimpleFailAddFormDuplicatedEmail()
     {
         $user = factory(User::class)->create([
-            'email' => 'duplicate@example.com'
+            'email' => 'duplicate@example.com',
         ]);
 
         $this->seeInDatabase('users', [
-            'name'  => $user->name,
-            'email' => 'duplicate@example.com',
-            'is_admin' => false
+            'name'     => $user->name,
+            'email'    => 'duplicate@example.com',
+            'is_admin' => false,
         ]);
 
         $this->visit('user/add')
@@ -146,7 +146,7 @@ class UserTest extends BrowserKitTestCase
         $this->seeInDatabase('users', [
             'name'     => 'Valid Name',
             'email'    => 'valid-email@test.com',
-            'is_admin' => false
+            'is_admin' => false,
         ]);
     }
 
@@ -164,9 +164,9 @@ class UserTest extends BrowserKitTestCase
             ->seePageIs('user');
 
         $this->seeInDatabase('users', [
-            'name'  => 'Valid Name',
-            'email' => 'valid-email@test.com',
-            'is_admin' => true
+            'name'     => 'Valid Name',
+            'email'    => 'valid-email@test.com',
+            'is_admin' => true,
         ]);
     }
 
