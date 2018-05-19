@@ -63,7 +63,7 @@ return [
     'no_reservations_in_database'      => 'Brak rezerwacji w bazie danych',
     'no_users_in_database'             => 'Brak użytkowników w bazie danych',
     'people_exceeds_room_capacity'     => 'Liczba osób przekracza pojemność pokoju',
-    'dates_coincide_different_booking' => 'Podane daty kolidują z inną rezerwacją na ten pokój.',
+    'dates_coincide_different_booking' => 'Podane daty kolidują z inną rezerwacją na ten pokój',
 
     'created' => 'Utworzono',
     'updated' => 'Zaktualizowano',

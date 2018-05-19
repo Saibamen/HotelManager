@@ -63,7 +63,7 @@ return [
     'no_reservations_in_database'      => 'No reservations in database',
     'no_users_in_database'             => 'No users in database',
     'people_exceeds_room_capacity'     => 'The number of people exceeds the room capacity',
-    'dates_coincide_different_booking' => 'Given dates coincide with a different booking for this room.',
+    'dates_coincide_different_booking' => 'Given dates coincide with a different booking for this room',
 
     'created' => 'Created',
     'updated' => 'Updated',

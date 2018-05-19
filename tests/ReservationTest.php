@@ -310,8 +310,21 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertRedirectedToRoute('home')
             ->seeInSession('message', 'Nie znaleziono obiektu');
 
-        $this->followRedirects();
-        $this->seePageIs('room');
+        $this->followRedirects()
+            ->seePageIs('room');
+    }
+
+    public function testTryAddWithIncorrectSession()
+    {
+        $response = $this->call('GET', 'reservation/add/1/2');
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home')
+            ->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->followRedirects()
+            ->seePageIs('room');
     }
 
     public function testTryEditInvalidId()
@@ -374,8 +387,30 @@ class ReservationTest extends BrowserKitTestCase
             ->see($reservation->room->number)
             ->press('Wyślij')
             ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
             ->seePageIs('reservation')
             ->see('Zapisano pomyślnie');
+    }
+
+    public function testSendEditFormWithMorePeopleThanRoomCapacity()
+    {
+        $reservation = factory(Reservation::class)->create();
+
+        $this->visit('reservation/edit/'.$reservation->id)
+            ->see('Edytuj rezerwację')
+            ->see('Gość')
+            ->see('Zmień gościa')
+            ->see('Zmień pokój')
+            ->see('Data rozpoczęcia')
+            ->see('Data zakończenia')
+            ->see($reservation->guest->full_name)
+            ->see($reservation->room->number)
+            ->type($reservation->room->capacity + 10, 'people')
+            ->press('Wyślij')
+            ->see('Liczba osób przekracza pojemność pokoju')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->seePageIs('reservation/edit/'.$reservation->id)
+            ->dontSee('Zapisano pomyślnie');
     }
 
     public function testShowChooseGuestForEdit()
