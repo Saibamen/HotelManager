@@ -387,6 +387,10 @@ class ReservationTest extends BrowserKitTestCase
 
         factory(Room::class)->create();
 
+        $this->markTestIncomplete(
+            'This test has not been completed yet.'
+        );
+
         $this->visit('reservation/edit_choose_room/'.$reservation->id)
             ->see('Zmień pokój dla rezerwacji')
             ->dontSee('Brak pokoi w bazie danych')
