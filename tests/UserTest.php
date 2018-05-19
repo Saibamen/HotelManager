@@ -190,6 +190,29 @@ class UserTest extends BrowserKitTestCase
         ]);
     }
 
+    public function testCannotDeleteYourself()
+    {
+        $object = factory(User::class)->create(['is_admin' => true]);
+        $this->actingAs($object);
+
+        $this->seeInDatabase('users', [
+            'id' => $object->id,
+        ]);
+
+        $response = $this->call('DELETE', 'user/delete/'.$object->id, [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $responseData = json_decode($response->getContent(), true);
+        $this->assertEquals('Nie można usunąć tego obiektu', $responseData['message']);
+
+        $this->seeInDatabase('users', [
+            'id' => $object->id,
+        ]);
+    }
+
     public function testChangePassword()
     {
         $user = factory(User::class)->create([
