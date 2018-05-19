@@ -110,6 +110,24 @@ class RoomTest extends BrowserKitTestCase
             ->seePageIs('room');
     }
 
+    public function testTryStoreInvalidId()
+    {
+        $response = $this->call('POST', 'room/edit/1000', [
+            '_token'   => csrf_token(),
+            'number'   => 1,
+            'floor'    => 1,
+            'capacity' => 1,
+            'price'    => 1,
+        ]);
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('home');
+        $this->seeInSession('message', 'Nie znaleziono obiektu');
+
+        $this->notSeeInDatabase('rooms', []);
+    }
+
     public function testEditValidId()
     {
         $room = factory(Room::class)->create();
@@ -154,6 +172,18 @@ class RoomTest extends BrowserKitTestCase
         ]);
     }
 
+    public function testDeleteInvalidId()
+    {
+        $response = $this->call('DELETE', 'room/delete/1000', [
+            '_token' => csrf_token(),
+        ]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Nie znaleziono obiektu', $this->decodeResponseJson()['message']);
+
+        $this->notSeeInDatabase('rooms', []);
+    }
+
     public function testDeleteWithReservation()
     {
         $reservation = factory(Reservation::class)->create();
@@ -187,14 +217,5 @@ class RoomTest extends BrowserKitTestCase
         $this->seeInDatabase('guests', [
             'id' => $reservation->guest->id,
         ]);
-    }
-
-    public function testTryStoreInvalidId()
-    {
-        $this->makeRequest('POST', 'room/edit/1000', [
-            '_token' => csrf_token(),
-        ]);
-
-        $this->notSeeInDatabase('rooms', []);
     }
 }

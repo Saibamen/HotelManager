@@ -24,7 +24,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/', function () {
     return redirect()->route('room.index');
-});
+})->name('home');
 
 Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');
 
