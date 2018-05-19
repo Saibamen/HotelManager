@@ -101,10 +101,11 @@ class RegisterTest extends BrowserKitTestCase
             ->seePageIs('room')
             ->see($this->fakeUser->name)
             ->see('Pokoje')
-            ->visit('register')
-            ->seePageIs('room')
-            ->see($this->fakeUser->name)
-            ->see('Pokoje');
+            ->dontSee('Zarejestruj');
+
+        $response = $this->call('GET', 'register');
+
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     public function testRegisterIsDisabled()
@@ -112,8 +113,11 @@ class RegisterTest extends BrowserKitTestCase
         $this->visit('login')
             ->seePageIs('login')
             ->see('Zaloguj')
-            ->dontSee('Zarejestruj')
-            ->visit('register')
-            ->seePageIs('login');
+            ->dontSee('Zarejestruj');
+
+
+        $response = $this->call('GET', 'register');
+
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }

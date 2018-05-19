@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\UserAddRequest;
 use App\Models\User;
 use App\Services\UserTableService;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,21 @@ class UserController extends Controller
         ];
 
         return view('addedit', $viewData);
+    }
+
+    public function postAdd(UserAddRequest $request)
+    {
+        $object = new User();
+
+        $request->merge(['password' => Hash::make($request->password)]);
+        $object->fill($request->all());
+        $object->save();
+
+        return redirect()->route($this->userTableService->getRouteName().'.index')
+            ->with([
+                'message'     => trans('general.saved'),
+                'alert-class' => 'alert-success',
+            ]);
     }
 
     public function delete($objectId)
@@ -120,7 +136,7 @@ class UserController extends Controller
                 ],
             ],
             [
-                'id'       => 'password-confirm',
+                'id'       => 'password_confirmation',
                 'title'    => trans('auth.password_confirmation'),
                 'type'     => 'password',
                 'optional' => [
@@ -128,7 +144,7 @@ class UserController extends Controller
                 ],
             ],
             [
-                'id'    => 'is-admin',
+                'id'    => 'is_admin',
                 'title' => trans('general.administrator'),
                 'value' => function () {
                     return true;

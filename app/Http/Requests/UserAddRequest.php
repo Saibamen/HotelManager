@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class InitialStateRequest extends FormRequest
+class UserAddRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,8 +15,9 @@ class InitialStateRequest extends FormRequest
     public function rules()
     {
         return [
-            'rooms'    => 'required|numeric|min:1',
-            'guests'   => 'required|numeric|min:1',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ];
     }
 }
