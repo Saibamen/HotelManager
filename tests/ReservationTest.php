@@ -254,8 +254,8 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->session([
             'date_start' => Carbon::today(),
-            'date_end' => Carbon::today()->addDays($sessionEndAddDays),
-            'people' => 1,
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays),
+            'people'     => 1,
         ]);
 
         $room = factory(Room::class)->create();
@@ -349,8 +349,8 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->session([
             'date_start' => Carbon::today(),
-            'date_end' => Carbon::today()->addDays($sessionEndAddDays),
-            'people' => 1,
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays),
+            'people'     => 1,
         ]);
 
         $room = factory(Room::class)->create();
@@ -387,9 +387,9 @@ class ReservationTest extends BrowserKitTestCase
             ->seePageIs('reservation');
 
         $this->seeInDatabase('reservations', [
-            'room_id'  => $reservation->room->id,
-            'guest_id' => $reservation->guest->id,
-            'people'   => 1,
+            'room_id'    => $reservation->room->id,
+            'guest_id'   => $reservation->guest->id,
+            'people'     => 1,
             'date_start' => Carbon::today(),
         ]);
     }
