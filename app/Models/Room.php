@@ -82,6 +82,14 @@ class Room extends Model
         });
     }
 
+    public function isFree($dateStart, $dateEnd)
+    {
+        return !$this->reservations()
+            ->where('date_start', '<', $dateEnd)
+            ->where('date_end', '>', $dateStart)
+            ->exists();
+    }
+
     public function reservations()
     {
         return $this->hasMany('App\Models\Reservation');

@@ -237,6 +237,9 @@ class ReservationController extends Controller implements ManageTableInterface
         $dateEnd = Session::get('date_end');
         $people = Session::get('people');
 
+        $dateStart = Carbon::parse($dateStart);
+        $dateEnd = Carbon::parse($dateEnd);
+
         try {
             $guest = Guest::select('id')->findOrFail($guestId);
             $room = Room::select('id', 'capacity')->findOrFail($roomId);
@@ -256,7 +259,12 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // TODO: Check if room is free
+        if (!$room->isFree($dateStart, $dateEnd)) {
+            return $this->returnBack([
+                'message'     => trans('dates_coincide_different_booking'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
 
         $reservation = new Reservation();
         $reservation->guest_id = $guest->id;
@@ -467,7 +475,8 @@ class ReservationController extends Controller implements ManageTableInterface
     public function editChangeRoom($reservationId, $roomId)
     {
         try {
-            $reservation = Reservation::select('id', 'people')->findOrFail($reservationId);
+            $reservation = Reservation::select('id', 'people', 'date_start', 'date_end')
+                ->findOrFail($reservationId);
             $room = Room::select('id', 'capacity')->findOrFail($roomId);
         } catch (ModelNotFoundException $e) {
             return $this->returnBack([
@@ -476,6 +485,9 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
+        $dateStart = Carbon::parse($reservation->date_start);
+        $dateEnd = Carbon::parse($reservation->date_end);
+
         if ($room->capacity < $reservation->people) {
             return $this->returnBack([
                 'message'     => trans('general.people_exceeds_room_capacity'),
@@ -483,7 +495,12 @@ class ReservationController extends Controller implements ManageTableInterface
             ]);
         }
 
-        // TODO: Check if room is free
+        if (!$room->isFree($dateStart, $dateEnd)) {
+            return $this->returnBack([
+                'message'     => trans('dates_coincide_different_booking'),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
 
         $reservation->room_id = $room->id;
         $reservation->save();

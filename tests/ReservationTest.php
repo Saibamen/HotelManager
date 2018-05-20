@@ -349,7 +349,9 @@ class ReservationTest extends BrowserKitTestCase
     public function testTryAddWithoutGuestAndRoom()
     {
         $this->session([
-            'date_start' => 1, 'date_end' => 2, 'people' => 2,
+            'date_start' => Carbon::today(),
+            'date_end' => Carbon::tomorrow(),
+            'people' => 2,
         ]);
 
         $response = $this->call('GET', 'reservation/add/1/2');
