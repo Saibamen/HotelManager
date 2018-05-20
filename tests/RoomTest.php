@@ -110,6 +110,25 @@ class RoomTest extends BrowserKitTestCase
             ->seePageIs('room');
     }
 
+    public function testTryRefreshEditFormAfterDelete()
+    {
+        $room = factory(Room::class)->create();
+
+        $this->visit('room/edit/'.$room->id)
+            ->seePageIs('room/edit/'.$room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->see('Edytuj pokój')
+            ->see('Wyślij');
+
+        $room->delete();
+
+        $this->visit('room/edit/'.$room->id)
+            ->dontSee('Edytuj pokój')
+            ->dontSee('Wyślij')
+            ->see('Nie znaleziono obiektu')
+            ->seePageIs('room');
+    }
+
     public function testTryStoreInvalidId()
     {
         $response = $this->call('POST', 'room/edit/1000', [
