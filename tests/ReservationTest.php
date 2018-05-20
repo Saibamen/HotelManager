@@ -616,6 +616,45 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Zapisano pomyślnie');
     }
 
+    public function testTryChangeCollidingDatesForReservation()
+    {
+        $room = factory(Room::class)->create();
+        $reservation = factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'people'     => rand(1, $room->capacity),
+            'date_start' => Carbon::today(),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->subDays(15),
+            'date_end'   => Carbon::today()->subDays(5),
+        ]);
+
+
+        $this->visit('reservation');
+
+        $response = $this->call('POST', 'reservation/edit/'.$reservation->id, [
+            '_token'     => csrf_token(),
+            'guest'      => 'd',
+            'date_start' => Carbon::today()->subDays(10),
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => $reservation->people,
+        ]);
+
+        $this->assertEquals(302, $response->status());
+
+        $this->assertRedirectedToRoute('reservation.index')
+            ->seeInSession('message', 'Podane daty kolidują z inną rezerwacją na ten pokój');
+
+        $this->seeInDatabase('reservations', [
+            'id'         => $reservation->id,
+            'guest_id'   => $reservation->guest->id,
+            'room_id'    => $room->id,
+            'date_start' => Carbon::parse($reservation->date_start),
+            'date_end'   => Carbon::parse($reservation->date_end),
+        ]);
+    }
+
     public function testShowChooseGuestForEdit()
     {
         $reservation = factory(Reservation::class)->create();
