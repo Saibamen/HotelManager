@@ -705,8 +705,40 @@ class ReservationTest extends BrowserKitTestCase
         $this->visit('reservation')
             ->visit('reservation/edit_change_room/'.$reservation->id.'/'.$room->id)
             ->dontSee('Nie znaleziono obiektu')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->dontSee('Zapisano pomyślnie')
             ->see('Liczba osób przekracza pojemność pokoju')
             ->seePageIs('reservation');
+    }
+
+    public function testTryChangeRoomForReservationToNonFreeRoom()
+    {
+        $reservation = factory(Reservation::class)->create([
+            'date_start' => Carbon::today(),
+        ]);
+        $room = factory(Room::class)->create([
+            'capacity' => rand($reservation->people, 99),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today(),
+        ]);
+
+        $this->visit('reservation')
+            ->visit('reservation/edit_change_room/'.$reservation->id.'/'.$room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->dontSee('Zapisano pomyślnie')
+            ->see('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->seePageIs('reservation');
+
+        $this->seeInDatabase('reservations', [
+            'id'       => $reservation->id,
+            'guest_id' => $reservation->guest->id,
+            'room_id'  => $reservation->room->id,
+        ]);
     }
 
     public function testChangeRoomForReservation()

@@ -261,7 +261,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
         if (!$room->isFree($dateStart, $dateEnd)) {
             return $this->returnBack([
-                'message'     => trans('dates_coincide_different_booking'),
+                'message'     => trans('general.dates_coincide_different_booking'),
                 'alert-class' => 'alert-danger',
             ]);
         }
@@ -497,7 +497,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
         if (!$room->isFree($dateStart, $dateEnd)) {
             return $this->returnBack([
-                'message'     => trans('dates_coincide_different_booking'),
+                'message'     => trans('general.dates_coincide_different_booking'),
                 'alert-class' => 'alert-danger',
             ]);
         }
