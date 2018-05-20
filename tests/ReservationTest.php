@@ -630,7 +630,6 @@ class ReservationTest extends BrowserKitTestCase
             'date_end'   => Carbon::today()->subDays(5),
         ]);
 
-
         $this->visit('reservation');
 
         $response = $this->call('POST', 'reservation/edit/'.$reservation->id, [
