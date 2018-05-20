@@ -308,7 +308,7 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertEquals(302, $response->status());
 
         $this->assertRedirectedToRoute('home')
-            ->seeInSession('message', 'Nie znaleziono obiektu');
+            ->seeInSession('message', 'Błąd sesji. Spróbuj ponownie');
 
         $this->followRedirects()
             ->seePageIs('room');
@@ -340,7 +340,7 @@ class ReservationTest extends BrowserKitTestCase
         $this->assertEquals(302, $response->status());
 
         $this->assertRedirectedToRoute('home')
-            ->seeInSession('message', 'Nie znaleziono obiektu');
+            ->seeInSession('message', 'Błąd sesji. Spróbuj ponownie');
 
         $this->followRedirects()
             ->seePageIs('room');

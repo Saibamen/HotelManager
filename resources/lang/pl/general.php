@@ -64,6 +64,7 @@ return [
     'no_users_in_database'             => 'Brak użytkowników w bazie danych',
     'people_exceeds_room_capacity'     => 'Liczba osób przekracza pojemność pokoju',
     'dates_coincide_different_booking' => 'Podane daty kolidują z inną rezerwacją na ten pokój',
+    'session_error'                    => 'Błąd sesji. Spróbuj ponownie',
 
     'created' => 'Utworzono',
     'updated' => 'Zaktualizowano',

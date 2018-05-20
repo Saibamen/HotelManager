@@ -179,7 +179,7 @@ class ReservationController extends Controller implements ManageTableInterface
     {
         if (!$this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
-                'message'     => trans('general.object_not_found'),
+                'message'     => trans('general.session_error'),
                 'alert-class' => 'alert-danger',
             ]);
         }
@@ -228,7 +228,7 @@ class ReservationController extends Controller implements ManageTableInterface
     {
         if (!$this->isReservationDataInSessionCorrect()) {
             return $this->returnBack([
-                'message'     => trans('general.object_not_found'),
+                'message'     => trans('general.session_error'),
                 'alert-class' => 'alert-danger',
             ]);
         }

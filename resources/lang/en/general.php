@@ -64,6 +64,7 @@ return [
     'no_users_in_database'             => 'No users in database',
     'people_exceeds_room_capacity'     => 'The number of people exceeds the room capacity',
     'dates_coincide_different_booking' => 'Given dates coincide with a different booking for this room',
+    'session_error'                    => 'Session error. Try again',
 
     'created' => 'Created',
     'updated' => 'Updated',
