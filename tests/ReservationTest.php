@@ -350,8 +350,8 @@ class ReservationTest extends BrowserKitTestCase
     {
         $this->session([
             'date_start' => Carbon::today(),
-            'date_end' => Carbon::tomorrow(),
-            'people' => 2,
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => 2,
         ]);
 
         $response = $this->call('GET', 'reservation/add/1/2');
