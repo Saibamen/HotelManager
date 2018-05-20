@@ -474,6 +474,55 @@ class ReservationTest extends BrowserKitTestCase
         $this->seeInSession(['date_start', 'date_end', 'people']);
     }
 
+    public function testTryAddWithTooSmallRoom()
+    {
+        $guest = factory(Guest::class)->create();
+        $room = factory(Room::class)->create([
+            'capacity' => rand(1, 98),
+        ]);
+
+        $this->session([
+            'date_start' => Carbon::today(),
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => rand($room->capacity + 1, 99),
+        ]);
+
+        $this->visit('reservation')
+            ->visit('reservation/add/'.$guest->id.'/'.$room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->dontSee('Zapisano pomyślnie')
+            ->see('Liczba osób przekracza pojemność pokoju')
+            ->seePageIs('reservation');
+    }
+
+    public function testTryAddWithNonFreeRoom()
+    {
+        $guest = factory(Guest::class)->create();
+        $room = factory(Room::class)->create();
+
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today(),
+        ]);
+
+        $this->session([
+            'date_start' => Carbon::today(),
+            'date_end'   => Carbon::tomorrow(),
+            'people'     => rand(1, $room->capacity),
+        ]);
+
+        $this->visit('reservation')
+            ->visit('reservation/add/'.$guest->id.'/'.$room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->dontSee('Zapisano pomyślnie')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->see('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->seePageIs('reservation');
+    }
+
     public function testTryEditInvalidId()
     {
         $this->visit('reservation')
