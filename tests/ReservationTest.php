@@ -248,6 +248,48 @@ class ReservationTest extends BrowserKitTestCase
             ->dontSee('Piętro');
     }
 
+    public function testShowFreeRoomForReservationsOutsideDates()
+    {
+        $sessionEndAddDays = 3;
+
+        $this->session([
+            'date_start' => Carbon::today(),
+            'date_end' => Carbon::today()->addDays($sessionEndAddDays),
+            'people' => 1,
+        ]);
+
+        $room = factory(Room::class)->create();
+        $reservation = factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->subDays(10),
+            'date_end'   => Carbon::today()->subDays(2),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->subDays(10),
+            'date_end'   => Carbon::today(),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->addDays($sessionEndAddDays),
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays + 10),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->addDays($sessionEndAddDays + 2),
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays + 10),
+        ]);
+
+        $this->visit('reservation/choose_room/'.$reservation->guest->id)
+            ->see('Wybierz pokój dla '.$reservation->guest->first_name.' '.$reservation->guest->last_name)
+            ->dontSee('Brak pokoi w bazie danych')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->see('Numer')
+            ->see('Piętro');
+    }
+
     public function testSearchFreeRoomsCorrectPostWithRoomsAndAddReservation()
     {
         $guest = factory(Guest::class)->create();
@@ -299,6 +341,57 @@ class ReservationTest extends BrowserKitTestCase
 
         $this->assertTrue($guest->reservations()->exists());
         $this->assertTrue($guest->rooms()->exists());
+    }
+
+    public function testAddReservationOutsideOtherDates()
+    {
+        $sessionEndAddDays = 3;
+
+        $this->session([
+            'date_start' => Carbon::today(),
+            'date_end' => Carbon::today()->addDays($sessionEndAddDays),
+            'people' => 1,
+        ]);
+
+        $room = factory(Room::class)->create();
+        $reservation = factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->subDays(10),
+            'date_end'   => Carbon::today()->subDays(2),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->subDays(10),
+            'date_end'   => Carbon::today(),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->addDays($sessionEndAddDays),
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays + 10),
+        ]);
+        factory(Reservation::class)->create([
+            'room_id'    => $room->id,
+            'date_start' => Carbon::today()->addDays($sessionEndAddDays + 2),
+            'date_end'   => Carbon::today()->addDays($sessionEndAddDays + 10),
+        ]);
+
+        $this->visit('reservation/add/'.$reservation->guest->id.'/'.$reservation->room->id)
+            ->dontSee('Nie znaleziono obiektu')
+            ->dontSee('Brak pokoi w bazie danych')
+            ->dontSee('Liczba osób przekracza pojemność pokoju')
+            ->dontSee('Podane daty kolidują z inną rezerwacją na ten pokój')
+            ->dontSee('Błąd sesji. Spróbuj ponownie')
+            ->see('Zapisano pomyślnie')
+            ->see(Carbon::today()->format('d.m.Y'))
+            ->see(Carbon::today()->addDays($sessionEndAddDays)->format('d.m.Y'))
+            ->seePageIs('reservation');
+
+        $this->seeInDatabase('reservations', [
+            'room_id'  => $reservation->room->id,
+            'guest_id' => $reservation->guest->id,
+            'people'   => 1,
+            'date_start' => Carbon::today(),
+        ]);
     }
 
     public function testGetChooseFreeRoomsWithIncorrectSession()
