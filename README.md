@@ -11,6 +11,8 @@
 
 Web application for managing hotel rooms, guests and reservations with flexible and responsive frontend written in Laravel 5.5
 
+![All reservations](github_images/all_reservations.PNG)
+
 ## Requirements
 
 * PHP >= 7.0.0
