@@ -137,7 +137,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $dataset = new Reservation();
         $dataset->guest()->associate($guest);
         $title = trans('navigation.search_free_rooms');
-        $submitRoute = route($this->reservationTableService->getRouteName().'.post_search_free_rooms', $dataset->guest->id);
+        $submitRoute = route($this->reservationTableService->getRouteName().'.post_search_free_rooms', [$dataset->guest->id]);
 
         $fiels = $this->getFields(true);
         array_unshift($fiels, $this->getGuestField());
@@ -165,7 +165,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
         $data = $request->only(['date_start', 'date_end', 'people']);
 
-        return redirect()->route($this->reservationTableService->getRouteName().'.choose_free_room', $guest->id)
+        return redirect()->route($this->reservationTableService->getRouteName().'.choose_free_room', [$guest->id])
             ->with($data);
     }
 
@@ -428,7 +428,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $reservation->guest_id = $guest->id;
         $reservation->save();
 
-        return redirect()->route($this->reservationTableService->getRouteName().'.editform', $reservation->id)
+        return redirect()->route($this->reservationTableService->getRouteName().'.editform', [$reservation->id])
             ->with([
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',
@@ -505,7 +505,7 @@ class ReservationController extends Controller implements ManageTableInterface
         $reservation->room_id = $room->id;
         $reservation->save();
 
-        return redirect()->route($this->reservationTableService->getRouteName().'.editform', $reservation->id)
+        return redirect()->route($this->reservationTableService->getRouteName().'.editform', [$reservation->id])
             ->with([
                 'message'     => trans('general.saved'),
                 'alert-class' => 'alert-success',

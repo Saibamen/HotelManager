@@ -18,7 +18,7 @@ class ResetPasswordNotification extends \Illuminate\Auth\Notifications\ResetPass
         return (new MailMessage())
             ->subject(trans('passwords.mail_subject'))
             ->line(trans('passwords.mail_line_1'))
-            ->action(trans('passwords.reset_password'), url(config('app.url').route('password.reset', $this->token, false)))
+            ->action(trans('passwords.reset_password'), url(config('app.url').route('password.reset', [$this->token], false)))
             ->line(trans('passwords.mail_line_2'));
     }
 }
