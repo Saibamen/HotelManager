@@ -17,13 +17,13 @@ class ReservationTableService implements TableServiceInterface
             [
                 'title' => trans('general.room'),
                 'value' => function (Reservation $data) {
-                    return $data->room->number;
+                    return '<a href="'.route('room.editform', $data->room->id).'">'.$data->room->number.'</a>';
                 },
             ],
             [
                 'title' => trans('general.guest'),
                 'value' => function (Reservation $data) {
-                    return $data->guest->full_name;
+                    return '<a href="'.route('guest.editform', $data->guest->id).'">'.$data->guest->full_name.'</a>';
                 },
             ],
             [
