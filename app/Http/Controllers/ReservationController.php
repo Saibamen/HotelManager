@@ -548,7 +548,7 @@ class ReservationController extends Controller implements ManageTableInterface
             'buttons'    => [
                 [
                     'value' => function () {
-                        return 'Zmień gościa';
+                        return trans('general.change_guest');
                     },
                     'route_name'  => 'reservation.edit_choose_guest',
                     'route_param' => function (Reservation $data) {
@@ -560,7 +560,7 @@ class ReservationController extends Controller implements ManageTableInterface
                 ],
                 [
                     'value' => function () {
-                        return 'Zmień pokój';
+                        return trans('general.change_room');
                     },
                     'route_name'  => 'reservation.edit_choose_room',
                     'route_param' => function (Reservation $data) {

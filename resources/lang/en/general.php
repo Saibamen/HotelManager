@@ -51,6 +51,8 @@ return [
     'date_start'       => 'Start date',
     'date_end'         => 'End date',
     'number_of_people' => 'Number of people',
+    'change_room'      => 'Change room',
+    'change_guest'     => 'Change guest',
 
     'users' => 'Users',
 

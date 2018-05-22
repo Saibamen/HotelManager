@@ -51,6 +51,8 @@ return [
     'date_start'       => 'Data rozpoczęcia',
     'date_end'         => 'Data zakończenia',
     'number_of_people' => 'Ilość osób',
+    'change_room'      => 'Zmień pokój',
+    'change_guest'     => 'Zmień gościa',
 
     'users' => 'Użytkownicy',
 
