@@ -23,6 +23,16 @@ Web application for managing hotel rooms, guests and reservations with flexible 
 * XML PHP Extension
 * [Composer](https://getcomposer.org)
 
+## Demo: [hotelmanager.it-maniak.pl](http://hotelmanager.it-maniak.pl)
+
+Admin:<br />
+Login: admin2@example.com<br />
+Hasło: testadmin2
+
+User:<br />
+Login: user@example.com<br />
+Hasło: testuser
+
 ## Author
 
 [Adam Stachowicz](https://github.com/Saibamen) <saibamenppl@gmail.com>
