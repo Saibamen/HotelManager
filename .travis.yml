@@ -9,7 +9,8 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - nightly
+  # ErrorException: preg_match(): Compilation failed: invalid range in character class at offset 7
+  #- nightly
 
 env:
   - DB=sqlite DB_CONNECTION=sqlite
@@ -22,6 +23,12 @@ matrix:
     - php: 7.0.0
       dist: precise
       env: DB=sqlite DB_CONNECTION=sqlite
+    - php: 7.0.0
+      dist: precise
+      env: DB=mysql DB_CONNECTION=testing
+    - php: 7.0.0
+      dist: precise
+      env: DB=mariadb DB_CONNECTION=testing
     - php: 7.0.0
       dist: precise
       env: DB=postgres DB_CONNECTION=pgsql
