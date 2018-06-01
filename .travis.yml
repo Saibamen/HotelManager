@@ -41,7 +41,7 @@ before_install:
   - sh -c "if [ '$DB' = 'sqlite' ]; then echo 'Creating database'; touch database/database.sqlite; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS homestead_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'CREATE DATABASE homestead_test;' -U postgres; fi"
-  - sh -c "if [[ $DB == mysql* ]] || [[ $DB == mariadb* ]]; then echo 'Creating database'; mysql -e 'CREATE DATABASE IF NOT EXISTS homestead_test;'; fi"
+  - sh -c "if [[ '$DB' == mysql* ]] || [[ '$DB' == mariadb* ]]; then echo 'Creating database'; mysql -e 'CREATE DATABASE IF NOT EXISTS homestead_test;'; fi"
 
 install:
   - chmod -R 777 bootstrap/cache
