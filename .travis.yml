@@ -9,12 +9,11 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - 7.3
-  # ErrorException: preg_match(): Compilation failed: invalid range in character class at offset 7
   - nightly
 
 jobs:
   allow_failures:
+    # ErrorException: preg_match(): Compilation failed: invalid range in character class at offset 7
     - php: nightly
 
 env:
