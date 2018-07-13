@@ -9,8 +9,13 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
   # ErrorException: preg_match(): Compilation failed: invalid range in character class at offset 7
-  #- nightly
+  - nightly
+
+jobs:
+  allow_failures:
+    - php: nightly
 
 env:
   - DB=sqlite DB_CONNECTION=sqlite
