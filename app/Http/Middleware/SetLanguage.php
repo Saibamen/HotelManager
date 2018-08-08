@@ -21,7 +21,8 @@ class SetLanguage
     public function handle(Request $request, Closure $next)
     {
         if ($request->cookie('lang')) {
-            $locale = Crypt::decrypt($request->cookie('lang'));
+            // FIXME: bug in Laravel decrypt...
+            $locale = $request->cookie('lang');
         } else {
             $locale = Config::get('app.locale');
         }
