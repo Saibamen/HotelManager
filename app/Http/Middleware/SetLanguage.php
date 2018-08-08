@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App;
 use Closure;
 use Config;
-use Crypt;
 use Illuminate\Http\Request;
 
 class SetLanguage
