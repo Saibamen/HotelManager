@@ -120,12 +120,12 @@ return [
         'password'         => 'hasło',
         'current_password' => 'aktualne hasło',
         'new_password'     => 'nowe hasło',
+        'email'            => 'adres e-mail',
 
-        'comment'  => 'komentarz',
-        'date'     => 'data',
-        'email'    => 'adres e-mail',
-        'name'     => 'nazwa',
-        'value'    => 'wartość',
+        'comment' => 'komentarz',
+        'date'    => 'data',
+        'name'    => 'nazwa',
+        'value'   => 'wartość',
 
         'number'   => 'numer',
         'floor'    => 'piętro',

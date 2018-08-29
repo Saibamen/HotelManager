@@ -3,7 +3,7 @@ language: php
 os:
   - linux
   # PHP is no supported on OS X: https://github.com/travis-ci/travis-ci/issues/2313
-  #- osx
+  - osx
 
 php:
   - 7.0
