@@ -15,8 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $place
  * @property string $PESEL
  * @property string|null $contact
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  * @property-read string $full_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Room[] $rooms

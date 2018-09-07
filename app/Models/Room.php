@@ -15,8 +15,8 @@ use Illuminate\Database\Query\Builder;
  * @property int $capacity
  * @property float $price
  * @property string|null $comment
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Guest[] $guests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
  *
