@@ -16,6 +16,10 @@ php:
   - 7.3
   - nightly
 
+jobs:
+  allow_failures:
+    - php: nightly
+
 env:
   - DB=sqlite DB_CONNECTION=sqlite
   - DB=mysql DB_CONNECTION=testing
