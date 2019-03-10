@@ -27,11 +27,11 @@ Web application for managing hotel rooms, guests and reservations with flexible 
 
 Admin:<br />
 Login: admin2@example.com<br />
-Hasło: testadmin2
+Password: testadmin2
 
 User:<br />
 Login: user@example.com<br />
-Hasło: testuser
+Password: testuser
 
 ## Author
 
