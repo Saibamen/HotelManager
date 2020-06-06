@@ -1,3 +1,5 @@
+# Hotel Manager
+
 [![Travis Build Status](https://travis-ci.org/Saibamen/HotelManager.svg)](https://travis-ci.org/Saibamen/HotelManager)
 [![CircleCI Build Status](https://circleci.com/gh/Saibamen/HotelManager.svg?style=shield)](https://circleci.com/gh/Saibamen/HotelManager)
 [ ![Codeship Status for Saibamen/HotelManager](https://app.codeship.com/projects/4b76fb80-a887-0135-d285-4ac701b81e22/status)](https://app.codeship.com/projects/256229)
@@ -6,8 +8,6 @@
 [![StyleCI](https://styleci.io/repos/77186372/shield)](https://styleci.io/repos/77186372)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d/mini.png)](https://insight.sensiolabs.com/projects/37d84994-c778-4373-94f2-a3218c22f96d)
 [![codecov](https://codecov.io/gh/Saibamen/HotelManager/branch/master/graph/badge.svg)](https://codecov.io/gh/Saibamen/HotelManager)
-
-# Hotel Manager
 
 Web application for managing hotel rooms, guests and reservations with flexible and responsive frontend written in [Laravel](https://laravel.com) 5.5
 
@@ -22,6 +22,19 @@ Web application for managing hotel rooms, guests and reservations with flexible 
 * Tokenizer PHP Extension
 * XML PHP Extension
 * [Composer](https://getcomposer.org)
+
+## Installation
+
+First, change `.env.example` to `.env` and update it
+
+```
+composer install --no-interaction
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+```
+
+Run by `php artisan serve`
 
 ## Demo: [hotelmanager.it-maniak.pl](http://hotelmanager.it-maniak.pl)
 
