@@ -140,12 +140,6 @@ composer.phar
 sh.exe.stackdump
 
 ### Own rules ###
-storage/**/
-!storage/app/.gitkeep
-!storage/framework/sessions/.gitkeep
-!storage/framework/cache/.gitkeep
-!storage/framework/views/.gitkeep
-
 /_ide_helper.php
 bootstrap/cache/*
 !bootstrap/cache/.gitkeep
