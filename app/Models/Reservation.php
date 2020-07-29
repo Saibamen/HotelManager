@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Reservation.
  *
- * @property int $id
- * @property int $room_id
- * @property int $guest_id
- * @property string $date_start
- * @property string $date_end
- * @property int $people
+ * @property int                        $id
+ * @property int                        $room_id
+ * @property int                        $guest_id
+ * @property string                     $date_start
+ * @property string                     $date_end
+ * @property int                        $people
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \App\Models\Guest $guest

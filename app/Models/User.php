@@ -9,12 +9,12 @@ use Illuminate\Notifications\Notifiable;
 /**
  * App\Models\User.
  *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string|null $remember_token
- * @property bool $is_admin
+ * @property int                        $id
+ * @property string                     $name
+ * @property string                     $email
+ * @property string                     $password
+ * @property string|null                $remember_token
+ * @property bool                       $is_admin
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
