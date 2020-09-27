@@ -9,12 +9,12 @@ use Illuminate\Database\Query\Builder;
 /**
  * App\Models\Room.
  *
- * @property int $id
- * @property string $number
- * @property int $floor
- * @property int $capacity
- * @property float $price
- * @property string|null $comment
+ * @property int                        $id
+ * @property string                     $number
+ * @property int                        $floor
+ * @property int                        $capacity
+ * @property float                      $price
+ * @property string|null                $comment
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Guest[] $guests

@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Guest.
  *
- * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property string $address
- * @property string $zip_code
- * @property string $place
- * @property string $PESEL
- * @property string|null $contact
+ * @property int                        $id
+ * @property string                     $first_name
+ * @property string                     $last_name
+ * @property string                     $address
+ * @property string                     $zip_code
+ * @property string                     $place
+ * @property string                     $PESEL
+ * @property string|null                $contact
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read string $full_name
