@@ -143,8 +143,6 @@ sh.exe.stackdump
 
 ### Own rules ###
 /_ide_helper.php
-bootstrap/cache/*
-!bootstrap/cache/.gitkeep
 
 ### Yarn 2
 .yarn/*
