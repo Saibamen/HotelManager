@@ -4,12 +4,14 @@
 /storage/*.key
 /vendor
 /.idea
+/.vscode
 /.vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+.phpunit.result.cache
 
 # Created by https://www.gitignore.io/api/sublimetext,notepadpp,windows
 
