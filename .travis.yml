@@ -34,11 +34,11 @@ env:
 
 matrix:
   include:
-    - php: 7.0.0
+    - php: 7.1.3
       dist: precise
       env: DB=sqlite DB_CONNECTION=sqlite
 
-    - php: 7.0.0
+    - php: 7.1.3
       dist: precise
       env: DB=postgres DB_CONNECTION=pgsql
 
