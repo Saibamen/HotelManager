@@ -85,7 +85,7 @@ class UserTest extends BrowserKitTestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Wyślij')
             ->seePageIs('user/add')
-            ->see('Format adres e-mail jest nieprawidłowy.')
+            ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.')
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
     }
 
@@ -100,7 +100,7 @@ class UserTest extends BrowserKitTestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Wyślij')
             ->seePageIs('user/add')
-            ->see('Format adres e-mail jest nieprawidłowy.')
+            ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.')
             ->see('Potwierdzenie hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
     }
@@ -245,6 +245,6 @@ class UserTest extends BrowserKitTestCase
             ->type('new_test_password', 'new_password_confirmation')
             ->press('Zmień hasło')
             ->dontSee('Aktualne hasło jest nieprawidłowe.')
-            ->dontSee('Potwierdzenie nowe hasło nie zgadza się.');
+            ->dontSee('Potwierdzenie pola nowe hasło nie zgadza się.');
     }
 }
