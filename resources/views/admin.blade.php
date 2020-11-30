@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">@if (isset($title)) {{ $title }} @endif</div>
+            <div class="card">
+                <div class="card-header">@if (isset($title)) {{ $title }} @endif</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @include('layouts.messages')
 
                     <h4>{{ trans('general.options') }}</h4>

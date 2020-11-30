@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ $title or null }}</div>
+            <div class="card">
+                <div class="card-header">{{ $title or null }}</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @include('layouts.messages')
 
                     @if (!is_null($dataset))
@@ -16,9 +16,9 @@
                         @endif
 
                         @if ($dataset->total() > 0)
-                            <table class="table table-striped table-hover table-responsive">
+                            <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr class="active">
+                                    <tr class="table-active">
                                         @foreach ($columns as $column)
                                             <th>{{ $column['title'] }}</th>
                                         @endforeach
@@ -60,7 +60,9 @@
                                 <br>
                             @endif
 
-                            <a href="{{ route($routeName.'.addform') }}" class="btn btn-success" role="button"><i class="fa fa-plus"></i> @lang('general.add')</a>
+                            <a href="{{ route($routeName.'.addform') }}" class="btn btn-success" role="button">
+                                <i class="fa fa-plus"></i> @lang('general.add')
+                            </a>
                         </div>
                     @endif
                 </div>
