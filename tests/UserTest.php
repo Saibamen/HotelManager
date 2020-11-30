@@ -101,7 +101,7 @@ class UserTest extends BrowserKitTestCase
             ->press('Wyślij')
             ->seePageIs('user/add')
             ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.')
-            ->see('Potwierdzenie hasło nie zgadza się.')
+            ->see('Potwierdzenie pola hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
     }
 
@@ -127,7 +127,7 @@ class UserTest extends BrowserKitTestCase
             ->press('Wyślij')
             ->seePageIs('user/add')
             ->see('Taki adres e-mail już występuje.')
-            ->dontSee('Potwierdzenie hasło nie zgadza się.')
+            ->dontSee('Potwierdzenie pola hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
     }
 
