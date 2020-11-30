@@ -238,7 +238,7 @@ class UserTest extends BrowserKitTestCase
             ->type('new_test_password2', 'new_password_confirmation')
             ->press('Zmień hasło')
             ->see('Aktualne hasło jest nieprawidłowe.')
-            ->see('Potwierdzenie nowe hasło nie zgadza się.');
+            ->see('Potwierdzenie pola nowe hasło nie zgadza się.');
 
         $this->type('old_correct_pass', 'current_password')
             ->type('new_test_password', 'new_password')
