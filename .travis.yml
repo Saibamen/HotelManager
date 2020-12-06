@@ -23,7 +23,7 @@ jobs:
 
 services:
   - mysql
-  - postgresql
+  #- postgresql
 
 env:
   - DB=sqlite DB_CONNECTION=sqlite
