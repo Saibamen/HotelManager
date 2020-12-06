@@ -18,7 +18,7 @@
 
                     <h4>{{ trans('general.delete') }}</h4>
 
-                    <div class="btn-group btn-group-justified">
+                    <div class="btn-group d-flex" role="group">
                         {{ Html::link('#', trans('general.rooms'), ['class' => 'btn btn-danger', 'role' => 'button', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-href' => url('admin/delete_rooms'), 'data-message' => trans('general.delete_associated_reservations')]) }}
 
                         {{ Html::link('#', trans('general.guests'), ['class' => 'btn btn-danger', 'role' => 'button', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-href' => url('admin/delete_guests'), 'data-message' => trans('general.delete_associated_reservations')]) }}

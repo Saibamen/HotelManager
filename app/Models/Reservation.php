@@ -19,16 +19,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Guest $guest
  * @property-read \App\Models\Room $room
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation getCurrentReservations()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation getFutureReservations()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereDateEnd($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereDateStart($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereGuestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation wherePeople($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereRoomId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation getCurrentReservations()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation getFutureReservations()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereDateEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereDateStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereGuestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation wherePeople($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereRoomId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Reservation extends Model

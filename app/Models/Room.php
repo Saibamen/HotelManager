@@ -18,19 +18,24 @@ use Illuminate\Database\Query\Builder;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Guest[] $guests
+ * @property-read int|null $guests_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
+ * @property-read int|null $reservations_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room currentlyFreeRooms()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room currentlyOccupiedRooms()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room freeRoomsForReservation($dateStart, $dateEnd, $people)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCapacity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereFloor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Room whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room currentlyFreeRooms()
+ * @method static \Illuminate\Database\Eloquent\Builder|Room currentlyOccupiedRooms()
+ * @method static \Illuminate\Database\Eloquent\Builder|Room freeRoomsForReservation($dateStart, $dateEnd, $people)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Room newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Room query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereCapacity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereFloor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Room whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Room extends Model

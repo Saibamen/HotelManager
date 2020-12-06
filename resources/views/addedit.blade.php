@@ -21,12 +21,13 @@
                             {!! Form::open(['url' => $submitRoute, 'class' => 'form-horizontal']) !!}
                         @endif
 
-                        @php($fields_class = ['class' => 'form-control'])
-
                         @foreach ($fields as $field)
-                            <div class="form-group{{ isset($errors) && $errors->has($field['id']) ? ' has-error' : '' }}">
+                            @php($isInvalid = isset($errors) && $errors->has($field['id']) ? ' is-invalid' : '')
+                            @php($fields_class = ['class' => 'form-control'. $isInvalid])
+
+                            <div class="form-group row">
                                 @if (isset($field['title']))
-                                    {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
+                                    {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 col-form-label text-md-right']) }}
                                 @endif
 
                                 @php(isset($field['optional']) ? $fields_attributes = $fields_class + $field['optional'] : $fields_attributes = $fields_class)
