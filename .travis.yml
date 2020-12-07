@@ -1,5 +1,7 @@
 language: php
 
+dist: xenial
+
 cache:
   directories:
     - vendor
