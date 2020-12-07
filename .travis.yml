@@ -8,7 +8,7 @@ cache:
 
 os:
   - linux
-  # PHP tags are no supported on OS X: https://github.com/travis-ci/travis-ci/issues/2313
+  # PHP tags are not supported on OS X: https://github.com/travis-ci/travis-ci/issues/2313
   #- osx
 
 php:
@@ -18,7 +18,7 @@ php:
   - 7.3
   - 7.4
   #- 8.0
-  - nightly
+  #- nightly # Enable after migrating to Laravel 6.x
 
 jobs:
   allow_failures:
