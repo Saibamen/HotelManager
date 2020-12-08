@@ -36,7 +36,7 @@ class PasswordResetTest extends BrowserKitTestCase
             ->seePageIs('password/reset')
             ->dontSee('Wyloguj')
             ->dontSee('Pokoje')
-            ->see('Format adres e-mail jest nieprawidłowy.');
+            ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.');
     }
 
     public function testUserNotInDatabaseFailPasswordReset()

@@ -85,7 +85,7 @@ class UserTest extends BrowserKitTestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Wyślij')
             ->seePageIs('user/add')
-            ->see('Format adres e-mail jest nieprawidłowy.')
+            ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.')
             ->see('Hasło musi mieć przynajmniej 6 znaków.');
     }
 
@@ -100,8 +100,8 @@ class UserTest extends BrowserKitTestCase
             ->type('badPassConfirm', 'password_confirmation')
             ->press('Wyślij')
             ->seePageIs('user/add')
-            ->see('Format adres e-mail jest nieprawidłowy.')
-            ->see('Potwierdzenie hasło nie zgadza się.')
+            ->see('Pole adres e-mail nie jest poprawnym adresem e-mail.')
+            ->see('Potwierdzenie pola hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
     }
 
@@ -127,7 +127,7 @@ class UserTest extends BrowserKitTestCase
             ->press('Wyślij')
             ->seePageIs('user/add')
             ->see('Taki adres e-mail już występuje.')
-            ->dontSee('Potwierdzenie hasło nie zgadza się.')
+            ->dontSee('Potwierdzenie pola hasło nie zgadza się.')
             ->assertNull(Input::get('password'));
     }
 
@@ -238,13 +238,13 @@ class UserTest extends BrowserKitTestCase
             ->type('new_test_password2', 'new_password_confirmation')
             ->press('Zmień hasło')
             ->see('Aktualne hasło jest nieprawidłowe.')
-            ->see('Potwierdzenie nowe hasło nie zgadza się.');
+            ->see('Potwierdzenie pola nowe hasło nie zgadza się.');
 
         $this->type('old_correct_pass', 'current_password')
             ->type('new_test_password', 'new_password')
             ->type('new_test_password', 'new_password_confirmation')
             ->press('Zmień hasło')
             ->dontSee('Aktualne hasło jest nieprawidłowe.')
-            ->dontSee('Potwierdzenie nowe hasło nie zgadza się.');
+            ->dontSee('Potwierdzenie pola nowe hasło nie zgadza się.');
     }
 }

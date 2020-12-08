@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">@if (isset($title)) {{ $title }} @endif</div>
+            <div class="card">
+                <div class="card-header">@if (isset($title)) {{ $title }} @endif</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @include('layouts.messages')
 
                     @if (!is_null($fields))
@@ -21,12 +21,13 @@
                             {!! Form::open(['url' => $submitRoute, 'class' => 'form-horizontal']) !!}
                         @endif
 
-                        @php($fields_class = ['class' => 'form-control'])
-
                         @foreach ($fields as $field)
-                            <div class="form-group{{ isset($errors) && $errors->has($field['id']) ? ' has-error' : '' }}">
+                            @php($isInvalid = isset($errors) && $errors->has($field['id']) ? ' is-invalid' : '')
+                            @php($fields_class = ['class' => 'form-control'. $isInvalid])
+
+                            <div class="form-group row">
                                 @if (isset($field['title']))
-                                    {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 control-label']) }}
+                                    {{ Form::label($field['id'], $field['title'], ['class' => 'col-md-4 col-form-label text-md-right']) }}
                                 @endif
 
                                 @php(isset($field['optional']) ? $fields_attributes = $fields_class + $field['optional'] : $fields_attributes = $fields_class)
@@ -64,7 +65,7 @@
                                     @endif
 
                                     @if (isset($errors) && $errors->has($field['id']))
-                                        <span class="help-block">
+                                        <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first($field['id']) }}</strong>
                                         </span>
                                     @endif

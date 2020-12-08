@@ -19,18 +19,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read string $full_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reservation[] $reservations
+ * @property-read int|null $reservations_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Room[] $rooms
+ * @property-read int|null $rooms_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereContact($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest wherePESEL($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest wherePlace($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Guest whereZipCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest wherePESEL($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest wherePlace($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest whereZipCode($value)
  * @mixin \Eloquent
  */
 class Guest extends Model

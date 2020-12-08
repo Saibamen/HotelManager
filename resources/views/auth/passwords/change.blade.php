@@ -2,55 +2,55 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">@lang('auth.change_password')</div>
+            <div class="card">
+                <div class="card-header">@lang('auth.change_password')</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @include('layouts.messages')
 
                     <form class="form-horizontal" method="POST" action="{{ route('user.post_change_password') }}">
-                        {{ csrf_field() }}
+                        @csrf
 
-                        <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
-                            <label for="current-password" class="col-md-4 control-label">@lang('auth.current_password')</label>
+                        <div class="form-group row">
+                            <label for="current-password" class="col-md-4 col-form-label text-md-right">@lang('auth.current_password')</label>
 
                             <div class="col-md-6">
-                                <input id="current-password" type="password" class="form-control" name="current_password" required autofocus>
+                                <input id="current-password" type="password" class="form-control {{ $errors->has('current_password') ? ' is-invalid' : '' }}" name="current_password" required autofocus>
 
                                 @if ($errors->has('current_password'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('current_password') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('new_password') ? ' has-error' : '' }}">
-                            <label for="new-password" class="col-md-4 control-label">@lang('auth.new_password')</label>
+                        <div class="form-group row">
+                            <label for="new-password" class="col-md-4 col-form-label text-md-right">@lang('auth.new_password')</label>
 
                             <div class="col-md-6">
-                                <input id="new-password" type="password" class="form-control" name="new_password" required>
+                                <input id="new-password" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password" required>
 
                                 @if ($errors->has('new_password'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('new_password') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="new-password-confirm" class="col-md-4 control-label">@lang('auth.password_confirmation')</label>
+                        <div class="form-group row">
+                            <label for="new-password-confirm" class="col-md-4 col-form-label text-md-right">@lang('auth.password_confirmation')</label>
 
                             <div class="col-md-6">
                                 <input id="new-password-confirm" type="password" class="form-control" name="new_password_confirmation" required>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('auth.change_password')
                                 </button>
