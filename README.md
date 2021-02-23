@@ -43,8 +43,8 @@ Login: admin2@example.com<br />
 Password: testadmin2
 
 User:<br />
-Login: user@example.com<br />
-Password: testuser
+Login: user2@example.com<br />
+Password: testuser2
 
 ## Author
 
