@@ -9,13 +9,13 @@
 [![SymfonyInsight](https://insight.symfony.com/projects/37d84994-c778-4373-94f2-a3218c22f96d/mini.svg)](https://insight.symfony.com/projects/37d84994-c778-4373-94f2-a3218c22f96d)
 [![codecov](https://codecov.io/gh/Saibamen/HotelManager/branch/master/graph/badge.svg)](https://codecov.io/gh/Saibamen/HotelManager)
 
-Web application for managing hotel rooms, guests and reservations with flexible and responsive frontend written in [Laravel](https://laravel.com) 5.6
+Web application for managing hotel rooms, guests and reservations with flexible and responsive frontend written in [Laravel](https://laravel.com) 5.7
 
 ![All reservations](github_images/all_reservations.PNG)
 
 ## Requirements
 
-* [PHP](http://php.net) >= 7.1.3
+* [PHP](http://php.net) >= 7.2.3
 * OpenSSL PHP Extension
 * PDO PHP Extension
 * Mbstring PHP Extension
