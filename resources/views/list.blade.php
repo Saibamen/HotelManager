@@ -34,7 +34,7 @@
                                             <td>{!! $column['value']($data) !!}</td>
                                         @endforeach
 
-                                        {{-- Akcje --}}
+                                        {{-- Actions --}}
                                         <td>
                                             @if (!isset($routeChooseName))
                                                 @if (!isset($disableEdit) || !$disableEdit)

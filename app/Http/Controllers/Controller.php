@@ -34,7 +34,7 @@ class Controller extends BaseController
 
     protected function returnBack($data)
     {
-        // Zapobiegaj infinite loop
+        // Prevent infinite loop
         if (back()->getTargetUrl() === url()->current()) {
             Log::info('Request loop: '.back()->getTargetUrl());
 
@@ -46,7 +46,7 @@ class Controller extends BaseController
 
     public function changeLanguage($language)
     {
-        // 90 dni w minutach
+        // 90 days in minutes
         return back()->cookie('lang', $language, 129600);
     }
 }
