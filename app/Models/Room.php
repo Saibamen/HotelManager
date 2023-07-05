@@ -36,6 +36,7 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|Room whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Room wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Room whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Room extends Model
@@ -52,9 +53,9 @@ class Room extends Model
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param $dateStart
-     * @param $dateEnd
-     * @param $people
+     * @param                                       $dateStart
+     * @param                                       $dateEnd
+     * @param                                       $people
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

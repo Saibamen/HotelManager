@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Guest wherePlace($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereZipCode($value)
+ *
  * @mixin \Eloquent
  */
 class Guest extends Model

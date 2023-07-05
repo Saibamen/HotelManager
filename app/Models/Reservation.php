@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Reservation wherePeople($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereRoomId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Reservation whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Reservation extends Model
