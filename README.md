@@ -35,17 +35,3 @@ php artisan db:seed
 ```
 
 Run by `php artisan serve`
-
-## Demo: [hotelmanager.it-maniak.pl](http://hotelmanager.it-maniak.pl)
-
-Admin:<br />
-Login: admin2@example.com<br />
-Password: testadmin2
-
-User:<br />
-Login: user2@example.com<br />
-Password: testuser2
-
-## Author
-
-[Adam Stachowicz](https://github.com/Saibamen) <saibamenppl@gmail.com>
